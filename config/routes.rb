@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   devise_for :admins, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -9,40 +9,32 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
 
-  
-  namespace :public do
-    get 'homes/top'
+  root to: 'public/homes#top'
+
+  scope module: :public do
     get 'homes/about'
-    
-    get 'diaries/index'
-    get 'diaries/new'
-    get 'diaries/show'
-    get 'diaries/edit'
-    
+
+    resources :diaries, only:[:new, :index, :show, :edit] do
+      resources :favorites, only: [:create, :destroy]
+    end
+
+    resources :end_user, only:[:show, :edit, :update] do
+      resource :relationships, only: [:create, :destroy]
+    end
+
     get 'meal_details/show'
-    
-    get 'foods/index'
-    get 'foods/show'
-    
-    get 'meals/index'
-    get 'meals/show'
-    
-    get 'weights/index'
-    get 'weights/edit'
+
+    resources :foods, only:[:index, :show]
+    resources :meals, only:[:index, :show, :edit, :update]
+    resources :weights, only:[:index, :edit]
+
   end
-  
+
   namespace :admin do
-    get 'homes/top'
-    
-    get 'diary_comments/index'
-    get 'diary_comments/show'
-    get 'diary_comments/edit'
-    
-    get 'foods/index'
-    get 'foods/show'
-    get 'foods/new'
-    get 'foods/edit'
-    
+    get '/' => 'homes#top'
+    resources :diary_comments, only:[:index, :show, :edit]
+    resources :foods, only:[:index, :show, :new, :edit]
+
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
