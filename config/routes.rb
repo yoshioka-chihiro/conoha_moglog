@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  devise_for :end_user, skip: [:passwords], controllers: {
+  devise_for :end_user, skip: [:passwords], path: :me, controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   root to: 'public/homes#top'
 
   scope module: :public do
-    get 'homes/about'
 
+    get 'about' => 'public/homes#about'
     resources :diaries, only:[:new, :index, :show, :edit] do
       resources :favorites, only: [:create, :destroy]
     end
@@ -24,15 +24,20 @@ Rails.application.routes.draw do
     get 'meal_details/show'
 
     resources :foods, only:[:index, :show]
-    resources :meals, only:[:index, :show, :edit, :update]
+    resources :meals, only:[:index, :show, :edit, :update, :create]
     resources :weights, only:[:index, :edit]
+
+    patch 'end_users/:id/withdraw' => 'end_users#withdraw'
+    get 'end_users/unsubscribe' => 'end_users#unsubscribe'
+
 
   end
 
   namespace :admin do
     get '/' => 'homes#top'
     resources :diary_comments, only:[:index, :show, :edit]
-    resources :foods, only:[:index, :show, :new, :edit]
+    resources :foods, only:[:index, :show, :new, :edit, :create, :update]
+    resources :end_users, only:[:index, :show, :edit, :update]
 
   end
 

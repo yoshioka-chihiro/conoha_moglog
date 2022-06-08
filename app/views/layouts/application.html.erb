@@ -11,6 +11,9 @@
   </head>
 
   <body>
+    <% if end_user_signed_in? %>
+    <%= render 'member_header' %>
+    <% elsif  %>
     <%= yield %>
     <%= link_to 'ログイン', new_end_user_session_path %>
     <%= link_to '新規登録', new_end_user_registration_path %>
