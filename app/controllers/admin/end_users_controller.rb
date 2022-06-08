@@ -1,12 +1,10 @@
-class Public::EndUsersController < ApplicationController
-
+class Admin::EndUsersController < ApplicationController
   def index
     @end_users = EndUser.all
   end
 
   def show
     @end_user = EndUser.find(params[:id])
-    @end_users = @end_user.followings
   end
 
   def edit
@@ -17,18 +15,17 @@ class Public::EndUsersController < ApplicationController
     @end_user = EndUser.find(params[:id])
     if @end_user.update(end_user_params)
       flash[:notice] = "編集に成功しました。"
-      redirect_to end_user_path(@end_user)
+      redirect_to admin_end_user_path(@end_user)
     else
       flash[:alret] = "編集に失敗しました。"
       render :edit
     end
   end
 
-
-private
+  private
 
   def end_user_params
-    params.require(:end_user).permit(:email, :name, :nickname, :gender, :start_weight, :objective_weight, :age, :height)
+    params.require(:end_user).permit(:email, :name, :nickname, :gender, :start_weight, :objective_weight, :age, :height, :is_deleted)
   end
 
 end

@@ -1,16 +1,17 @@
-ja:
-    enums:
+ja :
+    enum:
       end_user:
         gender:
           man: "男性"
           woman: "女性"
-      meals:
+          other: "その他"
+      meal:
         meal_type:
           breakfast: "朝食"
           lunch: "昼食"
           dinner: "夕食"
           nash: "間食"
-      conditions:
+      condition:
         movement:
           stone: "コロコロ"
           hard: "硬め"
@@ -21,4 +22,4 @@ ja:
           sad: "悲しい"
           nomal: "普通"
           happy: "るんるん"
-      
+

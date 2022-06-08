@@ -1,0 +1,23 @@
+<h1>ユーザー一覧</h1>
+<% @end_users.each do |end_user| %>
+<table>
+  <tr>
+    <td>
+      <%= link_to admin_end_user_path(end_user) do %>
+        <%= end_user.name %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      <% if current_end_user != end_user %>
+        <% if current_end_user.following?(end_user) %>
+          <%= link_to "フォロー外す", end_user_relationships_path(end_user.id), method: :delete %>
+        <% else %>
+          <%= link_to "フォローする", end_user_relationships_path(end_user.id), method: :post %>
+        <% end %>
+      <% end %>
+    </th>
+  </tr>
+</table>
+<% end %>

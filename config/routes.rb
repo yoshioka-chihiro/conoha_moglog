@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'end_users/index'
+    get 'end_users/show'
+    get 'end_users/edit'
+  end
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -17,8 +22,10 @@ Rails.application.routes.draw do
       resources :favorites, only: [:create, :destroy]
     end
 
-    resources :end_user, only:[:show, :edit, :update] do
+    resources :end_users, only:[:show, :edit, :update, :index] do
       resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
     end
 
     get 'meal_details/show'

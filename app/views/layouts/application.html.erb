@@ -11,12 +11,34 @@
   </head>
 
   <body>
-    <% if end_user_signed_in? %>
-    <%= render 'member_header' %>
-    <% elsif  %>
+    <br>
+    <header>
+      <% if end_user_signed_in? %>
+        <%= link_to 'マイページ', end_user_path(current_end_user) %>
+        <%= link_to 'ログアウト', destroy_end_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'ログイン', new_end_user_session_path %>
+        <%= link_to '新規登録', new_end_user_registration_path %>
+      <% end %>
+
+      <% if admin_signed_in? %>
+      <h1>管理者としてログイン中です</h1>
+        <%= link_to '会員一覧', admin_end_users_path %>
+        <%= link_to '管理者ログアウト', destroy_admin_session_path, method: :delete %>
+      <% else %>
+       <%= link_to '管理者ログイン', new_admin_session_path %>
+      <% end %>
+    </header>
+    <div class="text-success">
+      <%= flash[:notice] %>
+    </div>
+    <div class="text-danger">
+      <%= flash[:alret] %>
+    </div>
     <%= yield %>
-    <%= link_to 'ログイン', new_end_user_session_path %>
-    <%= link_to '新規登録', new_end_user_registration_path %>
-    <%= link_to 'ログアウト', destroy_end_user_session_path, method: :delete %>
+
+
+
+
   </body>
 </html>
