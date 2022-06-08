@@ -6,7 +6,6 @@ class Public::EndUsersController < ApplicationController
 
   def show
     @end_user = EndUser.find(params[:id])
-    @end_users = @end_user.followings
   end
 
   def edit

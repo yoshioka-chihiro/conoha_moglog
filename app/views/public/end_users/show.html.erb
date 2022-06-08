@@ -1,6 +1,22 @@
 <h1>マイページ</h1>
 <table class="table">
   <tr>
+    <th>follow</th>
+    <td>
+      <%= link_to end_user_followings_path(@end_user.id) do %>
+        <%= current_end_user.followings.count %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>follower</th>
+    <td>
+      <%= link_to end_user_followers_path(@end_user.id) do %>
+        <%= current_end_user.followers.count %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
     <th>名前</th>
     <td><%= current_end_user.name %></td>
   </tr>
@@ -35,4 +51,4 @@
 </table>
 
 <%= link_to '編集',  edit_end_user_path %>
-<%= render 'relationships/follow_list', end_users: @end_users %>
+
