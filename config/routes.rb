@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
     resources :foods, only:[:index, :show]
     resources :meals, only:[:index, :show, :edit, :update, :create]
+    resources :meal_details, only:[:index, :create, :update, :destroy]
     resources :weights, only:[:index, :edit]
 
     patch 'end_users/:id/withdraw' => 'end_users#withdraw'

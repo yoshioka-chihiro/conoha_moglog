@@ -1,0 +1,13 @@
+　<div class="nested-fields">
+　  <div class="field">
+      <%= f.label :food_id, '食品名' %>
+      <%= f.select :food_id, options_from_collection_for_select(Food.all, :id, :name),{prompt: '選択してください'} %>
+    </div>
+    <div class="field">
+      <%= f.label :quantity, '×' %>
+      <%= f.select :quantity, *[1..10] %>
+    </div>
+    <div class="field">
+      <%= link_to_remove_association '削除', f %>
+    </div>
+  </div>

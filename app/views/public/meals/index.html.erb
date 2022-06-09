@@ -1,2 +1,24 @@
-<h1>Public::Meals#index</h1>
-<p>Find me in app/views/public/meals/index.html.erb</p>
+<h1>食事登録</h1>
+<%= form_with model: @meal, local:true do |f| %>
+  <%= f.select :meal_type, Meal.meal_types_i18n.keys.map{|k| [I18n.t("enums.meal.meal_type.#{k}"), k]}, {prompt: '選択してください'} %>
+  <%= f.time_select :recorded_at, {minute_step: 15} %>
+  <%= f.fields_for :meal_details do |meal_detail| %>
+    <%= render 'form', f: meal_detail %>
+      <%= link_to_add_association '＋別の食品を追加', f, :meal_details, class: 'btn btn-success' %>
+  <% end %>
+
+  <br>
+  <%= f.submit "登録する" %>
+<% end %>
+
+<h1>食事一覧</h1>
+<% @meals.each do |meal| %>
+  <div>
+    <h3><%= meal.meal_type_i18n %></h3>
+    <%= meal.recorded_at.strftime('%m/%d %H:%M') %>
+    <% meal.meal_details.each do |d| %>
+      <%= d.food.name %>
+      <%= d.quantity %>
+    <% end %>
+  </div>
+<% end %>

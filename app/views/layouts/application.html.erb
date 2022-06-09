@@ -15,6 +15,7 @@
     <header>
       <% if end_user_signed_in? %>
         <%= link_to 'マイページ', end_user_path(current_end_user) %>
+        <%= link_to '食事登録', meals_path %>
         <%= link_to 'ログアウト', destroy_end_user_session_path, method: :delete %>
       <% else %>
         <%= link_to 'ログイン', new_end_user_session_path %>
