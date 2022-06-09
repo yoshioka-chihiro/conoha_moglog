@@ -43,7 +43,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/' => 'homes#top'
     resources :diary_comments, only:[:index, :show, :edit]
-    resources :foods, only:[:index, :show, :new, :edit, :create, :update]
+    resources :foods, only:[:index, :show, :new, :edit, :create, :update, :destroy]
     resources :end_users, only:[:index, :show, :edit, :update]
 
   end

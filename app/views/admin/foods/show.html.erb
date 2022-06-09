@@ -1,2 +1,35 @@
-<h1>Admins::Foods#show</h1>
-<p>Find me in app/views/admins/foods/show.html.erb</p>
+<h1>詳細画面</h1>
+<table>
+  <tr>
+    <th>食品名</th>
+    <td><%= @food.name %></td>
+  </tr>
+  <tr>
+    <th>説明</th>
+    <td><%= @food.introduction %></td>
+  </tr>
+  <tr>
+    <th>カロリー</th>
+    <td><%= @food.calorie %>kcal</td>
+  </tr>
+  <tr>
+    <th>タンパク質</th>
+    <td><%= @food.protein %>g</td>
+  </tr>
+  <tr>
+    <th>炭水化物</th>
+    <td><%= @food.carbohydrate %>g</td>
+  </tr>
+  <tr>
+    <th>脂質</th>
+    <td><%= @food.fat %>g</td>
+  </tr>
+  <tr>
+    <th>脂質</th>
+    <td><%= @food.fiber %>mg</td>
+  </tr>
+  <tr>
+    <%= link_to '編集', edit_admin_food_path(@food) %>
+    <%= link_to '削除', admin_food_path(@food), method: :delete %>
+  </tr>
+</table>

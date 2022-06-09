@@ -1,5 +1,4 @@
-<h1>食品編集</h1>
-<%= form_with model: @food, url: admin_food_path do |f| %>
+<%= form_with model: food, url: admin_foods_path do |f| %>
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name, autofocus: true %>
@@ -29,6 +28,6 @@
     <%= f.text_field :fiber %>
   </div>
   <div class="actions">
-    <%= f.submit "編集" %>
+    <%= f.submit "登録" %>
   </div>
 <% end %>

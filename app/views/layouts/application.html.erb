@@ -24,6 +24,7 @@
       <% if admin_signed_in? %>
       <h1>管理者としてログイン中です</h1>
         <%= link_to '会員一覧', admin_end_users_path %>
+        <%= link_to '食品一覧', admin_foods_path %>
         <%= link_to '管理者ログアウト', destroy_admin_session_path, method: :delete %>
       <% else %>
        <%= link_to '管理者ログイン', new_admin_session_path %>
