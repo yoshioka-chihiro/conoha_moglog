@@ -1,8 +1,8 @@
 class MealDetail < ApplicationRecord
   belongs_to :meal
   belongs_to :food
-  with_options presence: true do
-    validates :food_id
-    validates :quantity
-  end
+  validates :quantity, presence: true
+  validates :food_id, presence: true
+
+
 end

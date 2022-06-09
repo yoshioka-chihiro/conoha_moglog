@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     get 'meal_details/show'
 
     resources :foods, only:[:index, :show]
-    resources :meals, only:[:index, :show, :edit, :update, :create]
+    resources :meals, only:[:index, :show, :edit, :update, :create, :destroy]
     resources :meal_details, only:[:index, :create, :update, :destroy]
     resources :weights, only:[:index, :edit]
 

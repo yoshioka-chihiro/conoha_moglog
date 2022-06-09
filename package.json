@@ -19,5 +19,9 @@
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^3"
-  }
+  },
+  "main": "index.js",
+  "repository": "git@github.com:yoshioka-chihiro/Portofolio.git",
+  "author": "<yoshokaaaa@gmail.com>",
+  "license": "MIT"
 }
