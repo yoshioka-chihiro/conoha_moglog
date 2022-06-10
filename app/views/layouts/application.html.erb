@@ -17,6 +17,10 @@
         <%= link_to 'マイページ', end_user_path(current_end_user) %>
         <%= link_to '食事登録', meals_path %>
         <%= link_to 'ログアウト', destroy_end_user_session_path, method: :delete %>
+        <%= link_to '会員一覧', end_users_path %>
+        <%= link_to '体調を登録', conditions_path %>
+        <%= link_to '体重を登録', weights_path %>
+        <%= link_to '日記を書く', diaries_path %>
       <% else %>
         <%= link_to 'ログイン', new_end_user_session_path %>
         <%= link_to '新規登録', new_end_user_registration_path %>

@@ -1,9 +1,7 @@
-<h1>食事登録</h1>
-
-<%= form_with model: @meal, local:true do |f| %>
-  <%= f.select :meal_type, Meal.meal_types_i18n.keys.map{|k| [I18n.t("enums.meal.meal_type.#{k}"), k]}, {prompt: '選択してください'} %>
+<%= form_with model: @meal do |f| %>
+  <%= f.select :meal_type, Meal.meal_types_i18n.keys.map{|k| [I18n.t("enums.meal.meal_type.#{k}"), k]} %>
   <%= f.time_select :recorded_at, {minute_step: 15} %>
-  <br>
+
   <div id="album-track-forms">
     <%= f.fields_for :meal_details do |f| %>
       <%= render 'form', food: f %>
@@ -26,26 +24,6 @@
                               },
                               # フォームオブジェクトを指定する場合(初期値 : f)
                               form_name: 'food'  %>
-  <br>
-  <div class="field">
-    <%= f.submit "登録" %>
-  </div>
+<br>
+  <%= f.submit '更新' %>
 <% end %>
-
-<h1>今日の食事一覧</h1>
-
-<% @meal_lists.each do |meal| %>
-  <%= meal.meal_type_i18n %>
-  <%= meal.recorded_at.strftime('%H:%M') %>
-  <% meal.meal_details.each do |d| %>
-    <%= d.food.name %>
-    <%= d.quantity %>
-  <% end %>
-  <%= link_to '詳細', meal_path(meal.id) %>
-  <%= link_to '編集', edit_meal_path(meal.id) %>
-  <%= link_to '削除', meal_path(meal.id), method: :delete %>
-  <br>
-
-<% end %>
-
-<%= link_to '全ての食事履歴を見る'%>

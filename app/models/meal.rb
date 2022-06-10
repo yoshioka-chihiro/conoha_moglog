@@ -11,6 +11,8 @@ class Meal < ApplicationRecord
 
   enum meal_type: { breakfast: 0, lunch: 1, dinner: 2, nash:3 }
 
-
+  def sub_total
+    food.calorie * meal_detail.quantity
+  end
 
 end

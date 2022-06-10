@@ -1,25 +1,47 @@
 class Public::MealsController < ApplicationController
   def index
+    # 食事登録用
     @meal = Meal.new
-    # mealに紐付くmeal_detailsをbuildしておく
+    # mealに紐付くmeal_detailsをbuildしておく（追加ボタン用）
     @meal_detail = @meal.meal_details.build
-    @meals = Meal.all
+    # 一覧画面用
+    start_date = Time.current.beginning_of_day
+    end_date = Time.current.end_of_day
+    @meal_lists = Meal.where(created_at: start_date..end_date)
   end
 
   def create
-    # @meal = current_end_user.meals.build(meal_params)
     @meal = Meal.new(meal_params)
     if @meal.save
       redirect_to meals_path, notice: "食事を投稿しました！"
     else
-      @meal = Meal.new
-      @mealdetail = MealDetail.new
-      @meals = Meal.all
       render :index, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
     end
   end
 
   def show
+    @meal = Meal.find(params[:id])
+    @meal_details = @meal.meal_details
+    @calorie_sum = 0
+    @protein_sum = 0
+    @carbohydrate_sum = 0
+    @fat_sum = 0
+    @fiber_sum = 0
+  end
+
+  def edit
+    @meal = Meal.find(params[:id])
+  end
+
+  def update
+    @meal = Meal.find(params[:id])
+    if @meal.update(meal_params)
+      flash[:notice] = "食事内容を更新しました。"
+      redirect_to meal_path(@meal)
+    else
+      flash[:alret] = "更新に失敗しました。"
+      render :edit
+    end
   end
 
   def destroy

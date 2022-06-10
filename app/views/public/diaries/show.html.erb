@@ -1,2 +1,33 @@
-<h1>Public::Diaries#show</h1>
-<p>Find me in app/views/public/diaries/show.html.erb</p>
+<% if @diary.end_user.nickname.empty? %>
+  匿名希望さん
+<% else %>
+  <%= @diary.end_user.nickname %>
+<% end %>
+<%= @diary.end_user.gender_i18n %>
+<%= @diary.title %>
+<%= @diary.body %>
+<%= render 'public/favorites/btn', diary: @diary %>
+
+
+<table>
+  <tbody>
+      <% @diary_comments.each do |diary_comment| %>
+      <tr>
+        <td>
+          <%= link_to end_user_path(diary_comment.end_user) do %>
+            <%= diary_comment.end_user.name %>
+          <% end %>
+        </td>
+        <td><%= diary_comment.comment %></td>
+        <td>
+          <% if diary_comment.end_user == current_end_user %>
+            <%= link_to "Destroy", diary_diary_comment_path(@diary, diary_comment), method: :delete, class: "btn btn-danger pull-right" %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+
+<%= render 'public/diary_comments/form', diary: @diary, diary_comment: @diary_comment %>
+

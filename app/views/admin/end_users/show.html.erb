@@ -32,6 +32,14 @@
     <th>メールアドレス</th>
     <td><%= @end_user.email %></td>
   </tr>
+  <tr>
+    <th>ステータス</th>
+    <% if @end_user.is_deleted == true %>
+      <td>退会</td>
+    <% else %>
+      <td>有効</td>
+    <% end %>
+  </tr>
 </table>
 
 <%= link_to '編集',  edit_admin_end_user_path %>

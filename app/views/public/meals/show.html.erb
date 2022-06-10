@@ -1,2 +1,45 @@
-<h1>Public::Meals#show</h1>
-<p>Find me in app/views/public/meals/show.html.erb</p>
+<%= @meal.meal_type_i18n %>
+<table class="table">
+    <tr>
+        <th>食品名</th>
+        <th>数量</th>
+        <th>カロリー小計</th>
+        <th>タンパク質</th>
+        <th>炭水化物</th>
+        <th>脂質</th>
+        <th>食物繊維</th>
+
+    </tr>
+    <% @meal_details.each do |meal_detail| %>
+    <tr>
+        <td><%= meal_detail.food.name %></td>
+        <td><%= meal_detail.quantity %></td>
+        <td><%= meal_detail.calorie_subtotal %>kcal</td>
+        <td><%= meal_detail.protein_subtotal %>g</td>
+        <td><%= meal_detail.carbohydrate_subtotal %>g</td>
+        <td><%= meal_detail.fat_subtotal %>g</td>
+        <td><%= meal_detail.fiber_subtotal %></td>
+        <% @calorie_sum += meal_detail.calorie_subtotal %>
+        <% @protein_sum += meal_detail.protein_subtotal %>
+        <% @carbohydrate_sum += meal_detail.carbohydrate_subtotal %>
+        <% @fat_sum += meal_detail.fat_subtotal %>
+        <% @fiber_sum += meal_detail.fiber_subtotal %>
+    </tr>
+    <% end %>
+</table>
+<table class="table">
+    <tr>
+        <th>カロリー合計</th>
+        <th>タンパク質合計</th>
+        <th>脂質合計</th>
+        <th>炭水化物合計</th>
+        <th>食物繊維合計</th>
+    </tr>
+    <tr>
+        <td><%= @calorie_sum %>kcal</td>
+        <td><%= @protein_sum %>g</td>
+        <td><%= @carbohydrate_sum %>g</td>
+        <td><%= @fat_sum %>g</td>
+        <td><%= @fiber_sum %>mg</td>
+    </tr>
+</table>

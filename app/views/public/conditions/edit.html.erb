@@ -1,0 +1,13 @@
+<%= form_with model: @condition, local:true do |f| %>
+<div class="fields">
+  <%= f.label:お通じ %>
+  <%= f.select :movement, Condition.movements_i18n.keys.map{|k| [I18n.t("enums.condition.movement.#{k}"), k]}, {prompt: '選択してください'} %>
+</div>
+<div class="fields">
+  <%= f.label:気分 %>
+   <%= f.select :feel, Condition.feels_i18n.keys.map{|k| [I18n.t("enums.condition.feel.#{k}"), k]}, {prompt: '選択してください'} %>
+</div>
+<div class="action">
+  <%= f.submit '更新' %>
+</div>
+<% end %>

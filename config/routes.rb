@@ -18,8 +18,9 @@ Rails.application.routes.draw do
   scope module: :public do
 
     get 'about' => 'public/homes#about'
-    resources :diaries, only:[:new, :index, :show, :edit] do
-      resources :favorites, only: [:create, :destroy]
+    resources :diaries, only:[:index, :show, :edit, :create, :update] do
+      resource :favorites, only: [:create, :destroy]
+      resources :diary_comments, only: [:create, :destroy]
     end
 
     resources :end_users, only:[:show, :edit, :update, :index] do
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
     resources :meals, only:[:index, :show, :edit, :update, :create, :destroy]
     resources :meal_details, only:[:index, :create, :update, :destroy]
     resources :weights, only:[:index, :edit]
+    resources :conditions, only:[:index, :create, :update, :destroy, :edit, :show]
 
     patch 'end_users/:id/withdraw' => 'end_users#withdraw'
     get 'end_users/unsubscribe' => 'end_users#unsubscribe'

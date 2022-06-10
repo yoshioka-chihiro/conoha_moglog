@@ -1,0 +1,15 @@
+<% if diary.favorited?(current_end_user) %>
+  <!--一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
+  <p>
+    <%= link_to diary_favorites_path(diary.id), method: :delete do %>
+      ♥<%= diary.favorites.count %>
+    <% end %>
+  </p>
+  <% else %>
+  <!--一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
+    <p>
+    <%= link_to diary_favorites_path(diary.id), method: :post do %>
+      ♡<%= diary.favorites.count %>
+    <% end %>
+    </p>
+<% end %>
