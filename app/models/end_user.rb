@@ -10,6 +10,7 @@ class EndUser < ApplicationRecord
   has_one_attached :image
   has_many :weights, dependent: :destroy
   has_many :meals, dependent: :destroy
+  has_many :meal_details, through: :meal
   has_many :diaries, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :diary_comments, dependent: :destroy

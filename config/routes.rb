@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     resources :foods, only:[:index, :show]
     resources :meals, only:[:index, :show, :edit, :update, :create, :destroy]
     resources :meal_details, only:[:index, :create, :update, :destroy]
-    resources :weights, only:[:index, :edit]
+    resources :weights, only:[:index, :edit, :create, :edit, :update, :destroy]
     resources :conditions, only:[:index, :create, :update, :destroy, :edit, :show]
 
     patch 'end_users/:id/withdraw' => 'end_users#withdraw'

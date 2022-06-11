@@ -33,7 +33,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
   gem 'pry-byebug'
-  
+
 end
 
 group :development do
@@ -58,8 +58,15 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+#ユーザー管理
 gem 'devise'
+#日本語化
 gem 'enum_help'
+#体重グラフ
 gem 'chartkick'
+#グラフの日時
+gem 'groupdate'
+#デバッグ用
 gem 'pry-byebug'
+#食事フォーム追加用
 gem 'cocoon'

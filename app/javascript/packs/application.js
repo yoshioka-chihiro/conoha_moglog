@@ -3,7 +3,7 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-
+import "chartkick/chart.js"
 import "cocoon"   //cocoonを動かすための記述
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
@@ -16,6 +16,8 @@ import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
+
+
 
 
 

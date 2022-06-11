@@ -1,2 +1,11 @@
-<h1>Public::Weights#index</h1>
-<p>Find me in app/views/public/weights/index.html.erb</p>
+<%= form_with model: @weight do |f| %>
+    <!--<= render 'layouts/error_messages', model: f.object %>-->
+    <%= f.label :value, '体重' %>
+    <%= f.number_field :weight, step: '0.1', placeholder: '例）70' %>
+    <%= f.label :recorded_at, '日時' %>
+    <%= f.datetime_field :recorded_at, value: Time.now.strftime("%Y-%m-%dT%H:%M") %>
+    <%= f.submit '投稿', class: 'waves-effect waves-light btn orange' %>
+    <%= link_to 'キャンセル', root_path, class: 'waves-effect waves-light btn grey' %>
+  <% end %>
+
+<%= line_chart @weights.chart_date, xtitle: "日付", ytitle: "体重（kg）", width: "600px", height: "200px" %>
