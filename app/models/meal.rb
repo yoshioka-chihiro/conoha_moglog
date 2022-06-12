@@ -7,7 +7,7 @@ class Meal < ApplicationRecord
   #関連付けしたモデルを一緒にデータ保存できるようにする
   accepts_nested_attributes_for :meal_details, reject_if: :all_blank, allow_destroy: true
   validates :meal_type, presence: true
-  validates :recorded_at, presence: true
+  validates :record_time, presence: true
 
   enum meal_type: { breakfast: 0, lunch: 1, dinner: 2, nash:3 }
 

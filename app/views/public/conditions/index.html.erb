@@ -1,3 +1,16 @@
+前回のお通じから<%= time_ago_in_words(@lastest_condition.created_at) %>！
+<br>
+今~48時間前の食事↓<br>
+<% @search_meals.each do |m| %>
+  ・<%= m.meal_type_i18n %>
+  <% m.meal_details.each do |d| %>
+    <%= d.food.name %>
+    <%= d.quantity %>
+  <% end %>
+  <%= link_to '食事詳細を見る', meal_path(m.id) %>
+  <br>
+<% end %>
+<h1>体調の記録</h1>
 <%= form_with model: @condition, local:true do |f| %>
 <div class="fields">
   <%= f.label:お通じ %>
@@ -13,6 +26,7 @@
 <% end %>
 
 <% @conditions.each do |condition| %>
+<%= time_ago_in_words(condition.created_at) %>前
 <%= condition.movement_i18n %>
 <%= condition.feel_i18n %>
 <%= link_to '詳細', condition_path(condition.id) %>

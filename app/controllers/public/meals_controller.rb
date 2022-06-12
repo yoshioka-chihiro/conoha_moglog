@@ -59,7 +59,7 @@ class Public::MealsController < ApplicationController
 
   def meal_params
     params.require(:meal).permit(
-      :meal_type,:recorded_at,
+      :meal_type,:record_time,
       meal_details_attributes:[:id, :meal_id, :food_id, :quantity, :_destroy])
       .merge(end_user_id: current_end_user.id)
   end

@@ -8,7 +8,20 @@
     <%= link_to 'キャンセル', root_path, class: 'waves-effect waves-light btn grey' %>
   <% end %>
 
-<%= line_chart @graph, min: 20, max: 80 %>
+  あなたの最新の体重
+  <%= @weights.last.value %>kg
+
+<!--グラフ部分-->
+<%= line_chart @graph,
+height: "300px",
+width: "600px",
+ytitle: "体重（kg）",
+  legend: false,
+  curve: false,
+  colors: "#ffd1a3",
+min: 20, max: 90 %>
+<!--グラフ部分-->
+
 <% @weights.each do |w| %>
 <table class="table">
   <tr>
