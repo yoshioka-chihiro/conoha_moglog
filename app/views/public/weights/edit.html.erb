@@ -1,2 +1,9 @@
-<h1>Public::Weights#edit</h1>
-<p>Find me in app/views/public/weights/edit.html.erb</p>
+<%= form_with model: @weight do |f| %>
+    <!--<= render 'layouts/error_messages', model: f.object %>-->
+    <%= f.label :value, '体重' %>
+    <%= f.number_field :value, step: '0.1' %>
+    <%= f.label :record_day, '日時' %>
+    <%= f.date_field :record_day %>
+    <%= f.submit '更新', class: 'waves-effect waves-light btn orange' %>
+    <%= link_to 'キャンセル', weights_path, class: 'waves-effect waves-light btn grey' %>
+  <% end %>
