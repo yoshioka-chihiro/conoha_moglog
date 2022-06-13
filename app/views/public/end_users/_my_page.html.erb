@@ -1,0 +1,70 @@
+<table class="table">
+  <tr>
+    <th>follow</th>
+    <td>
+      <%= link_to end_user_followings_path(current_end_user.id) do %>
+        <%= current_end_user.followings.count %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>follower</th>
+    <td>
+      <%= link_to end_user_followers_path(current_end_user.id) do %>
+        <%= current_end_user.followers.count %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <% if current_end_user.image.attached? %>
+      <%= image_tag current_end_user.image, size: "200x200" %>
+    <% else %>
+      <%= image_tag 'end_user/no_image', size: "200x200" %>
+    <% end %>
+  </tr>
+  <tr>
+    <th>名前</th>
+    <td><%= current_end_user.name %></td>
+  </tr>
+  <tr>
+    <th>ニックネーム</th>
+    <td><%= current_end_user.nickname %></td>
+  </tr>
+  <tr>
+    <th>性別</th>
+    <td><%= current_end_user.gender_i18n %></td>
+  </tr>
+  <tr>
+    <th>スタート時体重</th>
+    <td><%= current_end_user.start_weight %></td>
+  </tr>
+  <tr>
+    <th>目標体重</th>
+    <td><%= current_end_user.objective_weight %></td>
+  </tr>
+  <tr>
+    <th>年齢</th>
+    <td><%= current_end_user.age %></td>
+  </tr>
+  <tr>
+    <th>身長</th>
+    <td><%= current_end_user.height %></td>
+  </tr>
+  <tr>
+    <th>活動レベル</th>
+    <td><%= current_end_user.active_level_i18n %></td>
+  </tr>
+  <tr>
+    <th>基礎代謝</th>
+    <td><%= render 'basal_metabolism' %></td>
+  </tr>
+  <tr>
+    <th>１日あたりの摂取カロリー目安</th>
+    <td><%= render 'consumed_calories' %></td>
+  </tr>
+  <tr>
+    <th>メールアドレス</th>
+    <td><%= current_end_user.email %></td>
+  </tr>
+</table>
+<%= link_to '編集',  edit_end_user_path %>

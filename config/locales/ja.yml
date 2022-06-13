@@ -5,6 +5,10 @@ ja :
           man: "男性"
           woman: "女性"
           other: "その他"
+        active_level:
+          low: "低い"
+          middle: "普通"
+          high: "高い"
       meal:
         meal_type:
           breakfast: "朝食"
@@ -59,3 +63,7 @@ ja :
         over_x_years:
           one:   "1年以上"
           other: "%{count}年以上"
+    activerecord:
+      errors:
+        messages:
+          record_invalid: "バリデーションに失敗しました: %{errors}"

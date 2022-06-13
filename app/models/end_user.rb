@@ -5,7 +5,8 @@ class EndUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
 
-  enum gender: {man: 0, woman: 1, other: 2}
+  enum gender: {man: 0, woman: 1}
+  enum active_level: {low: 0, middle: 1, high: 2}
 
   has_one_attached :image
   has_many :weights, dependent: :destroy
@@ -35,5 +36,13 @@ class EndUser < ApplicationRecord
     followings.include?(end_user)
   end
 
+  def basal_metabolism_man
+    ( 0.0481 * start_weight + 0.0234 * height - 0.0138 * age - 0.4235 ) * 1000 / 4.186
+  end
+  
+  def basal_metabolism_woman
+    ( 0.0481 * start_weight + 0.0234 * height - 0.0138 * age - 0.9708 ) * 1000 / 4.186
+  end
 
+  
 end

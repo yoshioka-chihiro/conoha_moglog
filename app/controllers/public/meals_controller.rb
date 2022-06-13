@@ -7,7 +7,18 @@ class Public::MealsController < ApplicationController
     # 一覧画面用
     start_date = Time.current.beginning_of_day
     end_date = Time.current.end_of_day
-    @meal_lists = Meal.where(created_at: start_date..end_date)
+    # ログイン中ユーザーのMealを取得
+    @user_meals = Meal.where(end_user_id: current_end_user.id)
+    # その中から今日の記録を取得
+    @today_meals_list = @user_meals.where(record_time: start_date..end_date)
+    # カロリー合計表示用
+    @today_calorie_sum = 0
+    @today_meals_list.each do |meal|
+      meal.meal_details.each do |meal_detail|
+      @today_calorie_sum += meal_detail.calorie_subtotal
+      end
+    end
+
   end
 
   def create

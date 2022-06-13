@@ -1,54 +1,8 @@
+<% if @end_user == current_end_user %>
 <h1>マイページ</h1>
-<table class="table">
-  <tr>
-    <th>follow</th>
-    <td>
-      <%= link_to end_user_followings_path(@end_user.id) do %>
-        <%= current_end_user.followings.count %>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <th>follower</th>
-    <td>
-      <%= link_to end_user_followers_path(@end_user.id) do %>
-        <%= current_end_user.followers.count %>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <th>名前</th>
-    <td><%= current_end_user.name %></td>
-  </tr>
-  <tr>
-    <th>ニックネーム</th>
-    <td><%= current_end_user.nickname %></td>
-  </tr>
-  <tr>
-    <th>性別</th>
-    <td><%= current_end_user.gender_i18n %></td>
-  </tr>
-  <tr>
-    <th>スタート時体重</th>
-    <td><%= current_end_user.start_weight %></td>
-  </tr>
-  <tr>
-    <th>目標体重</th>
-    <td><%= current_end_user.objective_weight %></td>
-  </tr>
-  <tr>
-    <th>年齢</th>
-    <td><%= current_end_user.age %></td>
-  </tr>
-  <tr>
-    <th>身長</th>
-    <td><%= current_end_user.height %></td>
-  </tr>
-  <tr>
-    <th>メールアドレス</th>
-    <td><%= current_end_user.email %></td>
-  </tr>
-</table>
-
-<%= link_to '編集',  edit_end_user_path %>
+  <%= render 'my_page' %>
+<% else %>
+<h1>会員情報詳細</h1>
+  <%= render 'other_user', end_user: @end_user %> 
+<% end %>
 

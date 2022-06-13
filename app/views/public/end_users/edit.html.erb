@@ -3,6 +3,10 @@
 <%= form_with model: @end_user do |f| %>
 <table>
   <tr>
+    <th>プロフィール画像</th>
+    <td><%= f.file_field :image, accept: "image/*" %></td>
+  </tr>
+  <tr>
     <th><%= f.label:名前 %></th>
     <td><%= f.text_field :name, autofocus: true %></td>
   </tr>
@@ -29,6 +33,15 @@
   <tr>
     <th><%= f.label:身長 %></th>
     <td><%= f.text_field :height %></td>
+  </tr>
+  <tr>
+    <th><%= f.label:活動レベル %></th>
+    <td><%= f.select :active_level, EndUser.active_levels_i18n.keys.map{|k| [I18n.t("enums.end_user.active_level.#{k}"), k]} %></td>
+    <td>
+      低い：生活の大部分を座って過ごし、あまり体を動かすことがない場合<br>
+      普通：座っていることが多いが、職場内での移動や立っての作業、通勤・買い物・家事・軽いスポーツなどのいずれかを行う場合<br>
+      高い：移動や立っての作業が多い仕事に従事している、または頻繁に運動を行う習慣がある場合<br>
+    </td>
   </tr>
   <tr>
     <th><%= f.label:メールアドレス %></th>

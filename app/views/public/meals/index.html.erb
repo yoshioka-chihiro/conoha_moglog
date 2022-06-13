@@ -31,17 +31,19 @@
     <%= f.submit "登録" %>
   </div>
 <% end %>
+<h1></h1>
+<h1>今日の摂取カロリー合計</h1>
+<%= @today_calorie_sum %>kcal/<%= render 'public/end_users/consumed_calories' %>（目安）
 
 
 <h1>今日の食事一覧</h1>
-
-<% @meal_lists.each do |meal| %>
+<% @today_meals_list.each do |meal| %>
   <%= meal.meal_type_i18n %>
   <%= meal.record_time.strftime("%H:%M") %>
   <% meal.meal_details.each do |d| %>
     <%= d.food.name %>
     <%= d.quantity %>
-  <% end %>
+  <% end %>(目安)
   <%= link_to '詳細', meal_path(meal.id) %>
   <%= link_to '編集', edit_meal_path(meal.id) %>
   <%= link_to '削除', meal_path(meal.id), method: :delete %>

@@ -1,0 +1,19 @@
+<% if current_end_user.gender == 0 %>
+<!--男性の場合-->
+  <% if current_end_user.active_level = 0 %>
+    <%= current_end_user.basal_metabolism_man.to_i*1.5.floor %>kcal
+  <% elsif current_end_user.active_level = 1 %>
+    <%= current_end_user.basal_metabolism_man.to_i*1.75.floor %>kcal
+  <% else %>
+    <%= current_end_user.basal_metabolism_man.to_i*2.floor %>kcal
+  <% end %>
+<% else %>
+<!--女性の場合-->
+  <% if current_end_user.active_level = 0 %>
+    <%= current_end_user.basal_metabolism_woman.to_i*1.5.floor %>kcal
+  <% elsif current_end_user.active_level = 1 %>
+    <%= current_end_user.basal_metabolism_woman.to_i*1.75.floor %>kcal
+  <% else %>
+    <%= current_end_user.basal_metabolism_woman.to_i*2.floor %>kcal
+  <% end %>
+<% end %>
