@@ -4,6 +4,7 @@
 // that code so it'll be compiled.
 
 import "cocoon"   //cocoonを動かすための記述
+import "chosen-jquery"
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"

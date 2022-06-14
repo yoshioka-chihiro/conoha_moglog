@@ -20,7 +20,9 @@ Rails.application.routes.draw do
     get 'about' => 'public/homes#about'
     resources :diaries, only:[:index, :show, :edit, :create, :update] do
       resource :favorites, only: [:create, :destroy]
-      resources :diary_comments, only: [:create, :destroy]
+      resources :diary_comments, only: [:create, :destroy] do
+        resource :reports, only: [:create, :destroy]
+      end
     end
 
     resources :end_users, only:[:show, :edit, :update, :index] do
