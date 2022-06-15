@@ -1,7 +1,11 @@
-<% if current_end_user.gender == 0 %>
-  <!--男性の場合-->
-  <%= current_end_user.basal_metabolism_man.floor %>kcal
+<%= if current_end_user.gender.nill? %>
+  <h4>－</h4>
 <% else %>
-  <!--女性の場合-->
-  <%= current_end_user.basal_metabolism_woman.floor %>kcal
+  <% if current_end_user.gender == 0 %>
+    <!--男性の場合-->
+    <%= current_end_user.basal_metabolism_man.floor %>kcal
+  <% else %>
+    <!--女性の場合-->
+    <%= current_end_user.basal_metabolism_woman.floor %>kcal
+  <% end %>
 <% end %>
