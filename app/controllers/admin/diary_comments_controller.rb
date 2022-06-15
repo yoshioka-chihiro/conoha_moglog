@@ -10,7 +10,7 @@ class Admin::DiaryCommentsController < ApplicationController
   def edit
     @diary_comment = DiaryComment.find(params[:id])
   end
-  
+
   def destroy
     DiaryComment.find(params[:id]).destroy
     flash[:notice] = "コメントを削除"
