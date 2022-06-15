@@ -64,8 +64,6 @@ gem 'devise'
 gem 'enum_help'
 #体重グラフ
 gem 'chartkick'
-#デバッグ用
-gem 'pry-byebug'
 #食事フォーム追加用
 gem 'cocoon'
 # 検索フォーム用
