@@ -68,7 +68,6 @@ gem 'chartkick'
 gem 'cocoon'
 # 検索フォーム用
 gem 'compass-rails', '~> 2.0.alpha.0'
-gem 'chosen-rails'
 
 gem 'dotenv-rails'
 group :production do
