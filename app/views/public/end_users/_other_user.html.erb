@@ -19,7 +19,7 @@
     <% if end_user.image.attached? %>
       <%= image_tag end_user.image, size: "200x200" %>
     <% else %>
-      <%= image_tag 'end_user/no_image', size: "200x200" %>
+      <%= image_tag 'no_image', size: "200x200" %>
     <% end %>
   </tr>
   <tr>
@@ -35,6 +35,6 @@
     <td><%= end_user.gender_i18n %></td>
   </tr>
   <tr>
-    <%= link_to '日記を見る', diary_path(end_user) %>
+    <%= link_to '日記を見る', "/personal_index/#{end_user.id}" %>
   </tr>
 </table>

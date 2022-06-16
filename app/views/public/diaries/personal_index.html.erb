@@ -1,0 +1,17 @@
+<%= @diary_user.nickname %>&emsp;
+<%= @diary_user.age %>歳&emsp;
+<%= @diary_user.height %>cm&emsp;
+<% if @recent_weight.nil? %>
+  <%= @diary_user.start_weight %>kg
+<% else %>
+  <%= @recent_weight %>kg
+<% end %>
+
+<% if @diaries.empty? %>
+<p>日記はまだありません。</p>
+<% else %>
+  <% @diaries.each do |diary| %>
+    タイトル：<%= diary.title %>
+    本文<%= diary.body %>
+  <% end %>
+<% end %>

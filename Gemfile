@@ -66,9 +66,11 @@ gem 'enum_help'
 gem 'chartkick'
 #食事フォーム追加用
 gem 'cocoon'
-# 検索フォーム用
-gem 'compass-rails', '~> 2.0.alpha.0'
-
+# 食事フォーム用
+group :assets do
+  gem 'chosen-rails'
+end
+# デプロイ
 gem 'dotenv-rails'
 group :production do
   gem 'mysql2'

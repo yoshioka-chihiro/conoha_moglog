@@ -4,6 +4,8 @@ class MealDetail < ApplicationRecord
   validates :quantity, presence: true
   validates :food_id, presence: true
   
+  # accepts_nested_attributes_for :album_tracks, reject_if: :all_blank, allow_destroy: true
+  
   def calorie_subtotal
     food.calorie * quantity
   end

@@ -4,7 +4,10 @@
   <%= f.select :meal_type, Meal.meal_types_i18n.keys.map{|k| [I18n.t("enums.meal.meal_type.#{k}"), k]}, {prompt: '選択してください'} %>
   <%= f.datetime_field :record_time, value: Time.current.strftime('%Y-%m-%dT00:00:00') %>
   <br>
-  <div id="album-track-forms">
+
+
+
+  <div id="food-track-forms">
     <%= f.fields_for :meal_details do |f| %>
       <%= render 'form', food: f %>
     <% end %>
@@ -20,7 +23,7 @@
                               # オプション
                               data: {
                                 # フォームを追加する場所の指定
-                                association_insertion_node: '#album-track-forms',
+                                association_insertion_node: '#food-track-forms',
                                 # フォームを前後どの位置に追加するか。(初期値: before)
                                 association_insertion_method: 'after'
                               },
@@ -30,6 +33,8 @@
   <div class="field">
     <%= f.submit "登録" %>
   </div>
+
+
 <% end %>
 <h1></h1>
 <h1>今日の摂取カロリー合計</h1>
@@ -37,18 +42,22 @@
 
 
 <h1>今日の食事一覧</h1>
-<% @today_meals_list.each do |meal| %>
-  <%= meal.meal_type_i18n %>
-  <%= meal.record_time.strftime("%H:%M") %>
-  <% meal.meal_details.each do |d| %>
-    <%= d.food.name %>
-    <%= d.quantity %>
-  <% end %>(目安)
-  <%= link_to '詳細', meal_path(meal.id) %>
-  <%= link_to '編集', edit_meal_path(meal.id) %>
-  <%= link_to '削除', meal_path(meal.id), method: :delete %>
-  <br>
-
+<% if @today_meals_list.count == 0 %>
+  <p>食事が登録されていません</p>
+<% else %>
+  <% @today_meals_list.each do |meal| %>
+    <%= meal.meal_type_i18n %>
+    <%= meal.record_time.strftime("%H:%M") %>
+    <% meal.meal_details.each do |d| %>
+      <%= d.food.name %>
+      <%= d.quantity %>
+    <% end %>
+    <%= link_to '詳細', meal_path(meal.id) %>
+    <%= link_to '編集', edit_meal_path(meal.id) %>
+    <%= link_to '削除', meal_path(meal.id), method: :delete %>
+    <br>
+  
+  <% end %>
 <% end %>
 
 <%= link_to '全ての食事履歴を見る'%>

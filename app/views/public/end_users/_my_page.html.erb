@@ -19,7 +19,7 @@
     <% if current_end_user.image.attached? %>
       <%= image_tag current_end_user.image, size: "200x200" %>
     <% else %>
-      <h1>画像なし
+      <%= image_tag 'no_image', size: "200x200" %>
     <% end %>
   </tr>
   <tr>
@@ -68,3 +68,4 @@
   </tr>
 </table>
 <%= link_to '編集',  edit_end_user_path %>
+<%= link_to '日記', "/personal_index/#{current_end_user.id}" %>

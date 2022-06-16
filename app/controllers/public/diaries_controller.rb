@@ -11,6 +11,12 @@ class Public::DiariesController < ApplicationController
     @diary_comments = @diary.diary_comments
   end
 
+  def personal_index
+    @diary_user = EndUser.find(params[:id])
+    @diaries = Diary.where(end_user_id: @diary_user.id)
+    @recent_weight = Weight.where(end_user_id: @diary_user.id).order(record_day: :asc).last.value
+  end
+
   def create
     @diary = Diary.new(diary_params)
     @diary.end_user_id = current_end_user.id

@@ -1,5 +1,5 @@
-<%= if current_end_user.gender.nill? %>
- <h4>－</h4>
+<% if current_end_user.active_level.nil? %>
+活動レベルを登録すると、摂取カロリーの目安が表示されます。
 <% else %>
   <% if current_end_user.gender == 0 %>
   <!--男性の場合-->

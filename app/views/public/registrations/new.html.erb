@@ -14,7 +14,7 @@
     <%= f.text_field :nickname %>
   </div>
 
-    <div class="field">
+  <div class="field">
     <%= f.label :年齢 %><br />
     <%= f.text_field :age %>
   </div>
@@ -22,6 +22,22 @@
   <div class="gender-field">
     <%= f.label :性別 %>
     <%= f.select :gender, EndUser.genders_i18n.keys.map{|k| [I18n.t("enums.end_user.gender.#{k}"), k]}, {prompt: '選択してください'} %>
+  </div>
+
+  <div class="field">
+    <%= f.label :身長 %><br />
+    <%= f.text_field :height %>
+  </div>
+
+  <div class="field">
+    <%= f.label :現在の体重 %><br />
+    <%= f.text_field :start_weight %>
+  </div>
+
+  <div class="field">
+    <%= f.label :目標の体重 %><br />
+    ※後からの登録もできます。
+    <%= f.text_field :objective_weight %>
   </div>
 
   <div class="field">

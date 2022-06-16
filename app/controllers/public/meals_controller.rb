@@ -1,4 +1,5 @@
 class Public::MealsController < ApplicationController
+
   def index
     # 食事登録用
     @meal = Meal.new
@@ -18,7 +19,6 @@ class Public::MealsController < ApplicationController
       @today_calorie_sum += meal_detail.calorie_subtotal
       end
     end
-
   end
 
   def create
@@ -74,6 +74,7 @@ class Public::MealsController < ApplicationController
       meal_details_attributes:[:id, :meal_id, :food_id, :quantity, :_destroy])
       .merge(end_user_id: current_end_user.id)
   end
+
 
 
 end
