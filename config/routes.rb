@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     end
 
     get 'meal_details/show'
-
+    get 'meals/all_index'
     resources :foods, only:[:index, :show]
     resources :meals, only:[:index, :show, :edit, :update, :create, :destroy]
     resources :meal_details, only:[:index, :create, :update, :destroy]
@@ -48,7 +48,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '/' => 'homes#top'
-    resources :diary_comments, only:[:index, :show, :edit]
+    resources :diary_comments, only:[:index, :show, :edit, :destroy]
     resources :foods, only:[:index, :show, :new, :edit, :create, :update, :destroy]
     resources :end_users, only:[:index, :show, :edit, :update]
 

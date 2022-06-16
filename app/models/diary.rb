@@ -7,9 +7,4 @@ class Diary < ApplicationRecord
    favorites.where(end_user_id: end_user.id).exists?
   end
 
-    # 通報済みかどうか判断するメソッド
-  def already_reported?(end_user)
-   reports.where(end_user_id: end_user.id).exists?
-  end
-
 end

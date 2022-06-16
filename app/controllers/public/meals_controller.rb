@@ -20,6 +20,10 @@ class Public::MealsController < ApplicationController
       end
     end
   end
+  
+  def all_index
+    
+  end
 
   def create
     @meal = Meal.new(meal_params)

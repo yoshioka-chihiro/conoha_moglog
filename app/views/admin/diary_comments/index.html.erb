@@ -1,2 +1,12 @@
-<h1>Admin::DiaryComments#index</h1>
-<p>Find me in app/views/admin/diary_comments/index.html.erb</p>
+<% if @reports.empty? %>
+通報コメントはない
+<% else %>
+  <% @reports.each do |r| %>
+    通報した人の名前：<%= r.end_user.name %><br>
+    通報された日：<%= r.created_at.strftime("%Y/%m/%d %H:%M") %><br>
+    コメントがついた日記：<%= r.diary_comment.diary.title %><br>
+    通報されたコメントの内容：<%= r.diary_comment.comment %><br>
+    コメントを書いた人：<%= r.diary_comment.end_user.name %><br>
+    <%= link_to 'コメントを削除する', admin_diary_comment_path(r), method: :delete %>
+  <% end %>
+<% end %>

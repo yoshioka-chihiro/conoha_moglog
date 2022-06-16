@@ -12,7 +12,7 @@
   </tr>
   <tr>
     <th><%= f.label:性別 %></th>
-    <td><%= f.select :gender, EndUser.genders_i18n.keys.map{|k| [I18n.t("enum.end_user.gender.#{k}"), k]} %></td>
+    <td><%= f.select :gender, EndUser.genders_i18n.keys.map{|k| [I18n.t("enums.end_user.gender.#{k}"), k]} %></td>
   </tr>
   <tr>
     <th><%= f.label:スタート時体重 %></th>

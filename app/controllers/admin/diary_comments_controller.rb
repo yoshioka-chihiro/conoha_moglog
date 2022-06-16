@@ -1,6 +1,6 @@
 class Admin::DiaryCommentsController < ApplicationController
   def index
-    @diary_comments = DiaryComment.all
+    @reports = Report.all
   end
 
   def show
@@ -12,7 +12,11 @@ class Admin::DiaryCommentsController < ApplicationController
   end
 
   def destroy
-    DiaryComment.find(params[:id]).destroy
-    flash[:notice] = "コメントを削除"
+    report = Report.find_by(params[:diary_comment_id])
+    @destroy_comment = report.diary_comment
+    if @destroy_comment.destroy
+      redirect_to admin_diary_comments_path
+      flash[:notice] = "コメントを削除"
+    end
   end
 end
