@@ -16,6 +16,7 @@ class EndUser < ApplicationRecord
   has_many :meal_details, through: :meal
   has_many :diaries, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :reports, dependent: :destroy
   has_many :diary_comments, dependent: :destroy
   has_many :conditions, dependent: :destroy
 

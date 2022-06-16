@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_13_064822) do
+ActiveRecord::Schema.define(version: 2022_06_16_070041) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -147,6 +147,15 @@ ActiveRecord::Schema.define(version: 2022_06_13_064822) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.integer "end_user_id", null: false
+    t.integer "diary_comment_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["diary_comment_id"], name: "index_reports_on_diary_comment_id"
+    t.index ["end_user_id"], name: "index_reports_on_end_user_id"
+  end
+
   create_table "weights", force: :cascade do |t|
     t.integer "end_user_id"
     t.float "value"
@@ -157,4 +166,6 @@ ActiveRecord::Schema.define(version: 2022_06_13_064822) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "reports", "diary_comments"
+  add_foreign_key "reports", "end_users"
 end

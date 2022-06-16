@@ -10,7 +10,5 @@ class Public::FavoritesController < ApplicationController
     @diary_favorite = Favorite.find_by(end_user_id: current_end_user.id, diary_id: params[:diary_id])
     @diary_favorite.destroy
     redirect_to diary_path(params[:diary_id])
-
-
   end
 end

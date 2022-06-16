@@ -28,6 +28,8 @@
           <td>
             <% if diary_comment.end_user == current_end_user %>
               <%= link_to "Destroy", diary_diary_comment_path(@diary, diary_comment), method: :delete, class: "btn btn-danger pull-right" %>
+            <% else %>
+              <%= render 'public/reports/btn', diary_comment: diary_comment, diary: @diary %>
             <% end %>
           </td>
         </tr>

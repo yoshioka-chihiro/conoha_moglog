@@ -1,0 +1,6 @@
+<% if diary_comment.already_reported?(current_end_user) %>
+  <%= link_to '通報を取り消す', diary_diary_comment_reports_path(diary,diary_comment), method: :delete %>
+<% else %>
+  <%= link_to '通報する', diary_diary_comment_reports_path(diary.id, diary_comment.id), method: :post %>
+<% end %>
+
