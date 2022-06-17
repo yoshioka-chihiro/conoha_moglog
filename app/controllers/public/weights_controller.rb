@@ -2,7 +2,6 @@ class Public::WeightsController < ApplicationController
 
   def index
     @weights = Weight.where(end_user_id: current_end_user.id).order(record_day: :asc)
-    @recent_weight = @weights.last.value
     @weight = Weight.new
     @graph = Weight.where(end_user_id: current_end_user.id).pluck(:record_day, :value)
   end
@@ -14,6 +13,7 @@ class Public::WeightsController < ApplicationController
       @weights = Weight.where(end_user_id: current_end_user.id)
       redirect_to action: 'index'
     else
+      flash[:notice] = "登録できませんでした"
       @weights = Weight.where(end_user_id: current_end_user.id)
       render :index
     end

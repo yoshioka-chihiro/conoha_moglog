@@ -1,6 +1,8 @@
-前回のお通じから<%= time_ago_in_words(@lastest_condition.created_at) %>！
+<% unless @lastest_condition.nil? %>
+  前回のお通じから<%= time_ago_in_words(@lastest_condition.created_at) %>！
+<% end %>
 <br>
-今~48時間前の食事↓<br>
+24~48時間前の食事↓<br>
 <% @search_meals.each do |m| %>
   ・<%= m.meal_type_i18n %>
   <% m.meal_details.each do |d| %>

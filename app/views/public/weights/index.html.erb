@@ -1,16 +1,19 @@
 <%= form_with model: @weight do |f| %>
-    <!--<= render 'layouts/error_messages', model: f.object %>-->
-    <%= f.label :value, '体重' %>
-    <%= f.number_field :value, step: '0.1', placeholder: '例）70' %>
-    <%= f.label :record_day, '日時' %>
-    <%= f.date_field :record_day, value: Time.now.strftime("%Y-%m-%dT") %>
-    <%= f.submit '投稿', class: 'waves-effect waves-light btn orange' %>
-    <%= link_to 'キャンセル', root_path, class: 'waves-effect waves-light btn grey' %>
-  <% end %>
+  <!--<= render 'layouts/error_messages', model: f.object %>-->
+  <%= f.label :value, '体重' %>
+  <%= f.number_field :value, step: '0.1', placeholder: '例）70' %>
+  <%= f.label :record_day, '日時' %>
+  <%= f.date_field :record_day, value: Time.now.strftime("%Y-%m-%dT") %>
+  <%= f.submit '投稿', class: 'waves-effect waves-light btn orange' %>
+  <%= link_to 'キャンセル', root_path, class: 'waves-effect waves-light btn grey' %>
+<% end %>
 
+<% if @weights.empty? %>
+体重を記録しまししょう！
+<% else %>
   あなたの最新の体重
-  <%= @recent_weight %>kg
-
+  <%= @weights.last.value %>kg
+<% end %>
 <!--グラフ部分-->
 <%= line_chart @graph,
 height: "300px",
