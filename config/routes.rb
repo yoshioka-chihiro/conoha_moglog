@@ -34,15 +34,19 @@ Rails.application.routes.draw do
     end
 
     get 'meal_details/show'
-    get 'meals/all_index'
     resources :foods, only:[:index, :show]
-    resources :meals, only:[:index, :show, :edit, :update, :create, :destroy]
+    resources :meals, only:[:index, :show, :edit, :update, :create, :destroy] do
+      collection do
+        get 'search'
+      end
+    end
     resources :meal_details, only:[:index, :create, :update, :destroy]
     resources :weights, only:[:index, :edit, :create, :edit, :update, :destroy]
     resources :conditions, only:[:index, :create, :update, :destroy, :edit, :show]
 
     patch 'end_users/:id/withdraw' => 'end_users#withdraw'
     get 'end_users/unsubscribe' => 'end_users#unsubscribe'
+    get "search" => "searches#search"
 
 
   end

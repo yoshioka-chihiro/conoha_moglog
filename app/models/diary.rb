@@ -7,4 +7,9 @@ class Diary < ApplicationRecord
    favorites.where(end_user_id: end_user.id).exists?
   end
 
+  # 日記検索
+  def self.looks(word)
+      @diary = Diary.where("title LIKE?","%#{word}%")
+  end
+
 end

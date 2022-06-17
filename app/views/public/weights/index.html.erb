@@ -13,7 +13,11 @@
 <% else %>
   あなたの最新の体重
   <%= @weights.last.value %>kg
+  <% unless @objective_weight.nil? %>
+    目標まであと<%= -(@weights.last.value - @objective_weight) %>kg
+  <% end %>
 <% end %>
+
 <!--グラフ部分-->
 <%= line_chart @graph,
 height: "300px",

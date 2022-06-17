@@ -1,0 +1,17 @@
+ユーザーの全食事一覧
+<% if @results.empty? %>
+  まだ登録がありません
+<% else %>
+  <% @results.each do |result| %>
+    <%= result.record_time.strftime("%Y/%m/%d %H:%M") %>
+    <%= result.meal_type_i18n %>
+    <% result.meal_details.each do |d| %>
+      <%= d.food.name %>
+      <%= d.quantity %>
+    <% end %>
+    <%= link_to '詳細', meal_path(result.id) %>
+    <%= link_to '編集', edit_meal_path(result.id) %>
+    <%= link_to '削除', meal_path(result.id), method: :delete %>
+    <br>
+  <% end %>
+<% end %>

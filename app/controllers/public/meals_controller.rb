@@ -1,6 +1,8 @@
 class Public::MealsController < ApplicationController
 
+
   def index
+     @q = Meal.ransack(params[:q])
     # 食事登録用
     @meal = Meal.new
     # mealに紐付くmeal_detailsをbuildしておく（追加ボタン用）
@@ -20,9 +22,12 @@ class Public::MealsController < ApplicationController
       end
     end
   end
-  
-  def all_index
-    
+
+  def search
+    # :qはransackのデフォルトキーなので変更しない
+    @q = Meal.ransack(params[:q])
+    # (distinct: true)によりresultの重複をなくしてくれている
+    @results = @q.result(distinct: true).order(record_time: :asc)
   end
 
   def create

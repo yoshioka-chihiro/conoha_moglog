@@ -1,0 +1,15 @@
+<% unless meals.nil? %>
+  <% meals.each do |meal| %>
+    <%= meal.meal_type_i18n %>
+    <%= meal.record_time.strftime("%H:%M") %>
+    <% meal.meal_details.each do |d| %>
+      <%= d.food.name %>
+      <%= d.quantity %>
+    <% end %>
+    <%= link_to '詳細', meal_path(meal.id) %>
+    <%= link_to '編集', edit_meal_path(meal.id) %>
+    <%= link_to '削除', meal_path(meal.id), method: :delete %>
+    <br>
+
+  <% end %>
+<% end %>

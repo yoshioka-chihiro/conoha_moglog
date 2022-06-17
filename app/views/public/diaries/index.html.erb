@@ -1,3 +1,4 @@
+<%= render 'public/searches/form' %>
 <h3>投稿する</h3>
 
 <%= form_with model: @diary, local:true do |f| %>
@@ -26,4 +27,3 @@
       <%= diary.body %>
   <% end %>
 <% end %>
-

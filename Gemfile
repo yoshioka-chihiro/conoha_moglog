@@ -70,6 +70,8 @@ gem 'cocoon'
 group :assets do
   gem 'chosen-rails'
 end
+# 食事検索用
+gem 'ransack'
 # デプロイ
 gem 'dotenv-rails'
 group :production do
