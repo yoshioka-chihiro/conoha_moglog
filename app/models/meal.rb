@@ -6,6 +6,7 @@ class Meal < ApplicationRecord
   has_many :foods, through: :meal_details
   #関連付けしたモデルを一緒にデータ保存できるようにする
   accepts_nested_attributes_for :meal_details, reject_if: :all_blank, allow_destroy: true
+
   validates :meal_type, presence: true
   validates :record_time, presence: true
 

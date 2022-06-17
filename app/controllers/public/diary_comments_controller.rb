@@ -7,9 +7,15 @@ class Public::DiaryCommentsController < ApplicationController
     @diary_comment = @diary.diary_comments.new(diary_comment_params)
     # コメント投稿者(end_user)のidを代入
     @diary_comment.end_user_id = current_end_user.id
-    @diary_comment.save
-    @diary_comments = @diary.diary_comments
-    render :index
+    if @diary_comment.save
+      @diary_comments = @diary.diary_comments
+      flash[:notice] = "コメントを投稿しました！"
+      render :index
+    else
+      flash[:notice] = "コメントを入れてください！"
+      @diary = Diary.find(params[:diary_id])
+      redirect_to diary_path(@diary)
+    end
   end
 
    def destroy
@@ -17,7 +23,6 @@ class Public::DiaryCommentsController < ApplicationController
     @diary_comment = DiaryComment.find(params[:id])
     @diary_comment.destroy
     @diary_comments = @diary.diary_comments
-
     render :index
    end
 

@@ -2,7 +2,8 @@ class Public::MealsController < ApplicationController
 
 
   def index
-     @q = Meal.ransack(params[:q])
+    # 食事検索用
+    @q = Meal.ransack(params[:q])
     # 食事登録用
     @meal = Meal.new
     # mealに紐付くmeal_detailsをbuildしておく（追加ボタン用）
@@ -18,7 +19,7 @@ class Public::MealsController < ApplicationController
     @today_calorie_sum = 0
     @today_meals_list.each do |meal|
       meal.meal_details.each do |meal_detail|
-      @today_calorie_sum += meal_detail.calorie_subtotal
+        @today_calorie_sum += meal_detail.calorie_subtotal
       end
     end
   end
@@ -35,6 +36,7 @@ class Public::MealsController < ApplicationController
     if @meal.save
       redirect_to meals_path, notice: "食事を投稿しました！"
     else
+      @q = Meal.ransack(params[:q])
       render :index, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
     end
   end

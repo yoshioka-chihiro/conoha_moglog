@@ -6,12 +6,26 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-users = [
-   { name: '田中ゆうこ', nickname: 'タナカ',  age: 24, height: 155, start_weight: 57, active_level: 0, objective_weight: 40, gender: 1, email: 'tanaka@t', password: 'TanakaYuko' },
-   { name: '森山太郎', nickname: 'モリ', age: 27, height: 175, start_weight: 77, active_level: 2, objective_weight: 60, gender: 0, email: 'moriyama@t', password: 'MoriyamaTaro' },
-   { name: '山田太郎', nickname: 'ヤマダ', age: 37, height: 185, start_weight: 97, active_level: 1, objective_weight: 70, gender: 0, email: 'yamada@t', password: 'YamadaTaro' },
-   { name: '秋山なお', nickname: 'ナオチャン', age: 18, height: 160, start_weight: 47, active_level: 1, objective_weight: 40, gender: 1, email: 'akiyama@t', password: 'AkiyamaNao' }
-]
 
-EndUser.create(users)
+5.times do |n|
+    EndUser.create!(
+      email: "test#{n + 1}@t",
+      name: "テスト太郎#{n + 1}",
+      nickname: "タロちゃん#{n + 1}",
+      age: 20 + n,
+      height: 160 + n,
+      start_weight: 47 + n,
+      active_level: 0,
+      objective_weight: 40  + n,
+      gender: 0,
+      password: "test#{n + 1}test"
+    )
+  end
+
+5.times do |n|
+   Relationship.create!(
+     follower_id: 1 + n,
+     followed_id: 5 - n
+   )
+end
 

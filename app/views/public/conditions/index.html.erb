@@ -13,7 +13,7 @@
   <br>
 <% end %>
 <h1>体調の記録</h1>
-<%= render 'layouts/error_messages', model: @condition %>
+<%= render "public/shared/error_messages", resource: @condition %>
 <%= form_with model: @condition, local:true do |f| %>
 <div class="fields">
   <%= f.label:お通じ %>

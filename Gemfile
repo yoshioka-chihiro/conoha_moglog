@@ -72,6 +72,8 @@ group :assets do
 end
 # 食事検索用
 gem 'ransack'
+# エラーメッセージ
+gem 'rails-i18n'
 # デプロイ
 gem 'dotenv-rails'
 group :production do

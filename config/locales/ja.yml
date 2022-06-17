@@ -229,3 +229,9 @@ ja :
         long: "%Y/%m/%d %H:%M"
         short: "%m/%d %H:%M"
       pm: 午後
+
+    activerecord:
+        models:
+          meal: 食事
+          weight: 体重
+          diary: 日記

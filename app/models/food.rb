@@ -5,10 +5,10 @@ class Food < ApplicationRecord
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
-  varidates :calorie, presence: true
-  varidates :protein, presence: true
-  varidates :carbohydrate, presence: true
-  varidates :fat, presence: true
-  varidates :fiber, presence: true
+  validates :calorie, presence: true
+  validates :protein, presence: true
+  validates :carbohydrate, presence: true
+  validates :fat, presence: true
+  validates :fiber, presence: true
 
 end

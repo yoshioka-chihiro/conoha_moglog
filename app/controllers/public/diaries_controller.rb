@@ -23,6 +23,7 @@ class Public::DiariesController < ApplicationController
     if @diary.save
       redirect_to diaries_path, notice: "日記を投稿しました！"
     else
+      @diaries = Diary.all
       render :index, alert: "投稿できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
     end
   end
