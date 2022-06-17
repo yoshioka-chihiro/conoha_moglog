@@ -23,6 +23,15 @@ class Public::EndUsersController < ApplicationController
     end
   end
 
+  def image_destroy
+    @image = current_end_user.image
+    if @image.destroy
+      flash[:alret] = "プロフィール写真を削除しました。"
+      redirect_to edit_end_user_path(current_end_user.id)
+    end
+  end
+
+
 
 private
 

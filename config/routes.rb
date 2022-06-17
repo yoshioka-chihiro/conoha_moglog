@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
     get 'about' => 'public/homes#about'
     get 'personal_index/:id' => 'diaries#personal_index'
+    delete 'end_users/image_destroy'
     resources :diaries, only:[:index, :show, :edit, :create, :update] do
       resource :favorites, only: [:create, :destroy]
       resources :diary_comments, only: [:create, :destroy] do

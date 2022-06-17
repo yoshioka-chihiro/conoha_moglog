@@ -1,10 +1,16 @@
 <h1>会員情報編集</h1>
+<% unless  @end_user.image.blank? %>
+  <%= image_tag @end_user.image, size: "100x100" %>
+<% end %>
 
 <%= form_with model: @end_user do |f| %>
-<table>
+<table class="table">
   <tr>
     <th>プロフィール画像</th>
-    <td><%= f.file_field :image, accept: "image/*" %></td>
+    <td>
+      <%= f.file_field :image, accept: "image/*" %>
+      <%= link_to 'プロフィール画像を削除する', end_users_image_destroy_path, method: :delete %>
+    </td>
   </tr>
   <tr>
     <th><%= f.label:名前 %></th>
