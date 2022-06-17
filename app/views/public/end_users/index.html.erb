@@ -14,15 +14,11 @@
         <%= end_user.name %>
       <% end %>
     </th>
-    <th>
-      <% if current_end_user != end_user %>
-        <% if current_end_user.following?(end_user) %>
-          <%= link_to "フォロー外す", end_user_relationships_path(end_user.id), method: :delete %>
-        <% else %>
-          <%= link_to "フォローする", end_user_relationships_path(end_user.id), method: :post %>
-        <% end %>
-      <% end %>
+    <% if current_end_user != end_user %>
+    <th id="follow_btn_<%= end_user.id %>">
+      <%= render 'public/relationships/btn', end_user: end_user %>
     </th>
+    <% end %>
   </tr>
 </table>
 <% end %>

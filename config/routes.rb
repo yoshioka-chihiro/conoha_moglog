@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # ゲストログイン
   namespace :admin do
     get 'end_users/index'
     get 'end_users/show'
@@ -12,6 +13,10 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
+
+  devise_scope :end_user do
+    post 'end_users/guest_sign_in', to: 'public/sessions#new_guest'
+  end
 
   root to: 'public/homes#top'
 

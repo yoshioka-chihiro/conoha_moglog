@@ -1,5 +1,5 @@
 <h2>Log in</h2>
-
+<%= render 'public/shared/error_messages', resource: @end_user %>
 <%= form_with model: @end_user, url: end_user_session_path do |f| %>
   <div class="field">
     <%= f.label :email %><br />

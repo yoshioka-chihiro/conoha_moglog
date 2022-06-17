@@ -6,37 +6,14 @@
 <%= @diary.end_user.gender_i18n %>
 <%= @diary.title %>
 <%= @diary.body %>
-<%= render 'public/favorites/btn', diary: @diary %>
-
-<% if @diary_comments.empty? %>
-  <p>コメントはまだありません</p>
-<% else %>
-  <table>
-    <tbody>
-        <% @diary_comments.each do |diary_comment| %>
-        <tr>
-          <td>
-            <% if diary_comment.end_user.nickname.empty? %>
-              匿名希望さん
-            <% else %>
-              <%= link_to end_user_path(diary_comment.end_user) do %>
-                <%= diary_comment.end_user.name %>
-              <% end %>
-            <% end %>
-          </td>
-          <td><%= diary_comment.comment %></td>
-          <td>
-            <% if diary_comment.end_user == current_end_user %>
-              <%= link_to "Destroy", diary_diary_comment_path(@diary, diary_comment), method: :delete, class: "btn btn-danger pull-right" %>
-            <% else %>
-              <%= render 'public/reports/btn', diary_comment: diary_comment, diary: @diary %>
-            <% end %>
-          </td>
-        </tr>
-        <% end %>
-    </tbody>
-  </table>
-<% end %>
-
-<%= render 'public/diary_comments/form', diary: @diary, diary_comment: @diary_comment %>
-
+<%= link_to '編集', edit_diary_path(@diary) %>
+<div id ="favorite_btn">
+  <%= render 'public/favorites/btn', diary: @diary %>
+</div>
+<div id="comment_index">
+  <%= render 'public/diary_comments/comment_index', diary: @diary, diary_comments: @diary_comments %>
+</div>
+<div id ="comment_form">
+  <%= render 'layouts/error_messages', model: @diary %>
+  <%= render 'public/diary_comments/form', diary: @diary, diary_comment: @diary_comment %>
+</div>

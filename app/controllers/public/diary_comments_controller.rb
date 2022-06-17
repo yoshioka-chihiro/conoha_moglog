@@ -8,14 +8,17 @@ class Public::DiaryCommentsController < ApplicationController
     # コメント投稿者(end_user)のidを代入
     @diary_comment.end_user_id = current_end_user.id
     @diary_comment.save
-    redirect_to diary_path(@diary)
+    @diary_comments = @diary.diary_comments
+    render :index
   end
 
    def destroy
     @diary = Diary.find(params[:diary_id])
     @diary_comment = DiaryComment.find(params[:id])
     @diary_comment.destroy
-    redirect_to diary_path(@diary)
+    @diary_comments = @diary.diary_comments
+
+    render :index
    end
 
   private

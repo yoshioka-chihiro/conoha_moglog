@@ -26,12 +26,26 @@ class EndUser < ApplicationRecord
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { minimum: 2, maximum: 20 }
   validates :gender, presence: true
   validates :start_weight, presence: true
   validates :age, presence: true
   validates :height, presence: true
   validates :email, presence: true, uniqueness: true
+
+  # ゲストログイン
+  def self.guest
+    find_or_create_by!(email: 'aaa@aaa.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.password_confirmation = user.password
+      user.name = 'テスト太郎'
+      user.nickname = 'サンプル'
+      user.age = 22
+      user.gender = 0
+      user.height = 170
+      user.start_weight = 57
+    end
+  end
 
 
   # フォローしたときの処理

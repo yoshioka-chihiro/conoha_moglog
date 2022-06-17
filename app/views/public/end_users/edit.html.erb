@@ -3,6 +3,7 @@
   <%= image_tag @end_user.image, size: "100x100" %>
 <% end %>
 
+<%= render "public/shared/error_messages", resource: @end_user %>
 <%= form_with model: @end_user do |f| %>
 <table class="table">
   <tr>

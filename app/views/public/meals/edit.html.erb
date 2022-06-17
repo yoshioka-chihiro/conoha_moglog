@@ -1,3 +1,4 @@
+<%= render 'public/shared/error_messages', resource: @meal %>
 <%= form_with model: @meal do |f| %>
   <%= f.select :meal_type, Meal.meal_types_i18n.keys.map{|k| [I18n.t("enums.meal.meal_type.#{k}"), k]} %>
   <%= f.time_select :record_time, {minute_step: 15} %>

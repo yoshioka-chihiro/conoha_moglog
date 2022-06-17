@@ -1,2 +1,13 @@
-<h1>Public::Diaries#edit</h1>
-<p>Find me in app/views/public/diaries/edit.html.erb</p>
+<h3>投稿する</h3>
+<%= render "public/shared/error_messages", resource: @diary %>
+<%= form_with model: @diary, local:true do |f| %>
+  <div class="form-group">
+    <%= f.label :タイトル %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="form-group">
+    <%= f.label :本文 %>
+    <%= f.text_area :body %>
+  </div>
+  <%= f.submit '更新' %>
+<% end %>

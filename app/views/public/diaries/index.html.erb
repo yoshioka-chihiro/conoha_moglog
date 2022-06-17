@@ -1,6 +1,7 @@
 <%= render 'public/searches/form' %>
-<h3>投稿する</h3>
 
+<h3>投稿する</h3>
+<%= render "public/shared/error_messages", resource: @diary %>
 <%= form_with model: @diary, local:true do |f| %>
   <div class="form-group">
     <%= f.label :タイトル %>

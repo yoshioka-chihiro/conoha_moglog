@@ -1,3 +1,4 @@
+<%= render 'public/shared/error_messages', resource: @weight %>
 <%= form_with model: @weight do |f| %>
     <!--<= render 'layouts/error_messages', model: f.object %>-->
     <%= f.label :value, '体重' %>
