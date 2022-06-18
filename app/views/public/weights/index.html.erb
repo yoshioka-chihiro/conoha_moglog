@@ -13,17 +13,22 @@
       <% end %>
     </div>
 
-    <div class="justify-content-center row">
+<div clss="justify-content-center row">
+    <div class="text-center rounded-circle p-3" style="border: 1px solid pink; width:150px; background-color:pink;">
       <% if @weights.empty? %>
-      体重を記録しまししょう！
+        <p>体重を記録しまししょう！</p>
       <% else %>
-        現在の体重
+        <p><strong>現在の体重</strong></p>
         <%= @weights.last.value %>kg
+    </div>
+    <div class="text-center rounded-circle p-3" style="border: 1px solid gray; width:150px; background-color:gray;">
         <% unless @objective_weight.nil? %>
-          目標まであと<%= -(@weights.last.value - @objective_weight) %>kg
+          <strong><p>目標まであと</p></strong>
+          <%= -(@weights.last.value - @objective_weight) %>kg
         <% end %>
       <% end %>
     </div>
+  </div>
 
     <div class="justify-content-center row">
       <!--グラフ部分-->

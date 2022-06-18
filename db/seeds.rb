@@ -23,6 +23,38 @@ Admin.create!(email: "a@g", password: "HogeHoge")
     )
  end
 
+15.times do |n
+   start_day = Date.new(2022, 6, 1)
+   end_day = Date.new(2022, 6, 31)
+   Condition.create!(
+     end_user_id: 1,
+     movement: 2,
+     feel: 3,
+     created_at: Random.rand(start_day..end_day)
+   )
+end
+
+5.times do |n|
+   Diary.create!(
+   end_user_id: 1 + n,
+   title: "test#{n + 1}めちゃくちゃ食べた",
+   body: "今日は#{n + 1}合のご飯を食べた！"
+   )
+
+5.times do |n|
+   DiaryComment!(
+   end_user_id:1 + n,,
+   diary_id:5 - n,,
+   comment: "コメントテスト#{n + 1}"
+      )
+
+5.times do |n|
+   Favorite.create!(
+     end_user_id: 1 + n,
+     diary_id: 5 - n
+   )
+end
+
 5.times do |n|
    Relationship.create!(
      follower_id: 1 + n,
@@ -30,28 +62,44 @@ Admin.create!(email: "a@g", password: "HogeHoge")
    )
 end
 
-5.times do |n|
+30.times do |n|
    Food.create!(
       name: "food#{n + 1}",
-      introduction: "#{n + 1}粒あたり",
-      calorie:  60 + n,
-      protein:  15 + n,
-      carbohydrate:  10 + n,
-      fat:  0.1 + n,
-      fiber:  0.1 + n
+      introduction: "100gあたり",
+      calorie: Random.rand(1..500),
+      protein: Random.rand(1..30),
+      carbohydrate: Random.rand(1..50),
+      fat: Random.rand(1..50),
+      fiber: Random.rand(0.1..1)
    )
 end
 
-5.times do |n|
-   Food.create!(
-      name: "food#{n + 1}",
-      introduction: "#{n + 1}粒あたり",
-      calorie:  60 + n,
-      protein:  15 + n,
-      carbohydrate:  10 + n,
-      fat:  0.1 + n,
-      fiber:  0.1 + n
+30.times do |n|
+   start_day = Date.new(2022, 6, 1)
+   end_day = Date.new(2022, 6, 31)
+   Meal.create!(
+     end_user_id: 1,
+     meal_type: 2,
+     record_time: Random.rand(start_day..end_day)
    )
 end
+
+30.times do |n|
+   MealDetail.create!(
+     meal_id: 1 + n,
+     food_id: 1 + n,
+     quantity  1 + n:
+   )
+end
+
+30.times do |n|
+   start_day = Date.new(2022, 6, 1)
+   end_day = Date.new(2022, 6, 31)
+   Weight.create!(
+   end_user_id: 1,
+   value: Random.rand(30..70),
+   record_day: Random.rand(start_day..end_day)
+   )
+
 
 
