@@ -1,20 +1,25 @@
 <% if end_users.exists? %>
   <% end_users.each do |user| %>
-    <table>
-      <thead>
-        <tr>
-          <th>name</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= user.name %></td>
-          <td>フォロー数: <%= user.followings.count %></td>
-          <td>フォロワー数: <%= user.followers.count %></td>
-        </tr>
-      </tbody>
+    <table class="text-center mt-5">
+      <tr>
+        <td>
+          <%= link_to end_user_path(user) do %>
+            <%= image_tag user.get_profile_image(200,200), class: "rounded-circle" %>
+           <% end %>
+        </td>
+        <td>フォローボタン設置？！</td>
+        <td><%= user.nickname %></td>
+        <td>フォロー数:
+          <%= link_to end_user_followers_path(user.id) do %>
+            <%= user.followings.count %>
+          <% end %>
+        </td>
+        <td>フォロワー数:
+          <%= link_to end_user_followers_path(user.id) do %>
+            <%= user.followers.count %>
+          <% end %>
+        </td>
+      </tr>
     </table>
   <% end %>
 <% else %>

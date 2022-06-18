@@ -1,0 +1,23 @@
+<ul class="navbar-nav ml-auto">
+  <li class="nav-item active mr-3">
+    <%= link_to 'マイページ', end_user_path(current_end_user) %>
+  </li>
+  <li class="nav-item active mr-3">
+    <%= link_to '食事記録', meals_path %>
+  </li>
+  <li class="nav-item active mr-3">
+    <%= link_to '体重記録', weights_path %>
+  </li>
+  <li class="nav-item active mr-3">
+    <%= link_to 'お通じ記録', conditions_path %>
+  </li>
+  <li class="nav-item active mr-3">
+    <%= link_to '日記をつける', diaries_path %>
+  </li>
+  <li class="nav-item active mr-3">
+    <%= link_to '会員一覧', end_users_path %>
+  </li>
+  <li class="nav-item active mr-3">
+    <%= link_to 'ログアウト', destroy_end_user_session_path, method: :delete %>
+  </li>
+</ul>

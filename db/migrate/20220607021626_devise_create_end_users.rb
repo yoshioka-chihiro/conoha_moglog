@@ -5,12 +5,12 @@ class DeviseCreateEndUsers < ActiveRecord::Migration[6.1]
     create_table :end_users do |t|
       ## Database authenticatable
       t.string :name, null: false
-      t.string :nickname, null: false
+      t.string :nickname
       t.integer :gender, null: false
-      t.float :start_weight
+      t.float :start_weight, null: false
       t.float :objective_weight
       t.integer :age, null: false
-      t.float :height
+      t.float :height, null: false
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
       t.boolean :is_deleted, default: false

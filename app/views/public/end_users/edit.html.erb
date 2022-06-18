@@ -1,16 +1,18 @@
-<h1>会員情報編集</h1>
-<% unless  @end_user.image.blank? %>
-  <%= image_tag @end_user.image, size: "100x100" %>
-<% end %>
+<div class="container">
+  <h3 class="mini-title mb-3">編集画面</h3>
+
+ <div class="justify-content-center">
+
 
 <%= render "public/shared/error_messages", resource: @end_user %>
+
 <%= form_with model: @end_user do |f| %>
-<table class="table">
+<table class="table table-bordered text-center mt-5" >
   <tr>
     <th>プロフィール画像</th>
     <td>
-      <%= f.file_field :image, accept: "image/*" %>
-      <%= link_to 'プロフィール画像を削除する', end_users_image_destroy_path, method: :delete %>
+      <%= image_tag current_end_user.get_profile_image(200,200), class: "rounded-circle" %>
+      <%= f.file_field :profile_image, accept: "image/*" %>
     </td>
   </tr>
   <tr>
@@ -43,21 +45,28 @@
   </tr>
   <tr>
     <th><%= f.label:活動レベル %></th>
-    <td><%= f.select :active_level, EndUser.active_levels_i18n.keys.map{|k| [I18n.t("enums.end_user.active_level.#{k}"), k]} %></td>
     <td>
-      低い：生活の大部分を座って過ごし、あまり体を動かすことがない場合<br>
-      普通：座っていることが多いが、職場内での移動や立っての作業、通勤・買い物・家事・軽いスポーツなどのいずれかを行う場合<br>
-      高い：移動や立っての作業が多い仕事に従事している、または頻繁に運動を行う習慣がある場合<br>
+      <%= f.select :active_level, EndUser.active_levels_i18n.keys.map{|k| [I18n.t("enums.end_user.active_level.#{k}"), k]} %><br>
+      <p class="text-left">
+        低い：生活の大部分を座って過ごし、あまり体を動かすことがない場合<br>
+        普通：座っていることが多いが、職場内での移動や立っての作業、通勤・買い物・家事・軽いスポーツなどのいずれかを行う場合<br>
+        高い：移動や立っての作業が多い仕事に従事している、または頻繁に運動を行う習慣がある場合<br>
+      </p>
     </td>
   </tr>
   <tr>
     <th><%= f.label:メールアドレス %></th>
     <td><%= f.text_field :email %></td>
   </tr>
-  <tr>
-    <td><%= f.submit '編集' %></td>
-  </tr>
 </table>
-
-
+<div class="text-center mt-5 md-5">
+  <%= f.submit '更新', class: 'btn btn-success col-lg-5 mt-3' %>
+</div>
 <% end %>
+
+<div class="justify-content-center row mt-5">
+  <%= link_to "退会する", end_users_quit_path, class: 'btn btn-sm btn-danger btn-lg' %>
+</div>
+
+</div>
+</div>

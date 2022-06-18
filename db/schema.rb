@@ -78,12 +78,12 @@ ActiveRecord::Schema.define(version: 2022_06_17_070140) do
 
   create_table "end_users", force: :cascade do |t|
     t.string "name", null: false
-    t.string "nickname", null: false
+    t.string "nickname"
     t.integer "gender", null: false
-    t.float "start_weight"
+    t.float "start_weight", null: false
     t.float "objective_weight"
     t.integer "age", null: false
-    t.float "height"
+    t.float "height", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.boolean "is_deleted", default: false

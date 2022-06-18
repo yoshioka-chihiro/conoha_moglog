@@ -6,6 +6,7 @@ class Public::EndUsersController < ApplicationController
 
   def show
     @end_user = EndUser.find(params[:id])
+    @recent_weight = Weight.where(end_user_id: @end_user.id).order(record_day: :asc).last
   end
 
   def edit
@@ -23,13 +24,41 @@ class Public::EndUsersController < ApplicationController
     end
   end
 
-  def image_destroy
-    @image = current_end_user.image
-    if @image.destroy
-      flash[:alret] = "プロフィール写真を削除しました。"
-      redirect_to edit_end_user_path(current_end_user.id)
-    end
+# 保留
+  # def image_destroy
+  #   if current_end_user.profile_image.purge
+  #     flash[:alret] = "プロフィール写真を削除しました。"
+  #     redirect_to edit_end_user_path(current_end_user.id)
+  #   else
+  #     @end_user = current_end_user
+  #     flash[:alret] = "プロフィール写真を削除できません"
+  #     render :edit
+  #   end
+  # end
+
+  def quit
   end
+
+  def withdraw
+    #現在ログインしているユーザーを@end_userに格納
+    @end_user = EndUser.find(current_end_user.id)
+     if @end_user.update(is_deleted: true)
+       flash[:notice] = " 退会しました"
+      #sessionIDのresetを行う
+      reset_session
+      redirect_to root_path
+     else
+      flash[:notice] = " 退会に失敗しました"
+      render :show
+     end
+  end
+
+  def favorites
+    @end_user = EndUser.find(params[:end_user_id])
+    favorites= Favorite.where(end_user_id: @end_user.id).pluck(:diary_id)
+    @favorite_diaries = Diary.find(favorites)
+  end
+
 
 
 
@@ -37,7 +66,7 @@ private
 
   def end_user_params
     params.require(:end_user)
-    .permit(:email, :name, :nickname, :gender, :start_weight, :objective_weight, :age, :height, :image, :active_level)
+    .permit(:email, :name, :nickname, :gender, :start_weight, :objective_weight, :age, :height, :profile_image, :active_level)
   end
 
 end

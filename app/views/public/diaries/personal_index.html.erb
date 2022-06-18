@@ -4,7 +4,7 @@
 <% if @recent_weight.nil? %>
   <%= @diary_user.start_weight %>kg
 <% else %>
-  <%= @recent_weight %>kg
+  <%= @recent_weight.value %>kg
 <% end %>
 
 <% if @diaries.empty? %>

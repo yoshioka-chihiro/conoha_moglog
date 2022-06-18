@@ -24,7 +24,10 @@ Rails.application.routes.draw do
 
     get 'about' => 'public/homes#about'
     get 'personal_index/:id' => 'diaries#personal_index'
-    delete 'end_users/image_destroy'
+    patch 'end_users/withdraw' => 'end_users#withdraw'
+    get 'end_users/quit' => 'end_users#quit'
+    # delete 'end_users/image_destroy'
+
     resources :diaries, only:[:index, :show, :edit, :create, :update] do
       resource :favorites, only: [:create, :destroy]
       resources :diary_comments, only: [:create, :destroy] do
@@ -33,10 +36,12 @@ Rails.application.routes.draw do
     end
 
     resources :end_users, only:[:show, :edit, :update, :index] do
+      get 'favorites' => 'end_users#favorites'
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
     end
+
 
     get 'meal_details/show'
     resources :foods, only:[:index, :show]

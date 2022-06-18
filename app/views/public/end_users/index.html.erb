@@ -2,16 +2,10 @@
 <% @end_users.each do |end_user| %>
 <table>
   <tr>
-    <th>
-      <% if end_user.image.attached? %>
-        <%= image_tag end_user.image, size: "100x100" %>
-      <% else %>
-        <%= image_tag asset_path "no_image.png", size: "100x100" %>
-      <% end %>
-    </th>
+    <th><%= image_tag end_user.get_profile_image(100,100), class: "rounded-circle"  %></th>
     <th>
       <%= link_to end_user_path(end_user) do %>
-        <%= end_user.name %>
+        <%= end_user.nickname %>
       <% end %>
     </th>
     <% if current_end_user != end_user %>

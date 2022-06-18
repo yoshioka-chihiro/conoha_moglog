@@ -15,44 +15,32 @@
 
   <body>
     <br>
-    <header>
-      <% if end_user_signed_in? %>
-      <!--メンバー-->
-        <%= link_to 'マイページ', end_user_path(current_end_user) %>
-        <%= link_to '食事登録', meals_path %>
-        <%= link_to 'ログアウト', destroy_end_user_session_path, method: :delete %>
-        <%= link_to '会員一覧', end_users_path %>
-        <%= link_to '体調を登録', conditions_path %>
-        <%= link_to '体重を登録', weights_path %>
-        <%= link_to '日記を書く', diaries_path %>
-      <% else %>
-      <!--ゲスト-->
-        <%= link_to 'ゲストログイン（閲覧用）', end_users_guest_sign_in_path, method: :post %>
-        <%= link_to 'ログイン', new_end_user_session_path %>
-        <%= link_to '新規登録', new_end_user_registration_path %>
-      <% end %>
-
-      <% if admin_signed_in? %>
-      <!--管理者-->
-      <h1>管理者としてログイン中です</h1>
-        <%= link_to '会員一覧', admin_end_users_path %>
-        <%= link_to '食品一覧', admin_foods_path %>
-        <%= link_to 'コメント一覧', admin_diary_comments_path %>
-        <%= link_to '管理者ログアウト', destroy_admin_session_path, method: :delete %>
-      <% else %>
-       <%= link_to '管理者ログイン', new_admin_session_path %>
-      <% end %>
+    <header class="sticky-top bg-white p-0" >
+      <nav class="navbar navbar-expand-lg bg-white">
+        <div class="container">
+          <a class="navbar-brand" href="/">LOGO</a>
+          <div class="collapse navbar-collapse col-xl-8 text-dark" id="navbarNavDropdown">
+          <% if end_user_signed_in? %>
+          <!--メンバー-->
+            <%= render 'layouts/member_header'%>
+          <% elsif admin_signed_in? %>
+          <!--管理者-->
+            <%= render 'layouts/admin_header'%>
+          <% else %>
+          <!--ゲスト-->
+            <%= render 'layouts/gest_header'%>
+          <% end %>
+        </div>
+      </nav>
     </header>
 
-    <div class="text-success">
-      <%= flash[:notice] %>
-    </div>
-    <div class="text-danger">
-      <%= flash[:alret] %>
-    </div>
+    <main>
+      <div class="text-success"><%= flash[:notice] %></div>
+      <div class="text-danger"><%= flash[:alret] %></div>
+      <%= yield %>
+    </main>
 
-    <%= yield %>
+    <footer class="text-center">© moglog 2022.06</footer>
 
   </body>
-  <footer>フッター</footer>
 </html>

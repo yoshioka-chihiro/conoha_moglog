@@ -60,6 +60,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #ユーザー管理
 gem 'devise'
+# 画像リサイズ
+gem 'mini_magick'
 #日本語化
 gem 'enum_help'
 #体重グラフ

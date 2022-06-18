@@ -1,27 +1,24 @@
-<table class="table">
-  <tr>
-    <th>follow</th>
-    <td>
-      <%= link_to end_user_followings_path(current_end_user.id) do %>
+<div class="justify-content-center row col-lg-12">
+  <div class="text-center mt-5">
+    <%= image_tag current_end_user.get_profile_image(200,200), class: "rounded-circle" %>
+    フォロー数：
+    <%= link_to end_user_followings_path(current_end_user.id) do %>
         <%= current_end_user.followings.count %>
       <% end %>
-    </td>
-  </tr>
-  <tr>
-    <th>follower</th>
-    <td>
-      <%= link_to end_user_followers_path(current_end_user.id) do %>
-        <%= current_end_user.followers.count %>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <% if current_end_user.image.attached? %>
-      <%= image_tag current_end_user.image, size: "200x200" %>
-    <% else %>
-      <%= image_tag asset_path "no_image.png", size: "100x100" %>
+    フォロワー数：
+    <%= link_to end_user_followers_path(current_end_user.id) do %>
+      <%= current_end_user.followers.count %>
     <% end %>
-  </tr>
+    <%= link_to "/personal_index/#{current_end_user.id}", class: 'btn mr-5 ml-5 btn-outline-dark btn-lg' do %>
+      <i class="fas fa-history"></i> わたしの日記
+    <% end %>
+    <%= link_to end_user_favorites_path(current_end_user), class: 'btn  btn-outline-dark btn-lg' do %>
+      <i class="fas fa-heart"></i> いいねした日記
+    <% end %>
+  </div>
+</div>
+
+<table class="table table-bordered text-center mt-5" >
   <tr>
     <th>名前</th>
     <td><%= current_end_user.name %></td>
@@ -36,23 +33,27 @@
   </tr>
   <tr>
     <th>スタート時体重</th>
-    <td><%= current_end_user.start_weight %></td>
+    <td><%= current_end_user.start_weight %>kg</td>
   </tr>
   <tr>
     <th>目標体重</th>
-    <td><%= current_end_user.objective_weight %></td>
+    <td><%= current_end_user.objective_weight %>kg</td>
   </tr>
   <tr>
     <th>年齢</th>
-    <td><%= current_end_user.age %></td>
+    <td><%= current_end_user.age %>歳</td>
   </tr>
   <tr>
     <th>身長</th>
-    <td><%= current_end_user.height %></td>
+    <td><%= current_end_user.height %>cm</td>
   </tr>
   <tr>
     <th>活動レベル</th>
-    <td><%= current_end_user.active_level_i18n %></td>
+    <% if current_end_user.active_level.nil? %>
+      <td>登録されていません</td>
+    <% else %>
+      <td><%= current_end_user.active_level_i18n %></td>
+    <% end %>
   </tr>
   <tr>
     <th>基礎代謝</th>
@@ -67,5 +68,7 @@
     <td><%= current_end_user.email %></td>
   </tr>
 </table>
-<%= link_to '編集',  edit_end_user_path %>
-<%= link_to '日記', "/personal_index/#{current_end_user.id}" %>
+
+<div class="justify-content-center row">
+  <%= link_to "会員情報を編集する", edit_end_user_path, class: 'btn btn-success col-lg-5 mt-3' %>
+</div>

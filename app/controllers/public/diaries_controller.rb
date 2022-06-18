@@ -14,7 +14,7 @@ class Public::DiariesController < ApplicationController
   def personal_index
     @diary_user = EndUser.find(params[:id])
     @diaries = Diary.where(end_user_id: @diary_user.id)
-    @recent_weight = Weight.where(end_user_id: @diary_user.id).order(record_day: :asc).last.value
+    @recent_weight = Weight.where(end_user_id: @diary_user.id).order(record_day: :asc).last
   end
 
   def create

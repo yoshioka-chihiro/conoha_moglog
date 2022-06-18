@@ -8,9 +8,6 @@ class EndUser < ApplicationRecord
   enum gender: {man: 0, woman: 1}
   enum active_level: {low: 0, middle: 1, high: 2}
 
-  # 画像
-  has_one_attached :image
-
   has_many :weights, dependent: :destroy
   has_many :meals, dependent: :destroy
   has_many :meal_details, through: :meal
@@ -33,6 +30,17 @@ class EndUser < ApplicationRecord
   validates :height, presence: true
   validates :email, presence: true, uniqueness: true
 
+  # プロフィール画像
+  has_one_attached :profile_image
+
+  def get_profile_image(width, height)
+    unless profile_image.attached?
+      file_path = Rails.root.join('app/assets/images/no_image.png')
+      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+      profile_image.variant(resize_to_limit: [width, height]).processed
+  end
+
   # ゲストログイン
   def self.guest
     find_or_create_by!(email: 'aaa@aaa.com') do |user|
@@ -46,7 +54,6 @@ class EndUser < ApplicationRecord
       user.start_weight = 57
     end
   end
-
 
   # フォローしたときの処理
   def follow(end_user_id)

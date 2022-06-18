@@ -1,31 +1,24 @@
-<table class="table">
-  <tr>
-    <th>follow</th>
-    <td>
-      <%= link_to end_user_followings_path(end_user.id) do %>
-        <%= end_user.followings.count %>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <th>follower</th>
-    <td>
-      <%= link_to end_user_followers_path(end_user.id) do %>
-        <%= end_user.followers.count %>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <% if end_user.image.attached? %>
-      <%= image_tag end_user.image, size: "200x200" %>
-    <% else %>
-      <%= image_tag asset_path "no_image.png", size: "100x100" %>
+<div class="justify-content-center row col-lg-12">
+<div class="text-center mt-5">
+  <%= image_tag end_user.get_profile_image(200,200), class: "rounded-circle" %>
+  フォロー数：
+  <%= link_to end_user_followings_path(end_user.id) do %>
+      <%= end_user.followings.count %>
     <% end %>
-  </tr>
-  <tr>
-    <th>名前</th>
-    <td><%= end_user.name %></td>
-  </tr>
+  フォロワー数：
+  <%= link_to end_user_followers_path(end_user.id) do %>
+    <%= end_user.followers.count %>
+  <% end %>
+  <%= link_to "/personal_index/#{end_user.id}", class: 'btn mr-5 ml-5 btn-outline-dark btn-lg' do %>
+    <i class="fas fa-history"></i> 日記一覧
+  <% end %>
+  <%= link_to end_user_favorites_path(end_user), class: 'btn  btn-outline-dark btn-lg' do %>
+    <i class="fas fa-heart"></i> いいねした日記
+  <% end %>
+</div>
+</div>
+
+<table class="table table-bordered text-center mt-5">
   <tr>
     <th>ニックネーム</th>
     <td><%= end_user.nickname %></td>
@@ -35,6 +28,21 @@
     <td><%= end_user.gender_i18n %></td>
   </tr>
   <tr>
-    <%= link_to '日記を見る', "/personal_index/#{end_user.id}" %>
+    <th>体重</th>
+    <td>
+      <% if @recent_weight.nil? %>
+        <%= end_user.start_weight %>kg
+      <% else %>
+        <%= @recent_weight.value %>kg
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>年齢</th>
+    <td><%= end_user.age %>歳</td>
+  </tr>
+  <tr>
+    <th>身長</th>
+    <td><%= end_user.height %>cm</td>
   </tr>
 </table>
