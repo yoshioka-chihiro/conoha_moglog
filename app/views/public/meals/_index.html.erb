@@ -1,15 +1,33 @@
-<% unless meals.nil? %>
+<% if meals.empty? %>
+  まだ食事はありません！
+<% else %>
   <% meals.each do |meal| %>
-    <%= meal.meal_type_i18n %>
-    <%= meal.record_time.strftime("%H:%M") %>
-    <% meal.meal_details.each do |d| %>
-      <%= d.food.name %>
-      <%= d.quantity %>
-    <% end %>
-    <%= link_to '詳細', meal_path(meal.id) %>
-    <%= link_to '編集', edit_meal_path(meal.id) %>
-    <%= link_to '削除', meal_path(meal.id), method: :delete %>
-    <br>
-
+      <table class="table table-bordered text-center mt-5">
+      <tr>
+        <th>
+        <%= meal.meal_type_i18n %>
+        <%= meal.record_time.strftime("%H:%M") %>
+        <%= link_to edit_meal_path(meal.id) do %>
+            <i class="fa fa-pen"></i>
+        <% end %>
+        </th>
+        <th>
+          <% meal.meal_details.each do |meal_detail| %>
+            <%= meal_detail.calorie_subtotal %>kcal
+          <% end %>
+        </th>
+      </tr>
+      <tr>
+        <td>
+        <% meal.meal_details.each do |d| %>
+          <%= d.food.name %>
+          <%= d.quantity %>人前
+        <% end %>
+        </td>
+        <td>
+          <%= link_to "詳細", meal_path(meal.id) %>
+        </td>
+      </tr>
+      </table>
   <% end %>
 <% end %>

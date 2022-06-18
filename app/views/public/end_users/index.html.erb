@@ -1,18 +1,22 @@
-<h1>ユーザー一覧</h1>
-<% @end_users.each do |end_user| %>
-<table>
-  <tr>
-    <th><%= image_tag end_user.get_profile_image(100,100), class: "rounded-circle"  %></th>
-    <th>
-      <%= link_to end_user_path(end_user) do %>
-        <%= end_user.nickname %>
+<div class="container">
+  <h3 class="mini-title mb-3">会員一覧</h3>
+  <div class="justify-content-center row">
+    <table class="text-center mt-5">
+      <% @end_users.each do |end_user| %>
+        <tr>
+          <td><%= image_tag end_user.get_profile_image(100,100), class: "rounded-circle"  %></td>
+          <td>
+            <%= link_to end_user_path(end_user) do %>
+              <%= end_user.nickname %>
+            <% end %>
+          </td>
+          <% if current_end_user != end_user %>
+            <td id="follow_btn_<%= end_user.id %>">
+              <%= render 'public/relationships/btn', end_user: end_user %>
+            </td>
+          <% end %>
+        </tr>
       <% end %>
-    </th>
-    <% if current_end_user != end_user %>
-    <th id="follow_btn_<%= end_user.id %>">
-      <%= render 'public/relationships/btn', end_user: end_user %>
-    </th>
-    <% end %>
-  </tr>
-</table>
-<% end %>
+    </table>
+  </div>
+</div>

@@ -1,27 +1,21 @@
 <% if end_users.exists? %>
-  <% end_users.each do |user| %>
-    <table class="text-center mt-5">
-      <tr>
-        <td>
-          <%= link_to end_user_path(user) do %>
-            <%= image_tag user.get_profile_image(200,200), class: "rounded-circle" %>
-           <% end %>
-        </td>
-        <td>フォローボタン設置？！</td>
-        <td><%= user.nickname %></td>
-        <td>フォロー数:
-          <%= link_to end_user_followers_path(user.id) do %>
-            <%= user.followings.count %>
-          <% end %>
-        </td>
-        <td>フォロワー数:
-          <%= link_to end_user_followers_path(user.id) do %>
-            <%= user.followers.count %>
-          <% end %>
-        </td>
+  <table class="text-center mt-5">
+    <% end_users.each do |user| %>
+    <tr>
+      <td><%= image_tag user.get_profile_image(100,100), class: "rounded-circle"  %></td>
+      <td>
+        <%= link_to end_user_path(user) do %>
+          <%= user.nickname %>
+        <% end %>
+      </td>
+    <% if current_end_user != user %>
+      <td id="follow_btn_<%= user.id %>">
+        <%= render 'public/relationships/btn', end_user: user %>
+      </td>
+    <% end %>
       </tr>
-    </table>
-  <% end %>
+    <% end %>
+  </table>
 <% else %>
   <p>ユーザーはいません</p>
 <% end %>

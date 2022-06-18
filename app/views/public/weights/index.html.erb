@@ -1,50 +1,58 @@
-<%= render 'public/shared/error_messages', resource: @weight %>
-<%= form_with model: @weight do |f| %>
-  <!--<= render 'layouts/error_messages', model: f.object %>-->
-  <%= f.label :value, '体重' %>
-  <%= f.number_field :value, step: '0.1', placeholder: '例）70' %>
-  <%= f.label :record_day, '日時' %>
-  <%= f.date_field :record_day, value: Time.now.strftime("%Y-%m-%dT") %>
-  <%= f.submit '投稿', class: 'waves-effect waves-light btn orange' %>
-  <%= link_to 'キャンセル', root_path, class: 'waves-effect waves-light btn grey' %>
-<% end %>
+<div class="container">
+    <div class="justify-content-center">
+      <%= render 'public/shared/error_messages', resource: @weight %>
+    </div>
+    <div class="justify-content-center row mt-5">
+      <%= form_with model: @weight do |f| %>
+        <!--<= render 'layouts/error_messages', model: f.object %>-->
+        <%= f.label :value, '体重' %>
+        <%= f.number_field :value, step: '0.1', placeholder: '例）70' %>
+        <%= f.label :record_day, '日時' %>
+        <%= f.date_field :record_day, value: Time.now.strftime("%Y-%m-%dT") %>
+        <%= f.submit '投稿', class: 'btn btn-success' %>
+      <% end %>
+    </div>
 
-<% if @weights.empty? %>
-体重を記録しまししょう！
-<% else %>
-  あなたの最新の体重
-  <%= @weights.last.value %>kg
-  <% unless @objective_weight.nil? %>
-    目標まであと<%= -(@weights.last.value - @objective_weight) %>kg
-  <% end %>
-<% end %>
+    <div class="justify-content-center row">
+      <% if @weights.empty? %>
+      体重を記録しまししょう！
+      <% else %>
+        現在の体重
+        <%= @weights.last.value %>kg
+        <% unless @objective_weight.nil? %>
+          目標まであと<%= -(@weights.last.value - @objective_weight) %>kg
+        <% end %>
+      <% end %>
+    </div>
 
-<!--グラフ部分-->
-<%= line_chart @graph,
-height: "300px",
-width: "600px",
-ytitle: "体重（kg）",
-  legend: false,
-  curve: false,
-  colors: "#ffd1a3",
-min: 20, max: 90 %>
-<!--グラフ部分-->
+    <div class="justify-content-center row">
+      <!--グラフ部分-->
+      <%= line_chart @graph,
+      height: "300px",
+      width: "600px",
+      ytitle: "体重（kg）",
+        legend: false,
+        curve: false,
+        colors: "#ffd1a3",
+      min: 20, max: 90 %>
+      <!--グラフ部分-->
+    </div>
 
-<% @weights.each do |w| %>
-<table class="table">
-  <tr>
-    <th>日付</th>
-    <th>体重</th>
-    <th></th>
-  </tr>
-  <tr>
-    <td><%= w.record_day.strftime("%Y/%m/%d") %></td>
-    <td><%= w.value %>kg</td>
-    <td>
-      <%= link_to '編集', edit_weight_path(w.id) %>
-      <%= link_to '削除', weight_path(w.id), method: :delete %>
-    </td>
-  <br>
-  </tr>
-</table>
-<% end %>
+    <table class="table table-bordered text-center mt-5">
+      <tr>
+        <th>日付</th>
+        <th>体重</th>
+      </tr>
+      <% @weights.each do |weight| %>
+        <tr>
+          <td><%= weight.record_day.strftime("%Y/%m/%d") %></td>
+          <td>
+            <%= weight.value %>kg
+            <%= link_to edit_weight_path(weight.id) do %>
+              <i class="fa fa-pen"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+</div>

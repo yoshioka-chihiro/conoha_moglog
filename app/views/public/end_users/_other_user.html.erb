@@ -1,21 +1,21 @@
 <div class="justify-content-center row col-lg-12">
-<div class="text-center mt-5">
-  <%= image_tag end_user.get_profile_image(200,200), class: "rounded-circle" %>
-  フォロー数：
-  <%= link_to end_user_followings_path(end_user.id) do %>
-      <%= end_user.followings.count %>
+  <div class="text-center mt-5">
+    <%= image_tag end_user.get_profile_image(200,200), class: "rounded-circle" %>
+    フォロー数：
+    <%= link_to end_user_followings_path(end_user.id) do %>
+        <%= end_user.followings.count %>
+      <% end %>
+    フォロワー数：
+    <%= link_to end_user_followers_path(end_user.id) do %>
+      <%= end_user.followers.count %>
     <% end %>
-  フォロワー数：
-  <%= link_to end_user_followers_path(end_user.id) do %>
-    <%= end_user.followers.count %>
-  <% end %>
-  <%= link_to "/personal_index/#{end_user.id}", class: 'btn mr-5 ml-5 btn-outline-dark btn-lg' do %>
-    <i class="fas fa-history"></i> 日記一覧
-  <% end %>
-  <%= link_to end_user_favorites_path(end_user), class: 'btn  btn-outline-dark btn-lg' do %>
-    <i class="fas fa-heart"></i> いいねした日記
-  <% end %>
-</div>
+    <%= link_to "/personal_index/#{end_user.id}", class: 'btn mr-5 ml-5 btn-outline-dark btn-lg' do %>
+      <i class="fas fa-history"></i> 日記一覧
+    <% end %>
+    <%= link_to end_user_favorites_path(end_user), class: 'btn  btn-outline-dark btn-lg' do %>
+      <i class="fas fa-heart"></i> いいねした日記
+    <% end %>
+  </div>
 </div>
 
 <table class="table table-bordered text-center mt-5">

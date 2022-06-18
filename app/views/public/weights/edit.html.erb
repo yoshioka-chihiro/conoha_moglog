@@ -8,3 +8,5 @@
     <%= f.submit '更新', class: 'waves-effect waves-light btn orange' %>
     <%= link_to 'キャンセル', weights_path, class: 'waves-effect waves-light btn grey' %>
   <% end %>
+  
+    <%= link_to '削除する', weight_path(@weight.id), method: :delete %>
