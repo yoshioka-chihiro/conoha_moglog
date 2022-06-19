@@ -15,14 +15,14 @@
           <div class="new_item">
             <div class="tag">
               <%= link_to diary_path(diary.id),class: "text-decoration-none" do %>
-                <%= image_tag item.get_image(200, 150) %>
+                <%= image_tag diary.end_user.get_profile_image(200, 150) %>
               <% end %>
               <div class="index">
                 <div class="bat-index ">
                   <p><%= diary.title %></p>
                   <p><%= diary.body %></p>
-                  <div class="favorite-btn_<%= item.id %>">
-                    <%= render 'public/favorites/favorite', item: item %>
+                  <div id ="favorite_btn">
+                    <%= render 'public/favorites/btn', diary: diary %>
                   </div>
                 </div>
               </div>

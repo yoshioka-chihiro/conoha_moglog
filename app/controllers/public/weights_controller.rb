@@ -1,7 +1,7 @@
 class Public::WeightsController < ApplicationController
 
   def index
-    @weights = Weight.where(end_user_id: current_end_user.id).order(record_day: :asc)
+    @weights = Weight.where(end_user_id: current_end_user.id).order(record_day: :asc).page(params[:page]).per(8)
     @weight = Weight.new
     @graph = Weight.where(end_user_id: current_end_user.id).pluck(:record_day, :value)
     @objective_weight = current_end_user.objective_weight

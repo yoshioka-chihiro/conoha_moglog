@@ -1,3 +1,4 @@
+<div class="container">
 <% unless @lastest_condition.nil? %>
   前回のお通じから<%= time_ago_in_words(@lastest_condition.created_at) %>！
 <% end %>
@@ -12,28 +13,98 @@
   <%= link_to '食事詳細を見る', meal_path(m.id) %>
   <br>
 <% end %>
-<h1>体調の記録</h1>
+
 <%= render "public/shared/error_messages", resource: @condition %>
 <%= form_with model: @condition, local:true do |f| %>
-<div class="fields">
-  <%= f.label:お通じ %>
-  <%= f.select :movement, Condition.movements_i18n.keys.map{|k| [I18n.t("enums.condition.movement.#{k}"), k]}, {prompt: '選択してください'} %>
-</div>
-<div class="fields">
-  <%= f.label:気分 %>
-   <%= f.select :feel, Condition.feels_i18n.keys.map{|k| [I18n.t("enums.condition.feel.#{k}"), k]}, {prompt: '選択してください'} %>
-</div>
-<div class="action">
-  <%= f.submit '登録' %>
+
+  <h3 class="text-center mt-5">どんなウンチか？</h3>
+  <div class="selection-group">
+
+    <div class="feel-btn">
+      <%= f.radio_button :movement, Condition.movements.key(0) %>
+      <%= label :movement, 'コロコロ' %>
+      <%= image_tag  'icons/sad.png', size: "100x100", class: "label_img" %>
+     </div>
+
+    <div class="feel-btn">
+      <%= f.radio_button :movement, Condition.movements.key(1) %>
+      <%= label :movement, '硬め' %>
+      <%= image_tag  'icons/normal.png', size: "100x100", class: "label_img" %>
+    </div>
+
+    <div class="feel-btn">
+      <%= f.radio_button :movement, Condition.movements.key(2), checked: true %>
+      <%= label :movement, 'バナナ' %>
+      <%= image_tag  'icons/happy2.png', size: "100x100", class: "label_img" %>
+    </div>
+
+    <div class="feel-btn">
+      <%= f.radio_button :movement, Condition.movements.key(3) %>
+      <%= label :movement, 'やわめ' %>
+      <%= image_tag  'icons/happy2.png', size: "100x100", class: "label_img" %>
+    </div>
+
+    <div class="feel-btn">
+      <%= f.radio_button :movement, Condition.movements.key(4) %>
+      <%= label :movement, '水' %>
+      <%= image_tag  'icons/happy2.png', size: "100x100", class: "label_img" %>
+    </div>
+
+  </div>
+
+
+  <h3 class="text-center mt-5">今の気分は？</h3>
+  <div class="selection-group">
+
+    <div class="feel-btn">
+      <%= f.radio_button :feel, Condition.feels.key(0) %>
+      <%= label :feel, '悲しい' %>
+      <%= image_tag  'icons/sad.png', size: "100x100", class: "label_img" %>
+     </div>
+
+    <div class="feel-btn">
+      <%= f.radio_button :feel, Condition.feels.key(1), checked: true%>
+      <%= label :feel, '普通' %>
+      <%= image_tag  'icons/normal.png', size: "100x100", class: "label_img" %>
+    </div>
+
+    <div class="feel-btn">
+      <%= f.radio_button :feel, Condition.feels.key(2) %>
+      <%= label :feel, 'るんるん' %>
+      <%= image_tag  'icons/happy2.png', size: "100x100", class: "label_img" %>
+    </div>
+
+  </div>
+
+<div class="action text-center">
+  <%= f.submit '登録する！', class: 'btn btn-success' %>
 </div>
 <% end %>
 
 <% @conditions.each do |condition| %>
-<%= time_ago_in_words(condition.created_at) %>前
-<%= condition.movement_i18n %>
-<%= condition.feel_i18n %>
-<%= link_to '詳細', condition_path(condition.id) %>
-<%= link_to '編集', edit_condition_path(condition.id) %>
-<%= link_to '削除', condition_path(condition.id), method: :delete %>
+  <%= time_ago_in_words(condition.created_at) %>前
+  <%= condition.created_at.strftime("%Y年%m月%d日(%a)") %>
+  <%= condition.movement_i18n %>
+  <%= condition.feel_i18n %>
+  <%= link_to '詳細', condition_path(condition.id) %>
+  <%= link_to '編集', edit_condition_path(condition.id) %>
+  <%= link_to '削除', condition_path(condition.id), method: :delete %>
 <br>
+<% end %>
+
+</div>
+
+
+<%= month_calendar events: @conditions do |date, conditions| %>
+  <%= date.day %>
+
+<!--表示されない-->
+  <% conditions.each do |condition| %>
+    <div>
+      <%= condition.movement_i18n %>
+      <%= condition.feel_i18n %>
+      <%= condition.id %>
+    </div>
+  <% end %>
+
 <% end %>

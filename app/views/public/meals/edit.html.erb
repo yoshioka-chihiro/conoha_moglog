@@ -3,32 +3,36 @@
   <div class="justify-content-center row mr-5">
 
     <%= render 'public/shared/error_messages', resource: @meal %>
-    <%= form_with model: @meal do |f| %>
+    <%= form_with model: @meal, local:true do |f| %>
       <%= f.select :meal_type, Meal.meal_types_i18n.keys.map{|k| [I18n.t("enums.meal.meal_type.#{k}"), k]} %>
       <%= f.time_select :record_time, {minute_step: 15} %>
 
-      <div id="album-track-forms">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+      <!--フォームを追加する場所-->
+      <div id="food-track-forms">
+        <!--食品登録フォーム-->
         <%= f.fields_for :meal_details do |f| %>
-          <%= render 'form', food: f %>
+          <%= render 'add_form', food: f %>
         <% end %>
       </div>
+
       <!--トラックの追加フォームをするボタン-->
-      <%= link_to_add_association '＋別の食品を追加',
+      <%= link_to_add_association '＋食品を追加',
                                   # form_withのformタグ変数
                                   f,
                                   # フォームのデータを追加するモデル名
                                   :meal_details,
                                   # 追加するフォームの部分テンプレート
-                                  partial: "form",
+                                  partial: "add_form",
                                   # オプション
                                   data: {
                                     # フォームを追加する場所の指定
-                                    association_insertion_node: '#album-track-forms',
+                                    association_insertion_node: '#food-track-forms',
                                     # フォームを前後どの位置に追加するか。(初期値: before)
-                                    association_insertion_method: 'after'
+                                    association_insertion_method: 'append'
                                   },
                                   # フォームオブジェクトを指定する場合(初期値 : f)
-                                  form_name: 'food'  %>
+                                  form_name: 'food', class: "btn"  %>
       <div class="field text-center">
         <%= f.submit '更新', class: "btn btn-success" %>
       </div>
@@ -37,6 +41,8 @@
 
   </div>
   <div class="justify-content-center row">
-    <%= link_to 'この食事を削除する', meal_path(@meal.id), method: :delete, class: "btn btn-danger col-lg-5 mt-3" %>
+    <%= link_to meal_path(@meal.id), method: :delete, class: "btn btn-danger col-lg-3 mt-3" do %>
+      <i class="fas fa-trash"></i>この食事を削除する
+    <% end %>
   </div>
 </div>

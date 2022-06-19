@@ -12,9 +12,11 @@
         <% end %>
         </th>
         <th>
+          <% meal_calorie_sum = 0 %>
           <% meal.meal_details.each do |meal_detail| %>
-            <%= meal_detail.calorie_subtotal %>kcal
+            <% meal_calorie_sum += meal_detail.calorie_subtotal %>
           <% end %>
+          <%= meal_calorie_sum %>kcal
         </th>
       </tr>
       <tr>

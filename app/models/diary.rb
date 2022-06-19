@@ -14,5 +14,13 @@ class Diary < ApplicationRecord
   def self.looks(word)
       @diary = Diary.where("title LIKE?","%#{word}%")
   end
+  
+  def diary_name(end_user)
+    if end_user.nickname.empty?
+      "匿名希望さん"
+    else
+      end_user.nickname
+    end
+  end
 
 end

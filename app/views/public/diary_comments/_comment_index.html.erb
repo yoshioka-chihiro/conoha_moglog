@@ -1,7 +1,7 @@
 <% if diary_comments.empty? %>
   <p>コメントはまだありません</p>
 <% else %>
-  <table>
+  <table class="table">
     <tbody>
         <% diary_comments.each do |diary_comment| %>
         <tr>
@@ -10,14 +10,16 @@
               匿名希望さん
             <% else %>
               <%= link_to end_user_path(diary_comment.end_user) do %>
-                <%= diary_comment.end_user.name %>
+                <%= diary_comment.end_user.nickname %>
               <% end %>
             <% end %>
           </td>
           <td><%= diary_comment.comment %></td>
           <td>
             <% if diary_comment.end_user == current_end_user %>
-              <%= link_to "Destroy", diary_diary_comment_path(diary, diary_comment), method: :delete, remote: true, class: "btn btn-danger pull-right" %>
+              <%= link_to diary_diary_comment_path(diary, diary_comment), method: :delete, remote: true, class: "btn pull-right" do %>
+                <i class="fas fa-trash"></i>
+              <% end %>
             <% else %>
               <%= render 'public/reports/btn', diary_comment: diary_comment, diary: diary %>
             <% end %>

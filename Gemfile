@@ -69,13 +69,16 @@ gem 'chartkick'
 #食事フォーム追加用
 gem 'cocoon'
 # 食事フォーム用
-group :assets do
-  gem 'chosen-rails'
-end
+gem 'chosen-rails'
 # 食事検索用
 gem 'ransack'
 # エラーメッセージ
 gem 'rails-i18n'
+# indexのカレンダー表示
+gem 'simple_calendar', '~> 2.0'
+# ページネーション
+gem 'kaminari','~> 1.2.1'
+
 # デプロイ
 gem 'dotenv-rails'
 group :production do

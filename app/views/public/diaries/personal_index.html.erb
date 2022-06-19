@@ -1,17 +1,43 @@
-<%= @diary_user.nickname %>&emsp;
-<%= @diary_user.age %>歳&emsp;
-<%= @diary_user.height %>cm&emsp;
-<% if @recent_weight.nil? %>
-  <%= @diary_user.start_weight %>kg
-<% else %>
-  <%= @recent_weight.value %>kg
-<% end %>
+<div class="container">
+  <div class="justify-content-center row mt-5">
+    <%= @diary.diary_name(@diary_user) %>&emsp;
+    <%= @diary_user.age %>歳&emsp;
+    <%= @diary_user.height %>cm&emsp;
+    <% if @recent_weight.nil? %>
+      <%= @diary_user.start_weight %>kg
+    <% else %>
+      <%= @recent_weight.value %>kg
+    <% end %>
+  </div>
 
-<% if @diaries.empty? %>
-<p>日記はまだありません。</p>
-<% else %>
-  <% @diaries.each do |diary| %>
-    タイトル：<%= diary.title %>
-    本文<%= diary.body %>
+  <% if @diaries.empty? %>
+    <p>日記はまだありません。</p>
+  <% else %>
+    <% @diaries.each do |diary| %>
+      <div class="box row justify-content-center" style="width:500px; height:200px;">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                <%= diary.created_at.strftime("%Y年%m月%d日(%a)") %>
+                <%= link_to diary_path(diary) do %>
+                  <%= diary.title %>
+                <% end %>
+                  <% if @diary_user == current_end_user %>
+                  <%= link_to edit_diary_path(diary.id) do %>
+                    <i class="fa fa-pen"></i>
+                  <% end %>
+                <% end %>
+              </th>
+            </tr>
+            <tbody>
+              <tr>
+                <td><%= diary.body %></td>
+              </tr>
+            </tbody>
+          </thead>
+        </table>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>
