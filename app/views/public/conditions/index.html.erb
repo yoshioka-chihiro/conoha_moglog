@@ -23,35 +23,34 @@
     <div class="feel-btn">
       <%= f.radio_button :movement, Condition.movements.key(0) %>
       <%= label :movement, 'コロコロ' %>
-      <%= image_tag  'icons/sad.png', size: "100x100", class: "label_img" %>
+      <%= image_tag asset_path('icons/sad.png'), size: "100x100", class: "label_img" %>
      </div>
 
     <div class="feel-btn">
       <%= f.radio_button :movement, Condition.movements.key(1) %>
       <%= label :movement, '硬め' %>
-      <%= image_tag  'icons/normal.png', size: "100x100", class: "label_img" %>
+      <%= image_tag asset_path('icons/normal.png'), size: "100x100", class: "label_img" %>
     </div>
 
     <div class="feel-btn">
       <%= f.radio_button :movement, Condition.movements.key(2), checked: true %>
       <%= label :movement, 'バナナ' %>
-      <%= image_tag  'icons/happy2.png', size: "100x100", class: "label_img" %>
+      <%= image_tag asset_path('icons/happy2.png'), size: "100x100", class: "label_img" %>
     </div>
 
     <div class="feel-btn">
       <%= f.radio_button :movement, Condition.movements.key(3) %>
       <%= label :movement, 'やわめ' %>
-      <%= image_tag  'icons/happy2.png', size: "100x100", class: "label_img" %>
+      <%= image_tag asset_path('icons/happy2.png'), size: "100x100", class: "label_img" %>
     </div>
 
     <div class="feel-btn">
       <%= f.radio_button :movement, Condition.movements.key(4) %>
       <%= label :movement, '水' %>
-      <%= image_tag  'icons/happy2.png', size: "100x100", class: "label_img" %>
+      <%= image_tag asset_path('icons/happy2.png'), size: "100x100", class: "label_img" %>
     </div>
 
   </div>
-
 
   <h3 class="text-center mt-5">今の気分は？</h3>
   <div class="selection-group">
@@ -59,19 +58,19 @@
     <div class="feel-btn">
       <%= f.radio_button :feel, Condition.feels.key(0) %>
       <%= label :feel, '悲しい' %>
-      <%= image_tag  'icons/sad.png', size: "100x100", class: "label_img" %>
+      <%= image_tag asset_path('icons/sad.png'), size: "100x100", class: "label_img" %>
      </div>
 
     <div class="feel-btn">
       <%= f.radio_button :feel, Condition.feels.key(1), checked: true%>
       <%= label :feel, '普通' %>
-      <%= image_tag  'icons/normal.png', size: "100x100", class: "label_img" %>
+      <%= image_tag asset_path('icons/normal.png'), size: "100x100", class: "label_img" %>
     </div>
 
     <div class="feel-btn">
       <%= f.radio_button :feel, Condition.feels.key(2) %>
       <%= label :feel, 'るんるん' %>
-      <%= image_tag  'icons/happy2.png', size: "100x100", class: "label_img" %>
+      <%= image_tag asset_path('icons/happy2.png'), size: "100x100", class: "label_img" %>
     </div>
 
   </div>

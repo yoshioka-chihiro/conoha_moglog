@@ -7,7 +7,7 @@
         <%= @weights.last.value %>kg
     </div>
 
-    <div><%= image_tag 'graph.png', class: "mr-5 ml-5" %></div>
+    <div><%= image_tag asset_path('graph.png'), class: "mr-5 ml-5" %></div>
 
     <div class="weight-icon-gray text-center">
         <% unless @objective_weight.nil? %>

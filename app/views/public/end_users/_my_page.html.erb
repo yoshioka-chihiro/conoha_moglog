@@ -17,10 +17,10 @@
 
 <div class="mt-5 text-center">
   <%= link_to "/personal_index/#{current_end_user.id}", class: 'btn mr-5 ml-5 btn-outline-dark btn-lg' do %>
-     <%= image_tag 'diary_icon' %> Diary
+     <%= image_tag asset_path('diary_icon.png') %> Diary
   <% end %>
   <%= link_to end_user_favorites_path(current_end_user), class: 'btn  btn-outline-dark btn-lg' do %>
-    <%= image_tag 'iine' %> Favorite Diary
+    <%= image_tag asset_path('iine.png') %> Favorite Diary
   <% end %>
 </div>
 

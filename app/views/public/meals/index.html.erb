@@ -6,7 +6,7 @@
 
   <h3 class="mini-title mb-3 text-center">食事記録</h3>
   <div class="selection-group">
-    <div class="mr-5"><%= image_tag 'eat.png', size: "300x200" %></div>
+    <div class="mr-5"><%= image_tag asset_path('eat.png'), size: "300x200" %></div>
     <div class="justify-content-center row mr-5 mt-5">
       <%= render "public/shared/error_messages", resource: @meal %>
       <%= render 'public/meals/form', meal: @meal %>
