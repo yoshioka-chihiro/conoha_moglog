@@ -1,16 +1,20 @@
-header {
-  background-color: gray;
-
+li a {
+  color: gray;
 }
+
+li a:hover {
+  text-decoration: none;
+  border: none;
+}
+
 
 .box {
-  background-color: pink;
-  border-radius: 50px ;
-  margin: 20px;
-}
-
-.aaa {
-  display: flex;
+  background-color: #FFFFCC;
+  border-radius: 30px ;
+  margin: 20px auto;
+  padding: 30px;
+  width:700px;
+  height: 300px;
 }
 
 .selection-group {
@@ -47,4 +51,9 @@ header {
   border: 3px solid #000;
   box-sizing: border-box;
   border-radius: 50px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.2rem;
 }

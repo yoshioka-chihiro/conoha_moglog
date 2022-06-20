@@ -1,14 +1,21 @@
-<h3>編集する</h3>
-<%= render "public/shared/error_messages", resource: @diary %>
-
-<%= form_with model: @diary, local:true do |f| %>
-  <div class="form-group">
-    <%= f.label :タイトル %>
-    <%= f.text_field :title %>
+<div class="container">
+  <div class="selection-group">
+    <div class="w-100">
+      <%= render "public/shared/error_messages", resource: @diary %>
+      <%= form_with model: @diary, local:true do |f| %>
+        <div class="form-group">
+          <%= f.label :タイトル %>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :本文 %>
+          <%= f.text_area :body, class: "form-control", size: "40x10" %>
+        </div>
+        <div class="text-center">
+          <%= f.submit '更新する', class: 'btn btn-info text-center',style: "color:white;" %>
+          <%= link_to 'キャンセル', diary_path(@diary), class: 'waves-effect waves-light btn grey' %>
+        </div>
+      <% end %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.label :本文 %>
-    <%= f.text_area :body %>
-  </div>
-  <%= f.submit '更新' %>
-<% end %>
+</div>

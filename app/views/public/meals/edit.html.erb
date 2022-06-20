@@ -35,13 +35,14 @@
                                   form_name: 'food', class: "btn"  %>
       <div class="field text-center">
         <%= f.submit '更新', class: "btn btn-success" %>
+        <%= link_to 'キャンセル', meals_path, class: 'waves-effect waves-light btn grey' %>
       </div>
 
     <% end %>
 
   </div>
   <div class="justify-content-center row">
-    <%= link_to meal_path(@meal.id), method: :delete, class: "btn btn-danger col-lg-3 mt-3" do %>
+    <%= link_to meal_path(@meal.id), method: :delete, class: "btn btn-danger col-lg-3 mt-3", data: { confirm: '本当に削除しますか？' } do %>
       <i class="fas fa-trash"></i>この食事を削除する
     <% end %>
   </div>

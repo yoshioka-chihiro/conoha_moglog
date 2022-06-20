@@ -5,7 +5,6 @@
       <%= render 'my_page' %>
     </div>
   <% else %>
-    <h3 class="mini-title mb-3"><%= @end_user.nickname %>さんのページ</h3>
     <div class="justify-content-center">
       <%= render 'other_user', end_user: @end_user %>
     </div>

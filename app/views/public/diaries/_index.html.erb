@@ -1,0 +1,25 @@
+<% diaries.each do |diary| %>
+  <div class="box">
+    <div class="selection-group">
+      <%= render 'public/diaries/diary_profile', diary: diary %>
+    </div>
+
+    <div class="selection-group"><%= diary.created_at.strftime("%Y年%m月%d日(%a) %H:%m") %></div>
+
+    <div class="selection-group">
+      <div class="title"><%= diary.title %></div>
+      <div class="ml-2" id ="favorite_btn_<%= diary.id %>">
+        <%= render 'public/favorites/btn', diary: diary %>
+      </div>
+      <div class="ml-2">
+        <%= render 'public/diary_comments/comment_count', diary_comment: diary.diary_comments, diary: diary %>
+      </div>
+    </div>
+
+    <div class="ml-5 mr-5 text-center"><%= diary.body %></div>
+
+  </div>
+
+<% end %>
+
+<div class="row justify-content-center"><%= paginate diaries %></div>

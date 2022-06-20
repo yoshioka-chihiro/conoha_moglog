@@ -1,5 +1,13 @@
 <div class="container">
-  <h3 class="mini-title mb-3">会員一覧</h3>
+<div class="justify-content-end row mt-5">
+  <%= search_form_for @q, url: search_end_users_path, class: "search-form" do |f| %>
+    <%= f.text_field :nickname_cont, placeholder: "ユーザーを検索" %>
+    <%= f.submit '検索' %>
+  <% end %>
+</div>
+
+<div class="container">
+  <h3 class="mini-title text-center mt-3">User</h3>
   <div class="justify-content-center row">
     <table class="text-center mt-5">
       <% @end_users.each do |end_user| %>
@@ -19,4 +27,6 @@
       <% end %>
     </table>
   </div>
+</div>
+
 </div>

@@ -1,7 +1,7 @@
 class Public::WeightsController < ApplicationController
 
   def index
-    @weights = Weight.where(end_user_id: current_end_user.id).order(record_day: :asc).page(params[:page]).per(8)
+    @weights = Weight.where(end_user_id: current_end_user.id).order(record_day: :desc).page(params[:page]).per(8)
     @weight = Weight.new
     @graph = Weight.where(end_user_id: current_end_user.id).pluck(:record_day, :value)
     @objective_weight = current_end_user.objective_weight
@@ -11,11 +11,11 @@ class Public::WeightsController < ApplicationController
     @weight = Weight.new(weight_params)
     if @weight.save
       flash[:notice] = "体重を登録しました！"
-      @weights = Weight.where(end_user_id: current_end_user.id)
       redirect_to action: 'index'
     else
       flash[:notice] = "登録できませんでした"
-      @weights = Weight.where(end_user_id: current_end_user.id)
+      @weights = Weight.where(end_user_id: current_end_user.id).order(record_day: :desc).page(params[:page]).per(8)
+      @graph = Weight.where(end_user_id: current_end_user.id).pluck(:record_day, :value)
       render :index
     end
   end

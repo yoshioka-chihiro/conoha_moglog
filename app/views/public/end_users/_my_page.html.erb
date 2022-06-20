@@ -1,22 +1,29 @@
-<div class="justify-content-center row col-lg-12">
-  <div class="text-center mt-5">
+<div class="selection-group">
+  <div class="text-center">
     <%= image_tag current_end_user.get_profile_image(200,200), class: "rounded-circle" %>
-    フォロー数：
-    <%= link_to end_user_followings_path(current_end_user.id) do %>
-        <%= current_end_user.followings.count %>
+    <p class="title"><%= current_end_user.nickname %></p>
+    <p>
+      フォロー数：
+      <%= link_to end_user_followings_path(current_end_user.id) do %>
+          <%= current_end_user.followings.count %>
+        <% end %>
+      フォロワー数：
+      <%= link_to end_user_followers_path(current_end_user.id) do %>
+        <%= current_end_user.followers.count %>
       <% end %>
-    フォロワー数：
-    <%= link_to end_user_followers_path(current_end_user.id) do %>
-      <%= current_end_user.followers.count %>
-    <% end %>
-    <%= link_to "/personal_index/#{current_end_user.id}", class: 'btn mr-5 ml-5 btn-outline-dark btn-lg' do %>
-      <i class="fas fa-history"></i> わたしの日記
-    <% end %>
-    <%= link_to end_user_favorites_path(current_end_user), class: 'btn  btn-outline-dark btn-lg' do %>
-      <i class="fas fa-heart"></i> いいねした日記
-    <% end %>
+      </p>
   </div>
 </div>
+
+<div class="mt-5 text-center">
+  <%= link_to "/personal_index/#{current_end_user.id}", class: 'btn mr-5 ml-5 btn-outline-dark btn-lg' do %>
+     <%= image_tag 'diary_icon' %> Diary
+  <% end %>
+  <%= link_to end_user_favorites_path(current_end_user), class: 'btn  btn-outline-dark btn-lg' do %>
+    <%= image_tag 'iine' %> Favorite Diary
+  <% end %>
+</div>
+
 
 <table class="table table-bordered text-center mt-5" >
   <tr>

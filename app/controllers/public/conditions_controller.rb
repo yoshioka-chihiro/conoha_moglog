@@ -2,7 +2,8 @@ class Public::ConditionsController < ApplicationController
   def index
     @condition = Condition.new
     # ログイン中のユーザーのデータを取得
-    @conditions = Condition.where(end_user_id: current_end_user.id).order(created_at: :desc)
+    @condition_all = Condition.all
+    @conditions = Condition.where(end_user_id: current_end_user.id)
     # 最新のConditionデータを１件取得
     @lastest_condition = Condition.where(end_user_id: current_end_user.id).order(created_at: :asc).last
     # 現在の時間
@@ -67,7 +68,7 @@ class Public::ConditionsController < ApplicationController
   private
 
   def condition_params
-    params.require(:condition).permit(:movement, :feel)
+    params.require(:condition).permit(:movement, :feel, :start_time)
   end
 
 

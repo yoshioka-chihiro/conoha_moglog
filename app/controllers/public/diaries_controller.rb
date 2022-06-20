@@ -1,7 +1,7 @@
 class Public::DiariesController < ApplicationController
   def index
     @diary = Diary.new
-    @diaries = Diary.all.order(created_at: :desc)
+    @diaries = Diary.all.order(created_at: :desc).page(params[:page]).per(8)
   end
 
   def show
@@ -16,8 +16,7 @@ class Public::DiariesController < ApplicationController
   def personal_index
     @diary = Diary.find(params[:id])
     @diary_user = EndUser.find(params[:id])
-    @diaries = Diary.where(end_user_id: @diary_user.id)
-    @recent_weight = Weight.where(end_user_id: @diary_user.id).order(record_day: :asc).last
+    @diaries = Diary.where(end_user_id: @diary_user.id).order(created_at: :desc).page(params[:page]).per(8)
   end
 
   def create

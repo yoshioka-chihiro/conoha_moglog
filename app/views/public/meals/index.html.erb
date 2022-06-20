@@ -4,17 +4,18 @@
     <%= render 'public/meals/search_form', q: @q %>
   </div>
 
-  <h3 class="mini-title mb-3">食事記録</h3>
-  <div class="justify-content-center row"><%= image_tag 'eat.png', size: "300x200" %></div>
-  <div class="justify-content-center row mr-5 mt-3">
-    <%= render "public/shared/error_messages", resource: @meal %>
-    <%= render 'public/meals/form', meal: @meal %>
+  <h3 class="mini-title mb-3 text-center">食事記録</h3>
+  <div class="selection-group">
+    <div class="mr-5"><%= image_tag 'eat.png', size: "300x200" %></div>
+    <div class="justify-content-center row mr-5 mt-5">
+      <%= render "public/shared/error_messages", resource: @meal %>
+      <%= render 'public/meals/form', meal: @meal %>
+    </div>
   </div>
-
   <!--今日の食事-->
   <h3 class="mini-title mb-3 text-center mt-5"><%= Time.current.strftime("%Y年%m月%d日(%a)") %></h3>
-  <div class="row justify-content-center">
-    <div class="text-center rounded-pill" style="border: 1px solid pink; width:300px;">
+   <div class="selection-group">
+    <div class="text-center rounded-pill" style="background-color:pink; width:300px; padding:15px;">
       <strong><p class="mini-title mb-3">今日の摂取カロリー合計</p></strong>
       <%= @today_calorie_sum %>kcal
       <% unless current_end_user.active_level == nil %>

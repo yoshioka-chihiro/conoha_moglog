@@ -1,0 +1,12 @@
+<div>
+  <%= image_tag diary.end_user.get_profile_image(50,50), class: "rounded-circle"  %>
+  <%= diary.diary_name(diary.end_user) %>&emsp;
+  <%= diary.end_user.gender_i18n %>&emsp;
+  <%= diary.end_user.age %>歳&emsp;
+  <%= diary.end_user.height %>cm&emsp;
+  <% if Weight.where(end_user_id: diary.end_user.id).order(record_day: :asc).last.nil? %>
+    <%= diary.end_user.start_weight %>kg
+  <% else %>
+    <%= Weight.where(end_user_id: diary.end_user.id).order(record_day: :asc).last.value %>kg
+  <% end %>
+</div>

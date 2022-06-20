@@ -1,43 +1,37 @@
 <div class="container">
-  <div class="justify-content-center row mt-5">
-    <%= @diary.diary_name(@diary_user) %>&emsp;
-    <%= @diary_user.age %>歳&emsp;
-    <%= @diary_user.height %>cm&emsp;
-    <% if @recent_weight.nil? %>
-      <%= @diary_user.start_weight %>kg
-    <% else %>
-      <%= @recent_weight.value %>kg
-    <% end %>
-  </div>
-
-  <% if @diaries.empty? %>
-    <p>日記はまだありません。</p>
+  <% if @diary.end_user == current_end_user %>
+    <h3 class="mini-title text-center">My Diary</h3>
   <% else %>
-    <% @diaries.each do |diary| %>
-      <div class="box row justify-content-center" style="width:500px; height:200px;">
-        <table>
-          <thead>
-            <tr>
-              <th>
-                <%= diary.created_at.strftime("%Y年%m月%d日(%a)") %>
-                <%= link_to diary_path(diary) do %>
-                  <%= diary.title %>
-                <% end %>
-                  <% if @diary_user == current_end_user %>
-                  <%= link_to edit_diary_path(diary.id) do %>
-                    <i class="fa fa-pen"></i>
-                  <% end %>
-                <% end %>
-              </th>
-            </tr>
-            <tbody>
-              <tr>
-                <td><%= diary.body %></td>
-              </tr>
-            </tbody>
-          </thead>
-        </table>
-      </div>
-    <% end %>
+    <h3 class="mini-title text-center"><%= @diary.end_user.nickname %>さんの Diary</h3>
   <% end %>
-</div>
+
+  <div class="justify-content-center row mt-5">
+    <%= render 'public/diaries/diary_profile', diary: @diary %>
+  </div>
+      <% if @diaries.empty? %>
+        <p>日記はまだありません。</p>
+      <% else %>
+
+        <% @diaries.each do |diary| %>
+          <div class="box">
+            <div class="selection-group"><%= diary.created_at.strftime("%Y年%m月%d日(%a) %H:%m") %></div>
+              <div class="selection-group">
+                <div class="title">
+                  <%= diary.title %>
+                </div>
+                <div class="ml-2" id ="favorite_btn_<%= diary.id %>">
+                  <%= render 'public/favorites/btn', diary: diary %>
+                </div>
+                <div class="ml-2">
+                  <%= render 'public/diary_comments/comment_count', diary_comment: diary.diary_comments, diary: diary %>
+                </div>
+              </div>
+              <div class="ml-5 mr-5 text-center"><%= diary.body %></div>
+          </div>
+        <% end %>
+
+      <% end %>
+
+      <div class="row justify-content-center"><%= paginate @diaries %></div>
+
+  </div>

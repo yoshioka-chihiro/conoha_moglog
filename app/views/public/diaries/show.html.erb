@@ -1,6 +1,6 @@
 <div class="container">
 
-  <div class="justify-content-center row mt-5">
+  <div class="selection-group">
     <%= link_to diary_path(@diary) do %>
       <%= image_tag @diary.end_user.get_profile_image(50,50), class: "rounded-circle"  %>
     <% end %>
@@ -14,41 +14,32 @@
     <% end %>
   </div>
 
-
-   <div class="box row justify-content-center" style="width:500px; height:200px;">
-     <table>
-      <thead>
-        <tr>
-          <th>
-            <%= @diary.created_at.strftime("%Y年%m月%d日(%a)") %>
-            <%= @diary.title %>
-            <% if @diary_user == current_end_user %>
-              <%= link_to edit_diary_path(@diary.id) do %>
-                <i class="fa fa-pen"></i>
-              <% end %>
-            <% end %>
-            <div id ="favorite_btn">
-              <%= render 'public/favorites/btn', diary: @diary %>
-            </div>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= @diary.body %></td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="box">
+   <div class="selection-group">
+      <div>
+        <%= @diary.created_at.strftime("%Y年%m月%d日(%a)") %>
+        <strong><%= @diary.title %></strong>
+        <% if @diary_user == current_end_user %>
+          <%= link_to edit_diary_path(@diary.id) do %>
+            <i class="fa fa-pen"></i>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="ml-2" id ="favorite_btn_<%= @diary.id %>">
+        <%= render 'public/favorites/btn', diary: @diary %>
+      </div>
+    </div>
+    <div class="mr-5 ml-5"><%= @diary.body %></div>
   </div>
 
   <div id="comment_index">
     <%= render 'public/diary_comments/comment_index', diary: @diary, diary_comments: @diary_comments %>
   </div>
 
-  <div id ="comment_form">
+  <div class="text-center" id ="comment_form">
     <%= render 'public/diary_comments/form', diary: @diary, diary_comment: @diary_comment %>
   </div>
-  
+
 
 
 </div>

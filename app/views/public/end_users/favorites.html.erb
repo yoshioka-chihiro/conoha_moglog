@@ -1,34 +1,27 @@
 <div class="container">
-  <div class="row mb-3">
-    <div class="col-lg-8">
-      <h3 class="mini-title">いいね一覧</h3>
-    </div>
-  </div>
+  <h3 class="mini-title text-center">Favorite Diary</h3>
+  <% if @favorite_diaries.empty? %>
+    <p>いいねした日記はありません</p>
+  <% else %>
+    <% @favorite_diaries.each do |diary|%>
+      <div class="box">
+        <div class="selection-group">
+          <%= render 'public/diaries/diary_profile', diary: diary %>
+        </div>
+        <div class="selection-group"><%= diary.created_at.strftime("%Y年%m月%d日(%a) %H:%m") %></div>
 
-<% if @favorite_diaries.empty? %>
-  いいねした日記はありません
-<% else %>
-
-  <div class="row">
-      <% @favorite_diaries.each do |diary|%>
-        <div class="col-lg-4 mb-5">
-          <div class="new_item">
-            <div class="tag">
-              <%= link_to diary_path(diary.id),class: "text-decoration-none" do %>
-                <%= image_tag diary.end_user.get_profile_image(200, 150) %>
-              <% end %>
-              <div class="index">
-                <div class="bat-index ">
-                  <p><%= diary.title %></p>
-                  <p><%= diary.body %></p>
-                  <div id ="favorite_btn">
-                    <%= render 'public/favorites/btn', diary: diary %>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="selection-group">
+          <div class="title">
+            <%= diary.title %>
+          </div>
+          <div class="ml-2">
+            <%= render 'public/diary_comments/comment_count', diary_comment: diary.diary_comments, diary: diary %>
           </div>
         </div>
-      <% end %>
+        <div class="ml-5 mr-5 text-center"><%= diary.body %></div>
+      </div>
+    <% end %>
   <% end %>
+
+
   </div>

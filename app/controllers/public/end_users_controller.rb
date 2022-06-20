@@ -2,11 +2,19 @@ class Public::EndUsersController < ApplicationController
 
   def index
     @end_users = EndUser.all
+    @q = EndUser.ransack(params[:q])
   end
 
   def show
     @end_user = EndUser.find(params[:id])
     @recent_weight = Weight.where(end_user_id: @end_user.id).order(record_day: :asc).last
+  end
+  
+  def search
+    # :qはransackのデフォルトキーなので変更しない
+    @q = EndUser.ransack(params[:q])
+    # (distinct: true)によりresultの重複をなくしてくれている
+    @results = @q.result(distinct: true).order(id: :asc).page(params[:page]).per(8)
   end
 
   def edit

@@ -76,6 +76,11 @@
 
   </div>
 
+  <div class="plan_day">
+    <%= f.label :ご希望日 %>
+    <%= f.date_select :start_time %>
+  </div>
+
 <div class="action text-center">
   <%= f.submit '登録する！', class: 'btn btn-success' %>
 </div>
@@ -94,17 +99,23 @@
 
 </div>
 
-
-<%= month_calendar events: @conditions do |date, conditions| %>
+<!--カレンダーは表示されてる-->
+<%= month_calendar conditions: @conditions do |date, conditions| %>
   <%= date.day %>
 
 <!--表示されない-->
+<% if conditions.nil? %>
+  記録がありません
+<% else %>
   <% conditions.each do |condition| %>
     <div>
+      記録はある
       <%= condition.movement_i18n %>
       <%= condition.feel_i18n %>
       <%= condition.id %>
     </div>
   <% end %>
+
+<% end %>
 
 <% end %>

@@ -1,3 +1,5 @@
+<div class="container">
+<div class="justify-content-center row mt-5">
 <%= render 'public/shared/error_messages', resource: @weight %>
 <%= form_with model: @weight do |f| %>
     <!--<= render 'layouts/error_messages', model: f.object %>-->
@@ -5,8 +7,19 @@
     <%= f.number_field :value, step: '0.1' %>
     <%= f.label :record_day, '日時' %>
     <%= f.date_field :record_day %>
-    <%= f.submit '更新', class: 'waves-effect waves-light btn orange' %>
-    <%= link_to 'キャンセル', weights_path, class: 'waves-effect waves-light btn grey' %>
+
+    <div class="field text-center">
+      <%= f.submit '更新', class: "btn btn-success" %>
+      <%= link_to 'キャンセル', weights_path, class: 'waves-effect waves-light btn grey' %>
+    </div>
   <% end %>
-  
-    <%= link_to '削除する', weight_path(@weight.id), method: :delete %>
+
+</div>
+
+<div class="justify-content-center row">
+  <%= link_to weight_path(@weight.id), method: :delete, class: "btn btn-danger col-lg-3 mt-3", data: { confirm: '本当に削除しますか？' } do %>
+    <i class="fas fa-trash"></i>削除する
+  <% end %>
+</div>
+
+</div>

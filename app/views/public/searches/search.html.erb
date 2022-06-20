@@ -1,17 +1,13 @@
+<div class="container">
+  <%= link_to '<<戻る', diaries_path %>
+  <h3 class="mini-title text-center">
+    「
+      <% if params[:search].present? %>
+        <%= params[:search] %>
+      <% end %>
+    」の検索結果
+  </h3>
 
+<%= render 'public/diaries/index', diaries: @diaries %>
 
-<h3>検索結果</h3>
-<% @diaries.each do |diary| %>
-  <%= link_to diary_path(diary) do %>
-    <% if diary.end_user.nickname.empty? %>
-      匿名希望さん
-    <% else %>
-      <%= diary.end_user.nickname %>
-    <% end %>
-      <%= diary.end_user.gender_i18n %>
-      <%= diary.title %>
-      <%= diary.body %>
-  <% end %>
-<% end %>
-
-<%= link_to '戻る', diaries_path %>
+</div>

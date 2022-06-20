@@ -4,59 +4,26 @@
     <%= render 'public/searches/form' %>
   </div>
 
-  <div class="">
+  <div class="selection-group">
     <%= render "public/shared/error_messages", resource: @diary %>
-    <%= form_with model: @diary, local:true do |f| %>
-      <div class="form-group">
-        <%= f.label :title, 'タイトル', class: "col-2" %>
-        <%= f.text_field :title, class: "form-control col-lg-4" %>
+    <div class="mr-5"><%= image_tag 'diary.png', size: "300x200" %></div>
+    <div class="w-100">
+      <%= form_with model: @diary, local:true do |f| %>
+        <div class="form-group">
+          <%= f.label :title, 'タイトル' %>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :body, '本文' %>
+          <%= f.text_area :body, class: "form-control" %>
+        </div>
+        <%= f.submit '投稿', class: 'btn btn-info text-center',style: "color:white;" %>
+      <% end %>
       </div>
-      <div class="form-group">
-        <%= f.label :body, '本文', class: "col-2" %>
-        <%= f.text_area :body, class: "form-control col-lg-4" %>
-      </div>
-      <%= f.submit '投稿', class: 'btn btn-sm btn-info col-lg-2 text-center',style: "color:white;" %>
-    <% end %>
-  </div>
-
-
-  <h3 class="mini-title mb-3 text-center">新着日記</h3>
-  <div class="row">
-    <% @diaries.each do |diary| %>
-    <div class="box col-5 justify-content-center" style="width:500px; height:200px;">
-      <table>
-        <thead>
-        <tr>
-          <th>
-              <%= image_tag diary.end_user.get_profile_image(50,50), class: "rounded-circle"  %>
-              <%= diary.diary_name(diary.end_user) %>&emsp;
-              <%= diary.end_user.gender_i18n %>&emsp;
-              <%= diary.end_user.age %>歳&emsp;
-              <%= diary.end_user.height %>cm&emsp;
-              <% if Weight.where(end_user_id: diary.end_user.id).order(record_day: :asc).last.nil? %>
-                <%= diary.end_user.start_weight %>kg
-              <% else %>
-                <%= Weight.where(end_user_id: diary.end_user.id).order(record_day: :asc).last.value %>kg
-              <% end %><br>
-              <%= diary.created_at.strftime("%Y年%m月%d日(%a) %H:%m") %><br>
-            <%= link_to diary_path(diary) do %>
-              <%= diary.title %>
-            <% end %>
-            <div id ="favorite_btn">
-              <%= render 'public/favorites/btn', diary: diary %>
-            </div>
-          </th>
-        </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= diary.body %></td>
-          </tr>
-        </tbody>
-      </table>
-
     </div>
-  <% end %>
-  </div>
 
-  </div>
+
+    <h3 class="mini-title text-center">New Diary</h3>
+    <%= render 'public/diaries/index', diaries: @diaries %>
+
+</div>

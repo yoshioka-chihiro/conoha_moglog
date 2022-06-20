@@ -15,7 +15,6 @@ class Public::MealsController < ApplicationController
     @user_meals = Meal.where(end_user_id: current_end_user.id)
     # その中から今日の記録を取得
     @today_meals_list = @user_meals.where(record_time: start_date..end_date)
-
     # カロリー合計表示用
     @today_calorie_sum = 0
     @today_meals_list.each do |meal|
@@ -23,16 +22,13 @@ class Public::MealsController < ApplicationController
         @today_calorie_sum += meal_detail.calorie_subtotal
       end
     end
-
-
-
   end
 
   def search
     # :qはransackのデフォルトキーなので変更しない
     @q = Meal.ransack(params[:q])
     # (distinct: true)によりresultの重複をなくしてくれている
-    @results = @q.result(distinct: true).order(record_time: :asc)
+    @results = @q.result(distinct: true).order(record_time: :asc).page(params[:page]).per(8)
   end
 
   def create
@@ -89,7 +85,5 @@ class Public::MealsController < ApplicationController
       meal_details_attributes:[:id, :meal_id, :food_id, :quantity, :_destroy])
       .merge(end_user_id: current_end_user.id)
   end
-
-
 
 end

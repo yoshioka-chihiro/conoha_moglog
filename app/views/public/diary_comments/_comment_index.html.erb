@@ -17,7 +17,7 @@
           <td><%= diary_comment.comment %></td>
           <td>
             <% if diary_comment.end_user == current_end_user %>
-              <%= link_to diary_diary_comment_path(diary, diary_comment), method: :delete, remote: true, class: "btn pull-right" do %>
+              <%= link_to diary_diary_comment_path(diary, diary_comment), method: :delete, remote: true, class: "btn pull-right", data: { confirm: 'コメントを削除しますか？' } do %>
                 <i class="fas fa-trash"></i>
               <% end %>
             <% else %>

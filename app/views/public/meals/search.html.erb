@@ -1,17 +1,15 @@
-ユーザーの全食事一覧
-<% if @results.empty? %>
-  まだ登録がありません
-<% else %>
-  <% @results.each do |result| %>
-    <%= result.record_time.strftime("%Y/%m/%d %H:%M") %>
-    <%= result.meal_type_i18n %>
-    <% result.meal_details.each do |d| %>
-      <%= d.food.name %>
-      <%= d.quantity %>
-    <% end %>
-    <%= link_to '詳細', meal_path(result.id) %>
-    <%= link_to '編集', edit_meal_path(result.id) %>
-    <%= link_to '削除', meal_path(result.id), method: :delete %>
-    <br>
+<h3 class="mini-title mb-3 text-center mt-5">
+  検索結果(
+  <% if params[:q].present? && params[:q][:record_time_gteq].present? %>
+    <%= params[:q][:record_time_gteq] %>
   <% end %>
-<% end %>
+  〜
+  <% if params[:q].present? && params[:q][:record_time_lteq_end_of_day].present? %>
+    <%= params[:q][:record_time_lteq_end_of_day] %>
+  <% end %>
+  )
+</h3>
+
+<%= render 'public/meals/index', meals: @results %>
+
+<div class="row justify-content-center"><%= paginate @results %></div>

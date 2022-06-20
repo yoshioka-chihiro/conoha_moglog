@@ -1,23 +1,31 @@
 <ul class="navbar-nav ml-auto">
   <li class="nav-item active mr-3">
-    <%= link_to 'マイページ', end_user_path(current_end_user) %>
+    <%= link_to meals_path do %>
+      <%= image_tag  'meal_header' %> Meal
+    <% end %>
   </li>
   <li class="nav-item active mr-3">
-    <%= link_to '食事記録', meals_path %>
+    <%= link_to 'Weight', weights_path %>
   </li>
   <li class="nav-item active mr-3">
-    <%= link_to '体重記録', weights_path %>
+    <%= link_to 'Health', conditions_path %>
   </li>
   <li class="nav-item active mr-3">
-    <%= link_to 'お通じ記録', conditions_path %>
+    <%= link_to 'Diary', diaries_path %>
   </li>
   <li class="nav-item active mr-3">
-    <%= link_to '日記をつける', diaries_path %>
+    <%= link_to 'User', end_users_path %>
   </li>
   <li class="nav-item active mr-3">
-    <%= link_to '会員一覧', end_users_path %>
+    <%= link_to end_user_path(current_end_user) do %>
+      <!--<i class="fas fa-user-cog"></i>-->
+      My Page
+    <% end %>
   </li>
-  <li class="nav-item active mr-3">
-    <%= link_to 'ログアウト', destroy_end_user_session_path, method: :delete %>
+  <li class="nav-item active mr-3 header-icon">
+    <%= link_to destroy_end_user_session_path, method: :delete, data: { confirm: 'ログアウトしますか？' } do %>
+      <!--<i class="fas fa-sign-out-alt"></i>-->
+      Log Out
+    <% end %>
   </li>
 </ul>

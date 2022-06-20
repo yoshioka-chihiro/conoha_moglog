@@ -1,0 +1,16 @@
+<h3 class="mini-title mb-3 text-center mt-5">
+  検索結果(
+  <% if params[:q].present? && params[:q][:nickname_cont].present? %>
+    <%= params[:q][:nickname_cont] %>
+  <% end %>
+  )
+</h3>
+
+<% @results.each do |result| %>
+  <%= link_to end_user_path(result) do %>
+  <%= result.nickname %>
+  <% end %>
+
+<% end %>
+
+<div class="row justify-content-center"><%= paginate @results %></div>
