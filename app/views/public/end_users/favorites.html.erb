@@ -14,6 +14,9 @@
           <div class="title">
             <%= diary.title %>
           </div>
+          <div class="ml-2" id ="favorite_btn_<%= diary.id %>">
+            <%= render 'public/favorites/btn', diary: diary %>
+          </div>
           <div class="ml-2">
             <%= render 'public/diary_comments/comment_count', diary_comment: diary.diary_comments, diary: diary %>
           </div>

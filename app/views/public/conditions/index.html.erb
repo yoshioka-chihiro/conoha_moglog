@@ -1,120 +1,130 @@
 <div class="container">
-<% unless @lastest_condition.nil? %>
-  前回のお通じから<%= time_ago_in_words(@lastest_condition.created_at) %>！
-<% end %>
-<br>
-24~48時間前の食事↓<br>
-<% @search_meals.each do |m| %>
-  ・<%= m.meal_type_i18n %>
-  <% m.meal_details.each do |d| %>
-    <%= d.food.name %>
-    <%= d.quantity %>
-  <% end %>
-  <%= link_to '食事詳細を見る', meal_path(m.id) %>
-  <br>
-<% end %>
-
-<%= render "public/shared/error_messages", resource: @condition %>
-<%= form_with model: @condition, local:true do |f| %>
-
-  <h3 class="text-center mt-5">どんなウンチか？</h3>
   <div class="selection-group">
-
-    <div class="feel-btn">
-      <%= f.radio_button :movement, Condition.movements.key(0) %>
-      <%= label :movement, 'コロコロ' %>
-      <%= image_tag asset_path('icons/sad.png'), size: "100x100", class: "label_img" %>
-     </div>
-
-    <div class="feel-btn">
-      <%= f.radio_button :movement, Condition.movements.key(1) %>
-      <%= label :movement, '硬め' %>
-      <%= image_tag asset_path('icons/normal.png'), size: "100x100", class: "label_img" %>
-    </div>
-
-    <div class="feel-btn">
-      <%= f.radio_button :movement, Condition.movements.key(2), checked: true %>
-      <%= label :movement, 'バナナ' %>
-      <%= image_tag asset_path('icons/happy2.png'), size: "100x100", class: "label_img" %>
-    </div>
-
-    <div class="feel-btn">
-      <%= f.radio_button :movement, Condition.movements.key(3) %>
-      <%= label :movement, 'やわめ' %>
-      <%= image_tag asset_path('icons/happy2.png'), size: "100x100", class: "label_img" %>
-    </div>
-
-    <div class="feel-btn">
-      <%= f.radio_button :movement, Condition.movements.key(4) %>
-      <%= label :movement, '水' %>
-      <%= image_tag asset_path('icons/happy2.png'), size: "100x100", class: "label_img" %>
-    </div>
-
+    <% unless @lastest_condition.nil? %>
+      <p>前回のお通じから<strong><%= time_ago_in_words(@lastest_condition.created_at) %></strong>が経っています</p>
+    <% end %>
   </div>
 
-  <h3 class="text-center mt-5">今の気分は？</h3>
-  <div class="selection-group">
+  <div>
+    <h5 class="text-center">24~48時間前の食事</h5>
+    <% if @search_meals.empty? %>
+      <p class="text-center">test!!!!!!!!!!!!!!!!!!</p>
+    <% else %>
+      <% @search_meals.each do |meal| %>
+      ・<%= meal.meal_type_i18n %>
+        <% meal.meal_details.each do |d| %>
+          <%= d.food.name %>
+          <%= d.quantity %>
+        <% end %>
+        <%= link_to '食事詳細を見る', meal_path(meal.id) %>
+      <% end %>
+    <% end %>
+   </div>
 
-    <div class="feel-btn">
-      <%= f.radio_button :feel, Condition.feels.key(0) %>
-      <%= label :feel, '悲しい' %>
-      <%= image_tag asset_path('icons/sad.png'), size: "100x100", class: "label_img" %>
-     </div>
+    <hr>
 
-    <div class="feel-btn">
-      <%= f.radio_button :feel, Condition.feels.key(1), checked: true%>
-      <%= label :feel, '普通' %>
-      <%= image_tag asset_path('icons/normal.png'), size: "100x100", class: "label_img" %>
+  <%= render "public/shared/error_messages", resource: @condition %>
+  <%= form_with model: @condition, local:true do |f| %>
+
+    <h3 class="text-center mt-5">日付</h3>
+    <div class="text-center">
+      <%= f.label :日付 %>
+      <%= f.date_select :start_time %>
     </div>
 
-    <div class="feel-btn">
-      <%= f.radio_button :feel, Condition.feels.key(2) %>
-      <%= label :feel, 'るんるん' %>
-      <%= image_tag asset_path('icons/happy2.png'), size: "100x100", class: "label_img" %>
+    <h3 class="text-center mt-5">どんなお通じでしたか？</h3>
+    <div class="selection-group">
+
+      <div class="movement-btn">
+        <%= f.radio_button :movement, Condition.movements.key(0) %>
+        <%= label :movement, 'コロコロ' %>
+        <%= image_tag asset_path('icons/iwa.png'), size: "100x100", class: "label_img" %>
+       </div>
+
+      <div class="movement-btn">
+        <%= f.radio_button :movement, Condition.movements.key(1) %>
+        <%= label :movement, '硬め' %>
+        <%= image_tag asset_path('icons/katame.png'), size: "100x100", class: "label_img" %>
+      </div>
+
+      <div class="movement-btn">
+        <%= f.radio_button :movement, Condition.movements.key(2), checked: true %>
+        <%= label :movement, 'バナナ' %>
+        <%= image_tag asset_path('icons/banana.png'), size: "100x100", class: "label_img" %>
+      </div>
+
+      <div class="movement-btn">
+        <%= f.radio_button :movement, Condition.movements.key(3) %>
+        <%= label :movement, 'やわめ' %>
+        <%= image_tag asset_path('icons/yawame.png'), size: "100x100", class: "label_img" %>
+      </div>
+
+      <div class="movement-btn">
+        <%= f.radio_button :movement, Condition.movements.key(4) %>
+        <%= label :movement, '水' %>
+        <%= image_tag asset_path('icons/mizu.png'), size: "100x100", class: "label_img" %>
+      </div>
+
     </div>
 
-  </div>
+    <h3 class="text-center mt-5">今の気分は？</h3>
+    <div class="selection-group">
 
-  <div class="plan_day">
-    <%= f.label :ご希望日 %>
-    <%= f.date_select :start_time %>
-  </div>
+      <div class="feel-btn">
+        <%= f.radio_button :feel, Condition.feels.key(0) %>
+        <%= label :feel, '悲しい' %>
+        <%= image_tag asset_path('icons/sad.png'), size: "100x100", class: "label_img" %>
+       </div>
 
-<div class="action text-center">
-  <%= f.submit '登録する！', class: 'btn btn-success' %>
-</div>
-<% end %>
+      <div class="feel-btn">
+        <%= f.radio_button :feel, Condition.feels.key(1), checked: true%>
+        <%= label :feel, '普通' %>
+        <%= image_tag asset_path('icons/normal.png'), size: "100x100", class: "label_img" %>
+      </div>
 
-<% @conditions.each do |condition| %>
-  <%= time_ago_in_words(condition.created_at) %>前
-  <%= condition.created_at.strftime("%Y年%m月%d日(%a)") %>
-  <%= condition.movement_i18n %>
-  <%= condition.feel_i18n %>
-  <%= link_to '詳細', condition_path(condition.id) %>
-  <%= link_to '編集', edit_condition_path(condition.id) %>
-  <%= link_to '削除', condition_path(condition.id), method: :delete %>
-<br>
-<% end %>
+      <div class="feel-btn">
+        <%= f.radio_button :feel, Condition.feels.key(2) %>
+        <%= label :feel, 'るんるん' %>
+        <%= image_tag asset_path('icons/happy.png'), size: "100x100", class: "label_img" %>
+      </div>
 
-</div>
+    </div>
 
-<!--カレンダーは表示されてる-->
-<%= month_calendar conditions: @conditions do |date, conditions| %>
-  <%= date.day %>
-
-<!--表示されない-->
-<% if conditions.nil? %>
-  記録がありません
-<% else %>
-  <% conditions.each do |condition| %>
-    <div>
-      記録はある
-      <%= condition.movement_i18n %>
-      <%= condition.feel_i18n %>
-      <%= condition.id %>
+    <div class="action text-center">
+    <%= f.submit '登録', class: 'btn btn-success' %>
     </div>
   <% end %>
 
-<% end %>
+  <%= month_calendar events: @condition_all do |date, conditions| %>
+    <%= date.day %>
+    <% conditions.each do |condition| %>
+      <div>
+          <%= link_to '詳細', condition_path(condition) %>
+          <% if condition.movement == 0 %>
+            <%= image_tag asset_path('icons/iwa.png'), size: "40x40", class: "label_img" %>
+          <% elsif condition.movement == 1 %>
+            <%= image_tag asset_path('icons/katame.png'), size: "40x40", class: "label_img" %>
+          <% elsif condition.movement == 2 %>
+            <%= image_tag asset_path('icons/banana.png'), size: "40x40", class: "label_img" %>
+          <% elsif condition.movement == 3 %>
+            <%= image_tag asset_path('icons/yawame.png'), size: "40x40", class: "label_img" %>
+          <% elsif %>
+            <%= image_tag asset_path('icons/mizu.png'), size: "40x40", class: "label_img" %>
+          <% end %>
 
-<% end %>
+          <% if condition.feel == 0 %>
+            <%= image_tag asset_path('icons/sad.png'), size: "40x40", class: "label_img" %>
+          <% elsif condition.feel == 1 %>
+            <%= image_tag asset_path('icons/normal.png'), size: "40x40", class: "label_img" %>
+          <% elsif %>
+            <%= image_tag asset_path('icons/happy.png'), size: "40x40", class: "label_img" %>
+          <% end %>
+
+          <%= link_to edit_condition_path(condition.id) do %>
+            <i class="fa fa-pen"></i>
+          <% end %>
+
+      </div>
+    <% end %>
+  <% end %>
+</div>

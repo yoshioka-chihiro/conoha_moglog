@@ -3,7 +3,7 @@ class Public::ConditionsController < ApplicationController
     @condition = Condition.new
     # ログイン中のユーザーのデータを取得
     @condition_all = Condition.all
-    @conditions = Condition.where(end_user_id: current_end_user.id)
+    @conditions = Condition.where(end_user_id: current_end_user.id).order(created_at: :desc)
     # 最新のConditionデータを１件取得
     @lastest_condition = Condition.where(end_user_id: current_end_user.id).order(created_at: :asc).last
     # 現在の時間
@@ -13,7 +13,7 @@ class Public::ConditionsController < ApplicationController
     # 48日前
     two_days_ago = now - 2.day
     # 今から24〜48時間の間に記録された食事を取得
-    @search_meals = Meal.where(record_time: one_day_ago..two_days_ago)
+    @search_meals = Meal.where(record_time: one_day_ago..two_days_ago).order(record_time: :desc)
   end
 
   def show

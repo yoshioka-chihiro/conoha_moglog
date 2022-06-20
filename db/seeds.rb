@@ -55,7 +55,8 @@ end
      end_user_id: 1,
      movement: 2,
      feel: 2,
-     created_at: Random.rand(start_day..end_day)
+     created_at: Random.rand(start_day..end_day),
+     start_time: Random.rand(start_day..end_day)
    )
 end
 

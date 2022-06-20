@@ -1,14 +1,81 @@
-<%= render 'public/shared/error_messages', resource: @condition %>
-<%= form_with model: @condition, local:true do |f| %>
-<div class="fields">
-  <%= f.label:お通じ %>
-  <%= f.select :movement, Condition.movements_i18n.keys.map{|k| [I18n.t("enums.condition.movement.#{k}"), k]}, {prompt: '選択してください'} %>
+
+<div class="container">
+  <%= render 'public/shared/error_messages', resource: @condition %>
+  <%= form_with model: @condition, local:true do |f| %>
+
+    <h3 class="text-center mt-5">日付</h3>
+    <div class="text-center">
+      <%= f.label :日付 %>
+      <%= f.date_select :start_time %>
+    </div>
+
+    <h3 class="text-center mt-5">どんなお通じでしたか？</h3>
+    <div class="selection-group">
+
+      <div class="movement-btn">
+        <%= f.radio_button :movement, Condition.movements.key(0) %>
+        <%= label :movement, 'コロコロ' %>
+        <%= image_tag asset_path('icons/iwa.png'), size: "100x100", class: "label_img" %>
+       </div>
+
+      <div class="movement-btn">
+        <%= f.radio_button :movement, Condition.movements.key(1) %>
+        <%= label :movement, '硬め' %>
+        <%= image_tag asset_path('icons/katame.png'), size: "100x100", class: "label_img" %>
+      </div>
+
+      <div class="movement-btn">
+        <%= f.radio_button :movement, Condition.movements.key(2), checked: true %>
+        <%= label :movement, 'バナナ' %>
+        <%= image_tag asset_path('icons/banana.png'), size: "100x100", class: "label_img" %>
+      </div>
+
+      <div class="movement-btn">
+        <%= f.radio_button :movement, Condition.movements.key(3) %>
+        <%= label :movement, 'やわめ' %>
+        <%= image_tag asset_path('icons/yawame.png'), size: "100x100", class: "label_img" %>
+      </div>
+
+      <div class="movement-btn">
+        <%= f.radio_button :movement, Condition.movements.key(4) %>
+        <%= label :movement, '水' %>
+        <%= image_tag asset_path('icons/mizu.png'), size: "100x100", class: "label_img" %>
+      </div>
+    </div>
+
+    <h3 class="text-center mt-5">今の気分は？</h3>
+    <div class="selection-group">
+
+      <div class="feel-btn">
+        <%= f.radio_button :feel, Condition.feels.key(0) %>
+        <%= label :feel, '悲しい' %>
+        <%= image_tag asset_path('icons/sad.png'), size: "100x100", class: "label_img" %>
+       </div>
+
+      <div class="feel-btn">
+        <%= f.radio_button :feel, Condition.feels.key(1), checked: true%>
+        <%= label :feel, '普通' %>
+        <%= image_tag asset_path('icons/normal.png'), size: "100x100", class: "label_img" %>
+      </div>
+
+      <div class="feel-btn">
+        <%= f.radio_button :feel, Condition.feels.key(2) %>
+        <%= label :feel, 'るんるん' %>
+        <%= image_tag asset_path('icons/happy.png'), size: "100x100", class: "label_img" %>
+      </div>
+
+    </div>
+
+    <div class="action text-center">
+      <%= f.submit '更新', class: 'btn btn-success' %>
+      <%= link_to 'キャンセル', conditions_path, class: 'waves-effect waves-light btn grey' %>
+    </div>
+  <% end %>
+
+  <div class="justify-content-center row">
+    <%= link_to condition_path(@condition.id), method: :delete, class: "btn btn-danger col-lg-3 mt-3", data: { confirm: '本当に削除しますか？' } do %>
+      <i class="fas fa-trash"></i>削除する
+    <% end %>
+  </div>
+
 </div>
-<div class="fields">
-  <%= f.label:気分 %>
-   <%= f.select :feel, Condition.feels_i18n.keys.map{|k| [I18n.t("enums.condition.feel.#{k}"), k]}, {prompt: '選択してください'} %>
-</div>
-<div class="action">
-  <%= f.submit '更新' %>
-</div>
-<% end %>
