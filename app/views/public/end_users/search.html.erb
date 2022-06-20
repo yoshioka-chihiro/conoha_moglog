@@ -6,11 +6,26 @@
   )
 </h3>
 
-<% @results.each do |result| %>
-  <%= link_to end_user_path(result) do %>
-  <%= result.nickname %>
-  <% end %>
-
-<% end %>
+<div class="container">
+  <div class="justify-content-center row">
+    <table class="text-center mt-5">
+      <% @results.each do |result| %>
+        <tr>
+          <td><%= image_tag result.get_profile_image(100,100), class: "rounded-circle"  %></td>
+          <td>
+            <%= link_to end_user_path(result) do %>
+              <%= result.nickname %>
+            <% end %>
+          </td>
+           <% if current_end_user != result %>
+          <td id="follow_btn_<%= result.id %>">
+            <%= render 'public/relationships/btn', end_user: result %>
+          </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
 
 <div class="row justify-content-center"><%= paginate @results %></div>
