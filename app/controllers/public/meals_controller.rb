@@ -1,4 +1,5 @@
 class Public::MealsController < ApplicationController
+  before_action :authenticate_end_user!
 
 
   def index

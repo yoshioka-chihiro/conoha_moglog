@@ -8,4 +8,5 @@ class Condition < ApplicationRecord
   validates :movement, presence: true
   validates :feel, presence: true
 
+
 end

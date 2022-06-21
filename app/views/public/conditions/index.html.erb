@@ -1,26 +1,16 @@
 <div class="container">
   <div class="selection-group">
-    <% unless @lastest_condition.nil? %>
-      <p>前回のお通じから<strong><%= time_ago_in_words(@lastest_condition.created_at) %></strong>が経っています</p>
-    <% end %>
-  </div>
-
-  <div>
-    <h5 class="text-center">24~48時間前の食事</h5>
-    <% if @search_meals.empty? %>
-      <p class="text-center">test!!!!!!!!!!!!!!!!!!</p>
-    <% else %>
-      <% @search_meals.each do |meal| %>
-      ・<%= meal.meal_type_i18n %>
-        <% meal.meal_details.each do |d| %>
-          <%= d.food.name %>
-          <%= d.quantity %>
-        <% end %>
-        <%= link_to '食事詳細を見る', meal_path(meal.id) %>
+    <div class="condition-icon-gray pt-5 mr-5 text-center">
+      <%= render 'public/meals/relation_meal', search_meals: @search_meals %>
+    </div>
+    <div class="pt-5 condition-icon text-center">
+      <% unless @lastest_condition.nil? %>
+        <p>前回のお通じから<br>
+        <strong><%= time_ago_in_words(@lastest_condition.created_at) %></strong>が経っています</p>
       <% end %>
-    <% end %>
-   </div>
+    </div>
 
+  </div>
     <hr>
 
   <%= render "public/shared/error_messages", resource: @condition %>
@@ -49,7 +39,7 @@
 
       <div class="movement-btn">
         <%= f.radio_button :movement, Condition.movements.key(2), checked: true %>
-        <%= label :movement, 'バナナ' %>
+        <%= label :movement, '快' %>
         <%= image_tag asset_path('icons/banana.png'), size: "100x100", class: "label_img" %>
       </div>
 
@@ -99,31 +89,13 @@
     <%= date.day %>
     <% conditions.each do |condition| %>
       <div>
-          <%= link_to '詳細', condition_path(condition) %>
-          <% if condition.movement == 0 %>
-            <%= image_tag asset_path('icons/iwa.png'), size: "40x40", class: "label_img" %>
-          <% elsif condition.movement == 1 %>
-            <%= image_tag asset_path('icons/katame.png'), size: "40x40", class: "label_img" %>
-          <% elsif condition.movement == 2 %>
-            <%= image_tag asset_path('icons/banana.png'), size: "40x40", class: "label_img" %>
-          <% elsif condition.movement == 3 %>
-            <%= image_tag asset_path('icons/yawame.png'), size: "40x40", class: "label_img" %>
-          <% elsif %>
-            <%= image_tag asset_path('icons/mizu.png'), size: "40x40", class: "label_img" %>
-          <% end %>
-
-          <% if condition.feel == 0 %>
-            <%= image_tag asset_path('icons/sad.png'), size: "40x40", class: "label_img" %>
-          <% elsif condition.feel == 1 %>
-            <%= image_tag asset_path('icons/normal.png'), size: "40x40", class: "label_img" %>
-          <% elsif %>
-            <%= image_tag asset_path('icons/happy.png'), size: "40x40", class: "label_img" %>
-          <% end %>
-
-          <%= link_to edit_condition_path(condition.id) do %>
-            <i class="fa fa-pen"></i>
-          <% end %>
-
+        <%= link_to condition_path(condition) do %>
+          <%= condition.movement_i18n %>
+          <%= condition.feel_i18n %>
+        <% end %>
+        <%= link_to edit_condition_path(condition.id) do %>
+          <i class="fa fa-pen"></i>
+        <% end %>
       </div>
     <% end %>
   <% end %>

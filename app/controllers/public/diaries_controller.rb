@@ -1,22 +1,39 @@
 class Public::DiariesController < ApplicationController
+  before_action :authenticate_end_user!
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+
+
   def index
     @diary = Diary.new
-    @diaries = Diary.all.order(created_at: :desc).page(params[:page]).per(8)
+    @diaries = Diary.published.order(created_at: :desc).page(params[:page]).per(8)
   end
 
   def show
-    @diary = Diary.find(params[:id])
+
+    if @diary.status_private? && @diary.user != current_user
+      respond_to do |format|
+        format.html { redirect_to posts_path, notice: 'このページにはアクセスできません' }
+      end
+    end
+
     @diary_user = @diary.end_user
     @recent_weight = Weight.where(end_user_id: @diary_user.id).order(record_day: :asc).last
     @diary_comment = DiaryComment.new
     @diary_comment.end_user_id = current_end_user.id
     @diary_comments = @diary.diary_comments
+
   end
 
   def personal_index
     @diary = Diary.find(params[:id])
     @diary_user = EndUser.find(params[:id])
-    @diaries = Diary.where(end_user_id: @diary_user.id).order(created_at: :desc).page(params[:page]).per(8)
+    if @diary_user == current_end_user
+      @diaries = Diary.where(end_user_id: @diary_user.id).order(created_at: :desc).page(params[:page]).per(8)
+    else
+      @diaries_published = Diary.published
+      @diaries = @diaries_published.where(end_user_id: @diary_user.id).order(created_at: :desc).page(params[:page]).per(8)
+    end
+
   end
 
   def create
@@ -31,11 +48,9 @@ class Public::DiariesController < ApplicationController
   end
 
   def edit
-    @diary = Diary.find(params[:id])
   end
 
   def update
-    @diary = Diary.find(params[:id])
     if @diary.update(diary_params)
       flash[:notice] = "日記を更新しました。"
       redirect_to diary_path(@diary)
@@ -46,7 +61,6 @@ class Public::DiariesController < ApplicationController
   end
 
   def destroy
-    @diary = Diary.find(params[:id])
     if @diary.destroy
       flash[:notice] = "日記を削除しました"
       @diaries = Diary.all
@@ -59,7 +73,11 @@ class Public::DiariesController < ApplicationController
   private
 
   def diary_params
-    params.require(:diary).permit(:title, :body)
+    params.require(:diary).permit(:title, :body, :is_published_flag)
+  end
+
+  def set_post
+    @diary = Diary.find(params[:id])
   end
 
 end

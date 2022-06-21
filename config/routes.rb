@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
 
-    get 'about' => 'public/homes#about'
+    get 'about' => 'homes#about'
     get 'personal_index/:id' => 'diaries#personal_index'
     patch 'end_users/withdraw' => 'end_users#withdraw'
     get 'end_users/quit' => 'end_users#quit'

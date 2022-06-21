@@ -1,0 +1,17 @@
+<% if search_meals.empty? %>
+  <p class="text-center">食事が見当たりません</p>
+<% else %>
+  <p class="text-center">
+    <%= image_tag asset_path('meal_icon.png'), size: "30x30" %>１〜２日前の食事
+  </p>
+  <div>
+    <% search_meals.each do |meal| %>
+      <% meal.meal_details.each do |meal_detail| %>
+        <%= link_to meal_path(meal.id) do  %>
+          <i class="fas fa-chevron-circle-right"></i>
+        <% end %>
+        <%= meal_detail.food.name %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

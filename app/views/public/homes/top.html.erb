@@ -1,1 +1,17 @@
-もぐログにようこそ！
+<div>
+  <h3 class="text-center mt-5">Top</h3>
+      <div class="selection-group_top">
+        <%= link_to meals_path, class: 'pt-5 mr-3 btn btn-outline-dark btn-lg' do %>
+           <%= image_tag asset_path('top_meals.png') %> 食事を記録する！
+        <% end %>
+        <%= link_to weights_path, class: 'pt-4 btn md-3 btn-outline-dark btn-lg' do %>
+          <%= image_tag asset_path('top_weights.png'), size: "150x200" %> 体重を記録する！
+        <% end %>
+        <%= link_to conditions_path, class: 'btn mr-3 mt-3 btn-outline-dark btn-lg' do %>
+          <%= image_tag asset_path('top_conditions.png') %> お通じを記録する！
+        <% end %>
+        <%= link_to diaries_path, class: 'btn mt-3 btn-outline-dark btn-lg' do %>
+          <%= image_tag asset_path('top_diaries.png') %> 日記で交流する！
+        <% end %>
+      </div>
+</div>

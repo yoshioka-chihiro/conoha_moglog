@@ -3,6 +3,10 @@ class Diary < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :diary_comments, dependent: :destroy
 
+  
+  scope :published, -> {where(is_published_flag: true)}
+  scope :unpublished, -> {where(is_published_flag: false)}
+
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
 

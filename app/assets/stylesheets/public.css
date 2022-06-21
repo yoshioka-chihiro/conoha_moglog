@@ -2,6 +2,13 @@ main {
   margin-top: 30px;
 }
 
+li a {
+  color:black;
+}
+
+li a:hover {
+  color:gray;
+}
 
 .box {
   background-color: #FFFFCC;
@@ -15,6 +22,17 @@ main {
 .selection-group {
   display: flex;
   justify-content: center;
+}
+
+.selection-group_top {
+  display: flex;
+  justify-content: center;
+  flex-wrap:wrap;
+}
+
+.selection-group_top a {
+  width: 35%;
+  height: 250px;
 }
 
 .weight-index{
@@ -35,6 +53,21 @@ main {
   height:150px;
   background-color: lightgray;
 }
+
+.condition-icon {
+  border-radius: 70px;
+  width:250px;
+  height:150px;
+  background-color: pink;
+}
+
+.condition-icon-gray {
+  border-radius: 70px;
+  width:250px;
+  height:150px;
+  background-color: lightgray;
+}
+
 
 .weight-text {
   padding-top: 40px;
@@ -65,3 +98,13 @@ main {
   text-align: center;
   margin: 30px auto;
 }
+
+.about-text-bg {
+  width: 500px;
+  height: 500px;
+  opacity: 0.9;
+  background-image: image-url("about-bg2.png");
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+

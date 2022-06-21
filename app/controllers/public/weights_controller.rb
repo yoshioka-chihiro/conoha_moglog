@@ -1,4 +1,5 @@
 class Public::WeightsController < ApplicationController
+  before_action :authenticate_end_user!
 
   def index
     @weights = Weight.where(end_user_id: current_end_user.id).order(record_day: :desc).page(params[:page]).per(8)

@@ -1,4 +1,5 @@
 class Public::EndUsersController < ApplicationController
+  before_action :authenticate_end_user!
 
   def index
     @end_users = EndUser.all
@@ -9,7 +10,7 @@ class Public::EndUsersController < ApplicationController
     @end_user = EndUser.find(params[:id])
     @recent_weight = Weight.where(end_user_id: @end_user.id).order(record_day: :asc).last
   end
-  
+
   def search
     # :qはransackのデフォルトキーなので変更しない
     @q = EndUser.ransack(params[:q])

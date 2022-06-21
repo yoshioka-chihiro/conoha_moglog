@@ -25,6 +25,13 @@
                 <div class="ml-2">
                   <%= render 'public/diary_comments/comment_count', diary_comment: diary.diary_comments, diary: diary %>
                 </div>
+                <div>
+                  <% if diary.is_published_flag == true %>
+                    <p>公開</p>
+                  <% else %>
+                    <p>非公開</p>
+                  <% end %>
+                </div>
               </div>
               <div class="ml-5 mr-5 text-center"><%= diary.body %></div>
           </div>

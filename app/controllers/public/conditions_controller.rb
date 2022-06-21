@@ -1,4 +1,6 @@
 class Public::ConditionsController < ApplicationController
+  before_action :authenticate_end_user!
+
   def index
     @condition = Condition.new
     # ログイン中のユーザーのデータを取得
@@ -13,17 +15,17 @@ class Public::ConditionsController < ApplicationController
     # 48日前
     two_days_ago = now - 2.day
     # 今から24〜48時間の間に記録された食事を取得
-    @search_meals = Meal.where(record_time: one_day_ago..two_days_ago).order(record_time: :desc)
+    @search_meals = Meal.where(record_time: two_days_ago..one_day_ago).order(record_time: :desc)
   end
 
   def show
     @condition = Condition.find(params[:id])
     # 体調が記録された時間の24時間前
-    one_day_ago =  @condition.created_at - 1.day
+    one_day_ago =  @condition.start_time - 1.day
     # 体調が記録された時間の48時間前
-    two_days_ago =  @condition.created_at - 2.day
+    two_days_ago =  @condition.start_time - 2.day
     # 体調が記録された時間から24〜48時間の間に記録された食事を取得
-    @search_meals = Meal.where(record_time: one_day_ago..two_days_ago)
+    @search_meals = Meal.where(record_time: two_days_ago..one_day_ago)
   end
 
   def create

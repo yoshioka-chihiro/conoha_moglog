@@ -105,7 +105,7 @@ end
    MealDetail.create!(
     meal_id: 1 + n,
     food_id: 1,
-    quantity:  1 + n
+    quantity:  1
    )
 end
 
