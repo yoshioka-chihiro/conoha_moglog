@@ -1,7 +1,9 @@
-<h1>食品一覧</h1>
-<%= link_to '食品登録', new_admin_food_path %>
-
-<% @foods.each do |food| %>
+<div class="container">
+  <h1>食品一覧</h1>
+  <div class="text-center">
+    <%= link_to '食品登録', new_admin_food_path, class: "btn btn-info" %>
+  </div>
+  <br>
   <table class="table">
     <tr>
       <th>食品名</th>
@@ -11,7 +13,9 @@
       <th>炭水化物</th>
       <th>脂質</th>
       <th>食物繊維</th>
+      <th></th>
     </tr>
+    <% @foods.each do |food| %>
     <tr>
       <td><%= food.name %></td>
       <td><%= food.introduction %></td>
@@ -20,7 +24,13 @@
       <td><%= food.carbohydrate %>g</td>
       <td><%= food.fat %>g</td>
       <td><%= food.fiber %>mg</td>
+      <td>
+        <%=link_to '詳細', admin_food_path(food) %>
+      </td>
     </tr>
+    <% end %>
   </table>
-<%=link_to '詳細', admin_food_path(food) %>
-<% end %>
+
+  <div class="row justify-content-center"><%= paginate @foods %></div>
+
+</div>

@@ -1,45 +1,49 @@
-<h1>会員情報詳細</h1>
-<table class="table">
-  <tr>
-    <th>名前</th>
-    <td><%= @end_user.name %></td>
-  </tr>
-  <tr>
-    <th>ニックネーム</th>
-    <td><%= @end_user.nickname %></td>
-  </tr>
-  <tr>
-    <th>性別</th>
-    <td><%= @end_user.gender_i18n %></td>
-  </tr>
-  <tr>
-    <th>スタート時体重</th>
-    <td><%= @end_user.start_weight %></td>
-  </tr>
-  <tr>
-    <th>目標体重</th>
-    <td><%= @end_user.objective_weight %></td>
-  </tr>
-  <tr>
-    <th>年齢</th>
-    <td><%= @end_user.age %></td>
-  </tr>
-  <tr>
-    <th>身長</th>
-    <td><%= @end_user.height %></td>
-  </tr>
-  <tr>
-    <th>メールアドレス</th>
-    <td><%= @end_user.email %></td>
-  </tr>
-  <tr>
-    <th>ステータス</th>
-    <% if @end_user.is_deleted == true %>
-      <td>退会</td>
-    <% else %>
-      <td>有効</td>
-    <% end %>
-  </tr>
-</table>
+<div class="container">
+  <h1>会員情報詳細</h1>
+  <table class="table">
+    <tr>
+      <th>名前</th>
+      <td><%= @end_user.name %></td>
+    </tr>
+    <tr>
+      <th>ニックネーム</th>
+      <td><%= @end_user.nickname %></td>
+    </tr>
+    <tr>
+      <th>性別</th>
+      <td><%= @end_user.gender_i18n %></td>
+    </tr>
+    <tr>
+      <th>スタート時体重</th>
+      <td><%= @end_user.start_weight %></td>
+    </tr>
+    <tr>
+      <th>目標体重</th>
+      <td><%= @end_user.objective_weight %></td>
+    </tr>
+    <tr>
+      <th>年齢</th>
+      <td><%= @end_user.age %></td>
+    </tr>
+    <tr>
+      <th>身長</th>
+      <td><%= @end_user.height %></td>
+    </tr>
+    <tr>
+      <th>メールアドレス</th>
+      <td><%= @end_user.email %></td>
+    </tr>
+    <tr>
+      <th>ステータス</th>
+      <% if @end_user.is_deleted == true %>
+        <td>退会</td>
+      <% else %>
+        <td>有効</td>
+      <% end %>
+    </tr>
 
-<%= link_to '編集',  edit_admin_end_user_path %>
+  </table>
+  <div class="text-center">
+    <%= link_to '編集', edit_admin_end_user_path(@end_user), class: "btn btn-success mt-3" %>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 class Admin::FoodsController < ApplicationController
   def index
-    @foods = Food.all
+    @foods = Food.all.order(record_day: :desc).page(params[:page]).per(8)
   end
 
   def show

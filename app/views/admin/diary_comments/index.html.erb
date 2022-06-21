@@ -1,12 +1,28 @@
-<% if @reports.empty? %>
-通報コメントはない
-<% else %>
-  <% @reports.each do |r| %>
-    通報した人の名前：<%= r.end_user.name %><br>
-    通報された日：<%= r.created_at.strftime("%Y/%m/%d %H:%M") %><br>
-    コメントがついた日記：<%= r.diary_comment.diary.title %><br>
-    通報されたコメントの内容：<%= r.diary_comment.comment %><br>
-    コメントを書いた人：<%= r.diary_comment.end_user.name %><br>
-    <%= link_to 'コメントを削除する', admin_diary_comment_path(r), method: :delete %>
+<div class="container">
+  <% if @reports.empty? %>
+    <p>通報コメントはありません</p>
+  <% else %>
+    <table class="table">
+      <tr>
+        <th>通報した人の名前</th>
+        <th>通報された日</th>
+        <th>コメントがついた日記</th>
+        <th>通報コメントの内容</th>
+        <th>コメントを書いた人の名前</th>
+        <th></th>
+      </tr>
+      <% @reports.each do |report| %>
+        <tr>
+          <td><%= report.end_user.name %></td>
+          <td><%= report.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          <td><%= report.diary_comment.diary.title %></td>
+          <td><%= report.diary_comment.comment %></td>
+          <td><%= report.diary_comment.end_user.name %></td>
+          <td>
+            <%= link_to '削除', admin_diary_comment_path(report), method: :delete, class: "btn btn-danger", data: { confirm: 'コメントを削除してもよろしいいですか？' } %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
   <% end %>
-<% end %>
+</div>

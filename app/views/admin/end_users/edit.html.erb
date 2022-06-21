@@ -1,50 +1,51 @@
-<h1>会員情報編集</h1>
+<div class="container">
+  <h1>会員情報編集</h1>
 
-<%= form_with model: @end_user, url: admin_end_user_path(@end_user), method: :patch do |f| %>
-<table>
-  <tr>
-    <th><%= f.label:名前 %></th>
-    <td><%= f.text_field :name, autofocus: true %></td>
-  </tr>
-  <tr>
-    <th><%= f.label:ニックネーム %></th>
-    <td><%= f.text_field :nickname %></td>
-  </tr>
-  <tr>
-    <th><%= f.label:性別 %></th>
-    <td><%= f.select :gender, EndUser.genders_i18n.keys.map{|k| [I18n.t("enums.end_user.gender.#{k}"), k]} %></td>
-  </tr>
-  <tr>
-    <th><%= f.label:スタート時体重 %></th>
-    <td><%= f.text_field :start_weight %></td>
-  </tr>
-  <tr>
-    <th><%= f.label:目標体重 %></th>
-    <td><%= f.text_field :objective_weight %></td>
-  </tr>
-  <tr>
-    <th><%= f.label:年齢 %></th>
-    <td><%= f.text_field :age %></td>
-  </tr>
-  <tr>
-    <th><%= f.label:身長 %></th>
-    <td><%= f.text_field :height %></td>
-  </tr>
-  <tr>
-    <th><%= f.label:メールアドレス %></th>
-    <td><%= f.text_field :email %></td>
-  </tr>
-  <tr>
-    <th><%= f.label :is_deleted, '会員ステータス' %></th>
-    <td>
-      <%= f.radio_button :is_deleted, false %> <%= f.label :is_deleted, "有効" %>
-      <%= f.radio_button :is_deleted, true %> <%= f.label :is_deleted, "退会" %>
-    </td>
-  </tr>
-  <tr>
-    <td><%= f.submit '編集' %></td>
-  </tr>
-</table>
+  <%= form_with model: @end_user, url: admin_end_user_path(@end_user), method: :patch do |f| %>
+  <table class="table">
+    <tr>
+      <th><%= f.label:名前 %></th>
+      <td><%= f.text_field :name, autofocus: true %></td>
+    </tr>
+    <tr>
+      <th><%= f.label:ニックネーム %></th>
+      <td><%= f.text_field :nickname %></td>
+    </tr>
+    <tr>
+      <th><%= f.label:性別 %></th>
+      <td><%= f.select :gender, EndUser.genders_i18n.keys.map{|k| [I18n.t("enums.end_user.gender.#{k}"), k]} %></td>
+    </tr>
+    <tr>
+      <th><%= f.label:スタート時体重 %></th>
+      <td><%= f.text_field :start_weight %></td>
+    </tr>
+    <tr>
+      <th><%= f.label:目標体重 %></th>
+      <td><%= f.text_field :objective_weight %></td>
+    </tr>
+    <tr>
+      <th><%= f.label:年齢 %></th>
+      <td><%= f.text_field :age %></td>
+    </tr>
+    <tr>
+      <th><%= f.label:身長 %></th>
+      <td><%= f.text_field :height %></td>
+    </tr>
+    <tr>
+      <th><%= f.label:メールアドレス %></th>
+      <td><%= f.text_field :email %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :is_deleted, '会員ステータス' %></th>
+      <td>
+        <%= f.radio_button :is_deleted, false %> <%= f.label :is_deleted, "有効" %>
+        <%= f.radio_button :is_deleted, true %> <%= f.label :is_deleted, "退会" %>
+      </td>
+    </tr>
+  </table>
+  <div class="text-center">
+    <%= f.submit '編集', class: "btn btn-success" %>
+  </div>
+  <% end %>
 
-
-<% end %>
+</div>

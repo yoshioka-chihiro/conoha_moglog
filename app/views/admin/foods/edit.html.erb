@@ -1,34 +1,36 @@
-<h1>食品編集</h1>
-<%= form_with model: @food, url: admin_food_path do |f| %>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-  <div class="field">
-    <%= f.label :introduction %><br>
-    <%= f.text_field :introduction %>
-  </div>
-  <div class="field">
-    <%= f.label :calorie %><br>
-    <%= f.text_field :calorie %>
-  </div>
-  <div class="field">
-    <%= f.label :protein %><br>
-    <%= f.text_field :protein %>
-  </div>
-  <div class="field">
-    <%= f.label :carbohydrate %><br>
-    <%= f.text_field :carbohydrate %>
-  </div>
-  <div class="field">
-    <%= f.label :fat %><br>
-    <%= f.text_field :fat %>
-  </div>
-  <div class="field">
-    <%= f.label :fiber %><br>
-    <%= f.text_field :fiber %>
-  </div>
-  <div class="actions">
-    <%= f.submit "編集" %>
-  </div>
-<% end %>
+<div class="container">
+  <h1>食品編集</h1>
+  <%= form_with model: @food, url: admin_food_path do |f| %>
+    <div class="field">
+      <%= f.label :name, "食品名" %><br>
+      <%= f.text_field :name, autofocus: true %>
+    </div>
+    <div class="field">
+      <%= f.label :introduction , "説明文" %><br>
+      <%= f.text_field :introduction %>
+    </div>
+    <div class="field">
+      <%= f.label :calorie, "カロリー（kcal）" %><br>
+      <%= f.text_field :calorie %>
+    </div>
+    <div class="field">
+      <%= f.label :protein, "タンパク質" %><br>
+      <%= f.text_field :protein %>
+    </div>
+    <div class="field">
+      <%= f.label :carbohydrate, "炭水化物" %><br>
+      <%= f.text_field :carbohydrate %>
+    </div>
+    <div class="field">
+      <%= f.label :fat, "脂質" %><br>
+      <%= f.text_field :fat %>
+    </div>
+    <div class="field">
+      <%= f.label :fiber, "食物繊維" %><br>
+      <%= f.text_field :fiber %>
+    </div>
+    <div class="actions">
+      <%= f.submit "編集", class: "btn btn-success mt-5" %>
+    </div>
+  <% end %>
+</div>
