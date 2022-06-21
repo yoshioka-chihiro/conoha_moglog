@@ -38,6 +38,13 @@ class Public::MealsController < ApplicationController
       redirect_to meals_path, notice: "食事を投稿しました！"
     else
       @q = Meal.ransack(params[:q])
+      # 一覧画面用
+      start_date = Time.current.beginning_of_day
+      end_date = Time.current.end_of_day
+      # ログイン中ユーザーのMealを取得
+      @user_meals = Meal.where(end_user_id: current_end_user.id)
+      # その中から今日の記録を取得
+      @today_meals_list = @user_meals.where(record_time: start_date..end_date)
       render :index, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
     end
   end

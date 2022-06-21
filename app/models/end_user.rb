@@ -41,6 +41,14 @@ class EndUser < ApplicationRecord
     end
       profile_image.variant(resize_to_limit: [width, height]).processed
   end
+  
+  def diary_name(end_user)
+    if end_user.nickname.empty?
+      "匿名希望さん"
+    else
+      end_user.nickname
+    end
+  end
 
   # ゲストログイン
   def self.guest

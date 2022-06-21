@@ -15,6 +15,17 @@
     <% end %>
   </div>
 
+  <script>
+    $(function() {
+     $(".chosen1").chosen({
+        width: "300px",
+        no_results_text:"ありません",
+        search_contains:true,
+        class: "form-control"
+      });
+    });
+  </script>
+
   <!--トラックの追加フォームをするボタン-->
   <div class="btn rounded-pill">
     <%= link_to_add_association '＋食品追加',

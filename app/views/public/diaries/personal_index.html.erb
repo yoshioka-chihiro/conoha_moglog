@@ -1,12 +1,12 @@
 <div class="container">
-  <% if @diary.end_user == current_end_user %>
+  <% if @diary_user == current_end_user %>
     <h3 class="mini-title text-center">My Diary</h3>
   <% else %>
-    <h3 class="mini-title text-center"><%= @diary.end_user.nickname %>さんの Diary</h3>
+    <h3 class="mini-title text-center"><%= @diary_user.nickname %>さんの Diary</h3>
   <% end %>
 
   <div class="justify-content-center row mt-5">
-    <%= render 'public/diaries/diary_profile', diary: @diary %>
+    <%= render 'public/diaries/diary_profile', end_user: @diary_user %>
   </div>
       <% if @diaries.empty? %>
         <p>日記はまだありません。</p>

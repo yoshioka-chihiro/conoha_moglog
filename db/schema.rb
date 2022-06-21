@@ -159,7 +159,7 @@ ActiveRecord::Schema.define(version: 2022_06_21_022758) do
 
   create_table "weights", force: :cascade do |t|
     t.integer "end_user_id"
-    t.float "value"
+    t.float "value", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.date "record_day"

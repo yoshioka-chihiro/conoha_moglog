@@ -3,6 +3,13 @@
 class Public::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  
+  private
+
+  def after_sign_in_path_for(resource)
+    flash[:notice] = "新規会員登録しました"
+    end_user_path(current_end_user)
+  end
 
   # GET /resource/sign_up
   # def new

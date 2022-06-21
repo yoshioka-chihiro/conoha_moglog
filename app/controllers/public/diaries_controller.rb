@@ -6,6 +6,7 @@ class Public::DiariesController < ApplicationController
   def index
     @diary = Diary.new
     @diaries = Diary.published.order(created_at: :desc).page(params[:page]).per(8)
+    
   end
 
   def show
@@ -18,13 +19,11 @@ class Public::DiariesController < ApplicationController
   end
 
   def personal_index
-    @diary = Diary.find(params[:id])
     @diary_user = EndUser.find(params[:id])
     if @diary_user == current_end_user
       @diaries = Diary.where(end_user_id: @diary_user.id).order(created_at: :desc).page(params[:page]).per(8)
     else
-      @diaries_published = Diary.published
-      @diaries = @diaries_published.where(end_user_id: @diary_user.id).order(created_at: :desc).page(params[:page]).per(8)
+      @diaries = Diary.published.where(end_user_id: @diary_user.id).order(created_at: :desc).page(params[:page]).per(8)
     end
 
   end

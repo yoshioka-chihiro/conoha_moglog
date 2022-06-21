@@ -3,7 +3,7 @@ class Diary < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :diary_comments, dependent: :destroy
 
-  
+
   scope :published, -> {where(is_published_flag: true)}
   scope :unpublished, -> {where(is_published_flag: false)}
 
@@ -18,7 +18,7 @@ class Diary < ApplicationRecord
   def self.looks(word)
       @diary = Diary.where("title LIKE?","%#{word}%")
   end
-  
+
   def diary_name(end_user)
     if end_user.nickname.empty?
       "匿名希望さん"

@@ -1,8 +1,7 @@
 <div class="container">
 <h3 class="mini-title mb-3">編集</h3>
+<%= render 'public/shared/error_messages', resource: @meal %>
   <div class="justify-content-center row mr-5">
-
-    <%= render 'public/shared/error_messages', resource: @meal %>
     <%= form_with model: @meal, local:true do |f| %>
       <%= f.select :meal_type, Meal.meal_types_i18n.keys.map{|k| [I18n.t("enums.meal.meal_type.#{k}"), k]} %>
       <%= f.time_select :record_time, {minute_step: 15} %>
@@ -15,6 +14,17 @@
           <%= render 'add_form', food: f %>
         <% end %>
       </div>
+
+        <script>
+          $(function() {
+           $(".chosen1").chosen({
+              width: "300px",
+              no_results_text:"ありません",
+              search_contains:true,
+              class: "form-control"
+            });
+          });
+        </script>
 
       <!--トラックの追加フォームをするボタン-->
       <%= link_to_add_association '＋食品を追加',
