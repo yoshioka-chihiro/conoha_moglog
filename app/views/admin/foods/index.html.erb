@@ -30,7 +30,8 @@
     </tr>
     <% end %>
   </table>
-
-  <div class="row justify-content-center"><%= paginate @foods %></div>
-
+  
+  <% unless @foods.empty? %>
+    <div class="row justify-content-center"><%= paginate @foods %></div>
+  <% end %>
 </div>
