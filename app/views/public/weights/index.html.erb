@@ -1,8 +1,6 @@
 <div class="weight-index">
     <div class="weight-icon text-center">
-      <% if @weights.empty? %>
-        <p class="weight-text">体重を記録しまししょう！</p>
-      <% else %>
+      <% unless @weights.empty? %>
         <p class="weight-text"><strong>現在の体重</strong></p>
         <%= @weights.last.value %>kg
        <% end %>
@@ -11,7 +9,7 @@
     <div><%= image_tag asset_path('graph.png'), class: "mr-5 ml-5" %></div>
 
     <div class="weight-icon-gray text-center">
-      <% unless @objective_weight.nil? %>
+      <% unless @objective_weight.nil? || @weights.empty? %>
         <strong><p class="weight-text">目標まであと</p></strong>
         <%= -(@weights.last.value - @objective_weight) %>kg
       <% end %>
