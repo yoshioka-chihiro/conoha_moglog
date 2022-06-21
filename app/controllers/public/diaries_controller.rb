@@ -9,13 +9,6 @@ class Public::DiariesController < ApplicationController
   end
 
   def show
-
-    if @diary.status_private? && @diary.user != current_user
-      respond_to do |format|
-        format.html { redirect_to posts_path, notice: 'このページにはアクセスできません' }
-      end
-    end
-
     @diary_user = @diary.end_user
     @recent_weight = Weight.where(end_user_id: @diary_user.id).order(record_day: :asc).last
     @diary_comment = DiaryComment.new
