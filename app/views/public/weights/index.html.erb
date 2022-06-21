@@ -27,7 +27,7 @@
       <%= f.label :value, '体重' %>
       <%= f.number_field :value, step: '0.1', placeholder: '例）70' %>
       <%= f.label :record_day, '日時' %>
-      <%= f.date_field :record_day, include_blank: true, selected: Date.today %>
+      <%= f.date_field :record_day, value: Time.now.strftime("%Y-%m-%d") %>
       <%= f.submit '投稿', class: 'btn btn-success' %>
     <% end %>
   </div>
