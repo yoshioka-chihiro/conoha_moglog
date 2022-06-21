@@ -103,7 +103,7 @@ li a:hover {
   width: 500px;
   height: 500px;
   opacity: 0.9;
-  background-image: image-url("about-bg2.png");
+  /*background-image: image-url("about-bg2.png");*/
   background-repeat: no-repeat;
   background-size: auto;
 }
