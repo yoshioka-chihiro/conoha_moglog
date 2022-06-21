@@ -68,7 +68,7 @@ Rails.application.routes.draw do
     get '/' => 'homes#top'
     resources :diary_comments, only:[:index, :show, :edit, :destroy]
     resources :foods, only:[:index, :show, :new, :edit, :create, :update, :destroy]
-    resources :end_users, only:[:index, :show, :edit, :update]
+    resources :end_users, only:[:show, :edit, :update]
 
   end
 
