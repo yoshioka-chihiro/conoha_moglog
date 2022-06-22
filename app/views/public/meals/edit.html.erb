@@ -4,7 +4,7 @@
   <div class="justify-content-center row mr-5">
     <%= form_with model: @meal, local:true do |f| %>
       <%= f.select :meal_type, Meal.meal_types_i18n.keys.map{|k| [I18n.t("enums.meal.meal_type.#{k}"), k]} %>
-      <%= f.time_select :record_time, {minute_step: 15} %>
+      <%= f.datetime_select :record_time %>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
       <!--フォームを追加する場所-->
@@ -14,17 +14,6 @@
           <%= render 'add_form', food: f %>
         <% end %>
       </div>
-
-        <script>
-          $(function() {
-           $(".chosen1").chosen({
-              width: "300px",
-              no_results_text:"ありません",
-              search_contains:true,
-              class: "form-control"
-            });
-          });
-        </script>
 
       <!--トラックの追加フォームをするボタン-->
       <%= link_to_add_association '＋食品を追加',

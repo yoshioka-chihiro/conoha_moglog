@@ -1,10 +1,18 @@
 class Admin::FoodsController < ApplicationController
   def index
     @foods = Food.all.order(created_at: :desc).page(params[:page]).per(8)
+    @q = Food.ransack(params[:q])
   end
 
   def show
     @food = Food.find(params[:id])
+  end
+  
+  def search
+    # :qはransackのデフォルトキーなので変更しない
+    @q = Food.ransack(params[:q])
+    # (distinct: true)によりresultの重複をなくしてくれている
+    @results = @q.result(distinct: true).order(id: :asc).page(params[:page]).per(8)
   end
 
   def new

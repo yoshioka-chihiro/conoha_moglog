@@ -1,0 +1,32 @@
+<h3 class="mini-title mb-3 text-center mt-5">
+  検索結果(
+  <% if params[:q].present? && params[:q][:name_cont].present? %>
+    <%= params[:q][:name_cont] %>
+  <% end %>
+  )
+</h3>
+
+<table class="table">
+  <tr>
+    <th>氏名</th>
+    <th>ステータス</th>
+  </tr>
+  <% @results.each do |result| %>
+    <tr>
+      <td>
+        <%= link_to admin_end_user_path(result) do %>
+          <%= result.name %>
+        <% end %>
+      </td>
+      <td>
+        <% if result.is_deleted == true %>
+          退会済み
+        <% else %>
+          有効
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+
+<div class="row justify-content-center"><%= paginate @results %></div>

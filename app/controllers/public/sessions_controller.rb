@@ -48,14 +48,14 @@ class Public::SessionsController < Devise::SessionsController
     ## もし@customerがある（!true=false）なら下の処理へ、ない（!false=true）ならreturnして
     return if !@end_user
     ## 【処理内容2】 取得したアカウントのパスワードと入力されたパスワードが一致（true）　かつ　is_withdrawalが（false）
-    if @end_user.valid_password?(params[:end_user][:password]) && !(@end_user.is_deleted?)
-    ## 【処理内容3】（!false=true）だった場合、退会していないのでcreateを実行
-    ## 何も書かなくていい
-    else
-    ## !true（false）だった場合、退会しているのでサインアップ画面に遷移する
-    flash[:notice] = "退会済みです。新規会員登録を行なってください"
-    redirect_to new_end_user_registration_path
-    end
+      if @end_user.valid_password?(params[:end_user][:password]) && !(@end_user.is_deleted?)
+        ## 【処理内容3】（!false=true）だった場合、退会していないのでcreateを実行
+        ## 何も書かなくていい
+      else
+        ## !true（false）だった場合、退会しているのでサインアップ画面に遷移する
+        flash[:notice] = "退会済みです。新規会員登録を行なってください"
+        redirect_to new_end_user_registration_path
+      end
   end
 
 

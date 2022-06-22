@@ -1,4 +1,5 @@
 <div class="nested-fields">
+
     <%= food.select :food_id, options_from_collection_for_select(Food.all, :id, :name),{prompt: '選択してください'}, class: "chosen1" %>
     <%= food.label :quantity, '×' %>
     <%= food.select :quantity, *[1..10] %>

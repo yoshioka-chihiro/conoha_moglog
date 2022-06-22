@@ -23,7 +23,6 @@
   </div>
   <div class="justify-content-center row mt-5">
     <%= form_with model: @weight do |f| %>
-      <!--<= render 'layouts/error_messages', model: f.object %>-->
       <%= f.label :value, '体重' %>
       <%= f.number_field :value, step: '0.1', placeholder: '例）70' %>
       <%= f.label :record_day, '日時' %>

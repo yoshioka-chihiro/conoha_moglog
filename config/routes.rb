@@ -67,8 +67,16 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/' => 'homes#top'
     resources :diary_comments, only:[:index, :show, :edit, :destroy]
-    resources :foods, only:[:index, :show, :new, :edit, :create, :update, :destroy]
-    resources :end_users, only:[:show, :edit, :update]
+    resources :foods, only:[:index, :show, :new, :edit, :create, :update, :destroy] do
+      collection do
+        get 'search'
+      end
+    end
+    resources :end_users, only:[:show, :edit, :update] do
+      collection do
+        get 'search'
+      end
+    end
 
   end
 
