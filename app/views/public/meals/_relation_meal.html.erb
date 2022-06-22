@@ -1,9 +1,9 @@
+<p class="text-center">
+  <%= image_tag asset_path('meal_icon.png'), size: "30x30" %>１〜２日前の食事
+</p>
 <% if search_meals.empty? %>
   <p class="text-center">食事が見当たりません</p>
 <% else %>
-  <p class="text-center">
-    <%= image_tag asset_path('meal_icon.png'), size: "30x30" %>１〜２日前の食事
-  </p>
   <div>
     <% search_meals.each do |meal| %>
       <% meal.meal_details.each do |meal_detail| %>
