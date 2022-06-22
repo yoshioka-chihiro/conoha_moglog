@@ -4,7 +4,6 @@ class Public::ConditionsController < ApplicationController
   def index
     @condition = Condition.new
     # ログイン中のユーザーのデータを取得
-    @condition_all = Condition.all
     @conditions = Condition.where(end_user_id: current_end_user.id).order(created_at: :desc)
     # 最新のConditionデータを１件取得
     @lastest_condition = Condition.where(end_user_id: current_end_user.id).order(created_at: :asc).last
@@ -14,8 +13,10 @@ class Public::ConditionsController < ApplicationController
     one_day_ago = now - 1.day
     # 48日前
     two_days_ago = now - 2.day
+    # ログイン中のユーザーのデータを取得
+    @user_meals = Meal.where(end_user_id: current_end_user.id)
     # 今から24〜48時間の間に記録された食事を取得
-    @search_meals = Meal.where(record_time: two_days_ago..one_day_ago).order(record_time: :desc)
+    @search_meals = @user_meals.where(record_time: two_days_ago..one_day_ago).order(record_time: :desc)
   end
 
   def show
@@ -24,15 +25,17 @@ class Public::ConditionsController < ApplicationController
     one_day_ago =  @condition.start_time - 1.day
     # 体調が記録された時間の48時間前
     two_days_ago =  @condition.start_time - 2.day
+    # ログイン中のユーザーのデータを取得
+    @user_meals = Meal.where(end_user_id: current_end_user.id)
     # 体調が記録された時間から24〜48時間の間に記録された食事を取得
-    @search_meals = Meal.where(record_time: two_days_ago..one_day_ago)
+    @search_meals = @user_meals.where(record_time: two_days_ago..one_day_ago)
   end
 
   def create
     @condition = Condition.new(condition_params)
     @condition.end_user_id = current_end_user.id
     if @condition.save
-      redirect_to conditions_path, notice: "体調を登録しました！"
+      redirect_to condition_path(@condition), notice: "体調を登録しました！"
     else
       @conditions = Condition.all
       render :index, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
@@ -48,7 +51,7 @@ class Public::ConditionsController < ApplicationController
     if @condition.update(condition_params)
       @conditions = Condition.all
       flash[:notice] = "更新しました。"
-      redirect_to conditions_path
+      redirect_to condition_path(@condition)
     else
       flash[:alret] = "更新に失敗しました。"
       render :edit

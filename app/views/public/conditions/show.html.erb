@@ -14,9 +14,10 @@
   </table>
 
   <div class="selection-group">
-    <%= link_to edit_condition_path(@condition.id) do %>
+    <%= link_to edit_condition_path(@condition.id), class: "mr-3" do %>
       <i class="fa fa-pen"></i>編集
     <% end %>
+    <%= link_to '一覧へ', conditions_path %>
   </div>
 
 </div>

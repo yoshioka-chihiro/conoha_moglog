@@ -6,7 +6,6 @@ class Public::DiariesController < ApplicationController
   def index
     @diary = Diary.new
     @diaries = Diary.published.order(created_at: :desc).page(params[:page]).per(8)
-
   end
 
   def show
@@ -20,19 +19,26 @@ class Public::DiariesController < ApplicationController
 
   def personal_index
     @diary_user = EndUser.find(params[:id])
+    
     if @diary_user == current_end_user
-      @diaries = Diary.where(end_user_id: @diary_user.id).order(created_at: :desc).page(params[:page]).per(8)
+      if params[:option] == "A" || params[:option] == nil
+      # 公開日記
+       @diaries = Diary.published.where(end_user_id: @diary_user.id).order(created_at: :desc).page(params[:page]).per(8)
+      elsif params[:option] == "B"
+      # 非公開日記
+       @diaries = Diary.unpublished.where(end_user_id: @diary_user.id).order(created_at: :desc).page(params[:page]).per(8)
+      end
     else
       @diaries = Diary.published.where(end_user_id: @diary_user.id).order(created_at: :desc).page(params[:page]).per(8)
     end
-
   end
+  
 
   def create
     @diary = Diary.new(diary_params)
     @diary.end_user_id = current_end_user.id
     if @diary.save
-      redirect_to diaries_path, notice: "日記を投稿しました！"
+      redirect_to diary_path(@diary), notice: "日記を投稿しました！"
     else
       @diaries = Diary.published.order(created_at: :desc).page(params[:page]).per(8)
       render :index, alert: "投稿できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
@@ -55,7 +61,7 @@ class Public::DiariesController < ApplicationController
   def destroy
     if @diary.destroy
       flash[:notice] = "日記を削除しました"
-      @diaries = Diary.all
+      @diaries = Diary.published.order(created_at: :desc).page(params[:page]).per(8)
       redirect_to diaries_path
     else
       render :index

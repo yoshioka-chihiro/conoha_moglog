@@ -26,16 +26,18 @@ class Public::MealsController < ApplicationController
   end
 
   def search
+    @user_meals = Meal.where(end_user_id: current_end_user.id)
     # :qはransackのデフォルトキーなので変更しない
-    @q = Meal.ransack(params[:q])
+    @q = @user_meals.ransack(params[:q])
     # (distinct: true)によりresultの重複をなくしてくれている
     @results = @q.result(distinct: true).order(record_time: :asc).page(params[:page]).per(8)
+
   end
 
   def create
     @meal = Meal.new(meal_params)
     if @meal.save
-      redirect_to meals_path, notice: "食事を投稿しました！"
+      redirect_to meal_path(@meal), notice: "食事を投稿しました！"
     else
       @q = Meal.ransack(params[:q])
       # 一覧画面用
@@ -67,7 +69,7 @@ class Public::MealsController < ApplicationController
     @meal = Meal.find(params[:id])
     if @meal.update(meal_params)
       flash[:notice] = "食事内容を更新しました。"
-      redirect_to meals_path
+      redirect_to meal_path(@meal)
     else
       flash[:alret] = "更新に失敗しました。"
       render :edit
@@ -78,7 +80,26 @@ class Public::MealsController < ApplicationController
     @meal = Meal.find(params[:id])
     if @meal.destroy
       flash[:notice] = "食事を削除しました"
-      @meals = Meal.all
+      # 食事検索用
+    @q = Meal.ransack(params[:q])
+    # 食事登録用
+    @meal = Meal.new
+    # mealに紐付くmeal_detailsをbuildしておく（追加ボタン用）
+    @meal_detail = @meal.meal_details.build
+    # 一覧画面用
+    start_date = Time.current.beginning_of_day
+    end_date = Time.current.end_of_day
+    # ログイン中ユーザーのMealを取得
+    @user_meals = Meal.where(end_user_id: current_end_user.id)
+    # その中から今日の記録を取得
+    @today_meals_list = @user_meals.where(record_time: start_date..end_date)
+    # カロリー合計表示用
+    @today_calorie_sum = 0
+    @today_meals_list.each do |meal|
+      meal.meal_details.each do |meal_detail|
+        @today_calorie_sum += meal_detail.calorie_subtotal
+      end
+    end
       redirect_to meals_path
     else
       render :index

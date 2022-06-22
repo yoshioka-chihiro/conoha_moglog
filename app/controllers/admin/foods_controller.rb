@@ -23,7 +23,7 @@ class Admin::FoodsController < ApplicationController
     @food = Food.new(food_params)
     if @food.save
       flash[:notice] = "食品を登録しました。"
-      redirect_to admin_foods_path
+      redirect_to admin_food_path(@food)
     else
       flash[:alert] = "食品を登録できませんでした。"
       render :new

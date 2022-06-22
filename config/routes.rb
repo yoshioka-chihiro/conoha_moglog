@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     get 'end_users/quit' => 'end_users#quit'
     # delete 'end_users/image_destroy'
 
-    resources :diaries, only:[:index, :show, :edit, :create, :update] do
+    resources :diaries, only:[:index, :show, :edit, :create, :update, :destroy] do
       resource :favorites, only: [:create, :destroy]
       resources :diary_comments, only: [:create, :destroy] do
         resource :reports, only: [:create, :destroy]

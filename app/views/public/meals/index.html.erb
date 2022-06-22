@@ -8,7 +8,7 @@
   <%= render 'public/shared/error_messages', resource: @meal %>
   <div class="selection-group">
     <div class="mr-5"><%= image_tag asset_path('eat.png'), size: "300x200" %></div>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
     <div class="justify-content-center row mr-5 mt-5">
       <%= render 'public/meals/form', meal: @meal %>

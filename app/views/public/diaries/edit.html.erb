@@ -16,6 +16,12 @@
           <%= link_to 'キャンセル', diary_path(@diary), class: 'waves-effect waves-light btn grey' %>
         </div>
       <% end %>
+      
+      <div class="justify-content-center row">
+        <%= link_to diary_path(@diary.id), method: :delete, class: "btn btn-danger col-lg-3 mt-3", data: { confirm: '本当に削除しますか？' } do %>
+          <i class="fas fa-trash"></i>削除する
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,5 +1,7 @@
 <div>
-  <%= image_tag end_user.get_profile_image(50,50), class: "rounded-circle"  %>
+  <%= link_to end_user_path(end_user) do %>
+    <%= image_tag end_user.get_profile_image(50,50), class: "rounded-circle"  %>
+  <% end %>
   <%= end_user.diary_name(end_user) %>&emsp;
   <%= end_user.gender_i18n %>&emsp;
   <%= end_user.age %>歳&emsp;

@@ -1,4 +1,6 @@
-
+<% if end_user.is_deleted == true %>
+  <p>このユーザーは退会済みです。</p>
+<% else %>
   <div class="selection-group">
     <div class="text-center">
       <%= image_tag end_user.get_profile_image(200,200), class: "rounded-circle" %>
@@ -17,38 +19,39 @@
   </div>
   <div class="mt-5 text-center">
     <%= link_to "/personal_index/#{end_user.id}", class: 'btn mr-5 ml-5 btn-outline-dark btn-lg' do %>
-      <%= image_tag asset_path('diary_icon.png') %> Diary
+      <%= image_tag asset_path('diary_icon') %> Diary
     <% end %>
     <%= link_to end_user_favorites_path(end_user), class: 'btn  btn-outline-dark btn-lg' do %>
       <%= image_tag asset_path('iine.png') %> Favorite Diary
     <% end %>
   </div>
 
-<table class="table table-bordered text-center mt-5">
-  <tr>
-    <th>ニックネーム</th>
-    <td><%= end_user.nickname %></td>
-  </tr>
-  <tr>
-    <th>性別</th>
-    <td><%= end_user.gender_i18n %></td>
-  </tr>
-  <tr>
-    <th>体重</th>
-    <td>
-      <% if @recent_weight.nil? %>
-        <%= end_user.start_weight %>kg
-      <% else %>
-        <%= @recent_weight.value %>kg
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <th>年齢</th>
-    <td><%= end_user.age %>歳</td>
-  </tr>
-  <tr>
-    <th>身長</th>
-    <td><%= end_user.height %>cm</td>
-  </tr>
-</table>
+  <table class="table table-bordered text-center mt-5">
+    <tr>
+      <th>ニックネーム</th>
+      <td><%= end_user.nickname %></td>
+    </tr>
+    <tr>
+      <th>性別</th>
+      <td><%= end_user.gender_i18n %></td>
+    </tr>
+    <tr>
+      <th>体重</th>
+      <td>
+        <% if @recent_weight.nil? %>
+          <%= end_user.start_weight %>kg
+        <% else %>
+          <%= @recent_weight.value %>kg
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>年齢</th>
+      <td><%= end_user.age %>歳</td>
+    </tr>
+    <tr>
+      <th>身長</th>
+      <td><%= end_user.height %>cm</td>
+    </tr>
+  </table>
+<% end %>

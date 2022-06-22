@@ -85,7 +85,7 @@
     </div>
   <% end %>
 
-  <%= month_calendar events: @condition_all do |date, conditions| %>
+  <%= month_calendar events: @conditions do |date, conditions| %>
     <%= date.day %>
     <% conditions.each do |condition| %>
       <div>
