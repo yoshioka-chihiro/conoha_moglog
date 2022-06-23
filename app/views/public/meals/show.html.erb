@@ -10,6 +10,7 @@
         <table class="table table-bordered text-center mt-5">
             <tr>
                 <th>食品</th>
+                <th>数量</th>
                 <th>タンパク質</th>
                 <th>炭水化物</th>
                 <th>脂質</th>
@@ -19,6 +20,7 @@
             <% @meal_details.each do |meal_detail| %>
             <tr>
                 <td><%= meal_detail.food.name %></td>
+                <td><%= meal_detail.quantity %></td>
                 <td><%= meal_detail.protein_subtotal %>g</td>
                 <td><%= meal_detail.carbohydrate_subtotal %>g</td>
                 <td><%= meal_detail.fat_subtotal %>g</td>
@@ -33,7 +35,7 @@
             </tr>
             <% end %>
         </table>
-        
+
         <% unless @meal_details.count == 1 %>
             <table class="table table-bordered text-center mt-5">
                 <tr>
@@ -52,5 +54,10 @@
                 </tr>
             </table>
         <% end %>
+        
+        <div class="selection-group">
+            <%= link_to '一覧へ', meals_path %>
+        </div>
+        
     </div>
 </div>

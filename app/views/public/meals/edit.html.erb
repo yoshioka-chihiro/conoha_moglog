@@ -11,12 +11,27 @@
       <div id="food-track-forms">
         <!--食品登録フォーム-->
         <%= f.fields_for :meal_details do |f| %>
-          <%= f.collection_select :food_id, Food.all, :id, :name, options = { include_blank: true}, class: "", style: "width:300px;" %>
-          <%= f.label :quantity, '×' %>
-          <%= f.select :quantity, *[1..10] %>
-          <%= link_to_remove_association '削除', f , class: "btn" %>
+          <div class="nested-fields">
+            <%= f.hidden_field :id, value: f.object.id %>
+            <%= f.select :food_id, options_from_collection_for_select(Food.all, :id, :name, f.object.food_id), { selected: f.object.food_id }, class: "chosen1" %>
+            <%= f.label :quantity, '×' %>
+            <%= f.select :quantity, *[1..10] %>
+            <%= link_to_remove_association '削除', f , class: "btn" %>
+          </div>
         <% end %>
+        
       </div>
+
+      <script>
+        $(function() {
+         $(".chosen1").chosen({
+            width: "300px",
+            no_results_text:"ありません",
+            search_contains:true,
+            class: ""
+          });
+        });
+      </script>
 
       <!--トラックの追加フォームをするボタン-->
       <%= link_to_add_association '＋食品を追加',

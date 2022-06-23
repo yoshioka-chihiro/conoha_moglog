@@ -118,13 +118,6 @@ ActiveRecord::Schema.define(version: 2022_06_21_022758) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "healths", force: :cascade do |t|
-    t.integer "meal_id"
-    t.integer "condition_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "meal_details", force: :cascade do |t|
     t.integer "meal_id"
     t.integer "food_id"
