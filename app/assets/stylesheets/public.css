@@ -8,6 +8,11 @@ header {
   opacity: 0.8;
 }
 
+.navbar-collapse {
+  text-align: center;
+  line-height: 300%;
+}
+
 li a {
   color:black;
 }
@@ -112,15 +117,6 @@ li a:hover {
   margin: 30px auto;
 }
 
-.calender-text-responsive {
-  display: none;
-}
-
-.calender-text {
-  display: block;
-}
-
-
 .error_explanation {
   font-size: 1rem;
 }
@@ -203,12 +199,8 @@ li a:hover {
     width: 250px;
   }
 
-  .calender-text-responsive {
-    display: block;
-  }
-
-  .calender-text {
-    display: none;
+  .calendar-text a{
+    font-size: 0.5rem;
   }
   /*Health*/
 

@@ -3,7 +3,7 @@
   <!--食事詳細登録フォーム-->
   <div>
     <%= f.select :meal_type, Meal.meal_types_i18n.keys.map{|k| [I18n.t("enums.meal.meal_type.#{k}"), k]}, { prompt: '選択してください' }, class: "form-control" %>
-    <%= f.datetime_select :record_time, value: Time.current.strftime('%Y-%m-%dT00:00:00'), class: "form-control" %>
+    <%= f.datetime_field :record_time, value: Time.current.strftime('%Y-%m-%dT00:00:00'), class: "form-control" %>
   </div>
 
 

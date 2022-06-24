@@ -1,7 +1,7 @@
 <div class="container">
   <h3 class="mini-title text-center">Favorite Diary</h3>
   <% if @favorite_diaries.empty? %>
-    <p>いいねした日記はありません</p>
+    <p class="text-center">いいねした日記はありません</p>
   <% else %>
     <% @favorite_diaries.each do |diary|%>
       <div class="box">

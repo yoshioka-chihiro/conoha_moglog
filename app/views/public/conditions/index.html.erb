@@ -19,7 +19,7 @@
     <h3 class="text-center mt-5">日付</h3>
     <div class="text-center">
       <%= f.label :日付 %>
-      <%= f.date_select :start_time %>
+      <%= f.date_field :start_time, value: Time.now.strftime("%Y-%m-%d") %>
     </div>
 
     <h3 class="text-center mt-5">どんなお通じでしたか？</h3>
@@ -88,17 +88,11 @@
   <%= month_calendar events: @conditions do |date, conditions| %>
     <%= date.day %>
     <% conditions.each do |condition| %>
-      <div class="calender-text">
+      <div class="calendar-text">
         <%= link_to condition_path(condition) do %>
-          <%= condition.movement_i18n %>
+          <%= condition.movement_i18n %><br>
           <%= condition.feel_i18n %>
         <% end %>
-        <%= link_to edit_condition_path(condition.id) do %>
-          <i class="fa fa-pen"></i>
-        <% end %>
-      </div>
-      <div class="calender-text-responsive">
-        <%= link_to ">>", condition_path(condition) %>
         <%= link_to edit_condition_path(condition.id) do %>
           <i class="fa fa-pen"></i>
         <% end %>
