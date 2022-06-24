@@ -1,5 +1,11 @@
 main {
-  margin-top: 30px;
+  margin: 50px auto;
+  height: 100%;
+}
+
+header {
+  background-color: #fff;
+  opacity: 0.8;
 }
 
 li a {
@@ -24,13 +30,21 @@ li a:hover {
   justify-content: center;
 }
 
-.selection-group_top {
+.top-responsive {
+  display: none;
+}
+
+.responsive-br {
+  display: none;
+}
+
+.selection-group-top {
   display: flex;
   justify-content: center;
   flex-wrap:wrap;
 }
 
-.selection-group_top a {
+.selection-group-top a {
   width: 35%;
   height: 250px;
 }
@@ -68,7 +82,6 @@ li a:hover {
   background-color: lightgray;
 }
 
-
 .weight-text {
   padding-top: 40px;
 }
@@ -99,7 +112,123 @@ li a:hover {
   margin: 30px auto;
 }
 
+.calender-text-responsive {
+  display: none;
+}
+
+.calender-text {
+  display: block;
+}
+
 
 .error_explanation {
   font-size: 1rem;
+}
+
+.col-xs-10 {
+    width: 83.333333%;
+}
+
+@media screen and (max-width: 481px){
+  main {
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+  }
+
+  .selection-group {
+  display: block;
+  justify-content: center;
+  }
+
+
+  /*トップページ*/
+  .selection-group-top {
+    display:none;
+  }
+
+  .top-responsive{
+  display: block;
+  padding: 0;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: center;
+  }
+
+  .top-responsive a {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  /*トップページ*/
+
+  /*Meal*/
+  .meal_responsive {
+   margin: 5px auto;
+   text-align: center;
+  }
+
+  .justify-content-end {
+    text-align: center;
+  }
+
+  .meal_responsive-btn {
+    margin: 10px 0;
+  }
+
+  /*Meal*/
+
+  /*Weight*/
+  .weight-index {
+    display: block;
+    text-align: center;
+  }
+
+  .weight-responsive {
+    margin: 20px auto;
+
+  }
+
+  .responsive-br {
+    display: block;
+  }
+  /*Weight*/
+
+  /*Health*/
+  .health-responsive {
+    margin: 20px auto;
+  }
+
+  .movement-btn, .feel-btn {
+    margin: 10px auto;
+    width: 250px;
+  }
+
+  .calender-text-responsive {
+    display: block;
+  }
+
+  .calender-text {
+    display: none;
+  }
+  /*Health*/
+
+  /*Diary*/
+  .diary-responsive {
+    margin: 10px;
+  }
+
+  .box {
+    width: 100%;
+    margin: 10px auto;
+  }
+  /*Diary*/
+
+  .end_user-responsive {
+    margin-bottom: 20px;
+  }
+
+  .about-responsive {
+    width: 90%;
+  }
+
 }

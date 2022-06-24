@@ -33,18 +33,6 @@ class Public::EndUsersController < ApplicationController
     end
   end
 
-# 保留
-  # def image_destroy
-  #   if current_end_user.profile_image.purge
-  #     flash[:alret] = "プロフィール写真を削除しました。"
-  #     redirect_to edit_end_user_path(current_end_user.id)
-  #   else
-  #     @end_user = current_end_user
-  #     flash[:alret] = "プロフィール写真を削除できません"
-  #     render :edit
-  #   end
-  # end
-
   def quit
   end
 

@@ -17,7 +17,8 @@ import '@fortawesome/fontawesome-free/js/all'
 
 import "chartkick/chart.js"
 
-
+window.$ = window.jQuery = require('jquery');
+require('packs/header')
 
 
 

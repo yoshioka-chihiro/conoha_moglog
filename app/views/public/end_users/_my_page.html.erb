@@ -16,7 +16,7 @@
 </div>
 
 <div class="mt-5 text-center">
-  <%= link_to "/personal_index/#{current_end_user.id}", class: 'btn mr-5 ml-5 btn-outline-dark btn-lg' do %>
+  <%= link_to "/personal_index/#{current_end_user.id}", class: 'end_user-responsive btn mr-5 ml-5 btn-outline-dark btn-lg' do %>
      <%= image_tag asset_path('diary_icon.png') %> Diary
   <% end %>
   <%= link_to end_user_favorites_path(current_end_user), class: 'btn  btn-outline-dark btn-lg' do %>
@@ -77,5 +77,5 @@
 </table>
 
 <div class="justify-content-center row">
-  <%= link_to "会員情報を編集する", edit_end_user_path, class: 'btn btn-success col-lg-5 mt-3' %>
+  <%= link_to "会員情報を編集する", edit_end_user_path, class: 'btn btn-success mt-3' %>
 </div>

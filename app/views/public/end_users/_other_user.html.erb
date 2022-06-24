@@ -18,7 +18,7 @@
       </div>
   </div>
   <div class="mt-5 text-center">
-    <%= link_to "/personal_index/#{end_user.id}", class: 'btn mr-5 ml-5 btn-outline-dark btn-lg' do %>
+    <%= link_to "/personal_index/#{end_user.id}", class: 'end_user-responsive btn mr-5 ml-5 btn-outline-dark btn-lg' do %>
       <%= image_tag asset_path('diary_icon') %> Diary
     <% end %>
     <%= link_to end_user_favorites_path(end_user), class: 'btn  btn-outline-dark btn-lg' do %>

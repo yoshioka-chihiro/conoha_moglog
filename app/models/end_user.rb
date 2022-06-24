@@ -33,10 +33,6 @@ class EndUser < ApplicationRecord
   
   has_one_attached :profile_image
   
-  # def active_for_authentication?
-  #   super && (self.is_deleted == false)
-  # end
-  
   
   # プロフィール画像
   def get_profile_image(width, height)

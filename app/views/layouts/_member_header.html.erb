@@ -18,9 +18,6 @@
     <%= link_to 'Health', conditions_path %>
   </li>
   <li class="nav-item active mr-3 header-icon">
-    <%= link_to destroy_end_user_session_path, method: :delete, data: { confirm: 'ログアウトしますか？' } do %>
-      <!--<i class="fas fa-sign-out-alt"></i>-->
-      Log Out
-    <% end %>
+    <%= link_to 'Log out', destroy_end_user_session_path, method: :delete, data: { confirm: 'ログアウトしますか？' } %>
   </li>
 </ul>

@@ -1,5 +1,5 @@
 <div class="weight-index">
-    <div class="weight-icon text-center">
+    <div class="weight-icon text-center weight-responsive">
       <% unless @weights.empty? %>
         <p class="weight-text"><strong>現在の体重</strong></p>
         <%= @weights.last.value %>kg
@@ -8,7 +8,7 @@
 
     <div><%= image_tag asset_path('graph.png'), class: "mr-5 ml-5" %></div>
 
-    <div class="weight-icon-gray text-center">
+    <div class="weight-icon-gray text-center weight-responsive">
       <% unless @objective_weight.nil? || @weights.empty? %>
         <strong><p class="weight-text">目標まであと</p></strong>
         <%= -(@weights.last.value - @objective_weight) %>kg
@@ -25,22 +25,24 @@
     <%= form_with model: @weight do |f| %>
       <%= f.label :value, '体重' %>
       <%= f.number_field :value, step: '0.1', placeholder: '例）70' %>
+      <p class="responsive-br"></p>
       <%= f.label :record_day, '日時' %>
       <%= f.date_field :record_day, value: Time.now.strftime("%Y-%m-%d") %>
-      <%= f.submit '投稿', class: 'btn btn-success' %>
+      <p class="responsive-br"></p>
+      <div class="text-center">
+        <%= f.submit '投稿', class: 'btn btn-success' %>
+      </div>
     <% end %>
   </div>
 
-  <div class="justify-content-center row">
+  <div class="justify-content-center row ">
     <!--グラフ部分-->
     <%= line_chart @graph,
-    height: "300px",
-    width: "600px",
     ytitle: "体重（kg）",
       legend: false,
       curve: false,
       colors: "#ffd1a3",
-    min: 20, max: 90 %>
+    min: 20, max: 100 %>
     <!--グラフ部分-->
   </div>
 

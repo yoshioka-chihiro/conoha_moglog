@@ -19,13 +19,12 @@
             <%= link_to_remove_association '削除', f , class: "btn" %>
           </div>
         <% end %>
-        
+
       </div>
 
       <script>
         $(function() {
          $(".chosen1").chosen({
-            width: "300px",
             no_results_text:"ありません",
             search_contains:true,
             class: ""
@@ -59,7 +58,7 @@
 
   </div>
   <div class="justify-content-center row">
-    <%= link_to meal_path(@meal.id), method: :delete, class: "btn btn-danger col-lg-3 mt-3", data: { confirm: '本当に削除しますか？' } do %>
+    <%= link_to meal_path(@meal.id), method: :delete, class: "btn btn-danger mt-3", data: { confirm: '本当に削除しますか？' } do %>
       <i class="fas fa-trash"></i>この食事を削除する
     <% end %>
   </div>

@@ -1,9 +1,9 @@
 <div class="container">
   <div class="selection-group">
-    <div class="condition-icon-gray pt-5 mr-5 text-center">
+    <div class="condition-icon-gray pt-5 mr-5 text-center health-responsive">
       <%= render 'public/meals/relation_meal', search_meals: @search_meals %>
     </div>
-    <div class="pt-5 condition-icon text-center">
+    <div class="pt-5 condition-icon text-center health-responsive">
       <% unless @lastest_condition.nil? %>
         <p>前回のお通じから<br>
         <strong><%= time_ago_in_words(@lastest_condition.created_at) %></strong>が経っています</p>
@@ -88,11 +88,17 @@
   <%= month_calendar events: @conditions do |date, conditions| %>
     <%= date.day %>
     <% conditions.each do |condition| %>
-      <div>
+      <div class="calender-text">
         <%= link_to condition_path(condition) do %>
           <%= condition.movement_i18n %>
           <%= condition.feel_i18n %>
         <% end %>
+        <%= link_to edit_condition_path(condition.id) do %>
+          <i class="fa fa-pen"></i>
+        <% end %>
+      </div>
+      <div class="calender-text-responsive">
+        <%= link_to ">>", condition_path(condition) %>
         <%= link_to edit_condition_path(condition.id) do %>
           <i class="fa fa-pen"></i>
         <% end %>
