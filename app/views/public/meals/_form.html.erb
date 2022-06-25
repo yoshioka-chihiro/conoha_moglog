@@ -9,6 +9,7 @@
 
   <!--フォームを追加する場所-->
   <div id="food-track-forms">
+    <p>（1 = 可食部100 g）</p>
     <!--食品登録フォーム-->
     <%= f.fields_for :meal_details do |f| %>
       <%= render 'add_form', food: f %>

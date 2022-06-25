@@ -4,7 +4,7 @@
   <div class="justify-content-center row mr-5">
     <%= form_with model: @meal, local:true do |f| %>
       <%= f.select :meal_type, Meal.meal_types_i18n.keys.map{|k| [I18n.t("enums.meal.meal_type.#{k}"), k]} %>
-      <%= f.datetime_select :record_time %>
+      <%= f.datetime_field :record_time %>
 
 
       <!--フォームを追加する場所-->

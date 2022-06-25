@@ -49,62 +49,36 @@ EndUser.create!(
   )
 end
 
-# 10.times do |n|
-#   Diary.create!(
-#   end_user_id: 1 + n,
-#   title: "めちゃくちゃ食べた",
-#   body: "今日はご飯を食べた！"
-#   )
-# end
-
-# 10.times do |n|
-#   DiaryComment.create!(
-#   end_user_id:2 + n,
-#   diary_id:1 + n,
-#   comment: "コメントテスト#{n + 1}"
-#   )
-# end
-
-# 10.times do |n|
-#   Favorite.create!(
-#     end_user_id: 1 + n,
-#     diary_id: 5 - n
-#   )
-# end
-
-10.times do |n|
-  Relationship.create!(
-    follower_id: 1 + n,
-    followed_id: 1 + n
+20.times do |n|
+  start_day = Date.new(2022, 5, 24)
+  end_day = Date.new(2022,6, 24)
+  Diary.create!(
+  end_user_id: Random.rand(1..20),
+  title: "test#{n + 1}",
+  body: "今日は#{n + 1}ご飯を食べた！",
+  created_at: Random.rand(start_day..end_day)
   )
 end
 
+10.times do |n|
+  DiaryComment.create!(
+  end_user_id: Random.rand(1..20),
+  diary_id: Random.rand(1..20),
+  comment: "コメントテスト#{n + 1}"
+  )
+end
 
-# 30.times do |n|
-#   start_day = Date.new(2022, 6, 1)
-#   end_day = Date.new(2022, 6, 30)
-#   Meal.create!(
-#     end_user_id: 1,
-#     meal_type: 2,
-#     record_time: Random.rand(start_day..end_day)
-#   )
-# end
+20.times do |n|
+  Favorite.create!(
+    end_user_id: Random.rand(1..20),
+    diary_id: Random.rand(1..20)
+  )
+end
 
-# 30.times do |n|
-#   MealDetail.create!(
-#     meal_id: 1 + n,
-#     food_id: 1,
-#     quantity:  1
-#   )
-# end
-
-30.times do |n|
-  start_day = Date.new(2022, 5, 24)
-  end_day = Date.new(2022, 6, 24)
-  Weight.create!(
-  end_user_id: 1,
-  value: Random.rand(40..80),
-  record_day: Random.rand(start_day..end_day)
+20.times do |n|
+  Relationship.create!(
+    follower_id: Random.rand(1..20),
+    followed_id: Random.rand(1..20)
   )
 end
 
@@ -122,3 +96,33 @@ CSV.foreach('db/pf_food.csv',headers: true) do |row|
     introduction: row['introduction']
   )
 end
+
+
+30.times do |n|
+  start_day = Date.new(2022, 5, 24)
+  end_day = Date.new(2022, 6, 24)
+  Meal.create!(
+    end_user_id: 1,
+    meal_type: Random.rand(0..1),
+    record_time: Random.rand(start_day..end_day)
+  )
+end
+
+30.times do |n|
+  MealDetail.create!(
+    meal_id: 1 + n,
+    food_id: Random.rand(1..1000),
+    quantity: Random.rand(1..10)
+  )
+end
+
+30.times do |n|
+  start_day = Date.new(2022, 5, 24)
+  end_day = Date.new(2022, 6, 24)
+  Weight.create!(
+  end_user_id: 1,
+  value: Random.rand(40..80),
+  record_day: Random.rand(start_day..end_day)
+  )
+end
+
