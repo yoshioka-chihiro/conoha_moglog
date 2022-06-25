@@ -1,11 +1,11 @@
 <% if current_end_user.active_level.nil? %>
 活動レベルを登録すると、基礎代謝が表示されます。
 <% else %>
-  <% if current_end_user.gender == 0 %>
+  <% if current_end_user.gender == "man" %>
     <!--男性の場合-->
-    <%= current_end_user.basal_metabolism_man.floor %>kcal
+    <%= current_end_user.basal_metabolism_man(current_end_user).floor(1) %>kcal
   <% else %>
     <!--女性の場合-->
-    <%= current_end_user.basal_metabolism_woman.floor %>kcal
+    <%= current_end_user.basal_metabolism_woman(current_end_user).floor(1) %>kcal
   <% end %>
 <% end %>

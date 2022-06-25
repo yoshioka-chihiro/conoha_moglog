@@ -1,23 +1,31 @@
 <% if current_end_user.active_level.nil? %>
-活動レベルを登録すると、摂取カロリーの目安が表示されます。
+  活動レベルを登録すると、摂取カロリーの目安が表示されます。
 <% else %>
-  <% if current_end_user.gender == 0 %>
+
+  <% if current_end_user.gender == "man" %>
   <!--男性の場合-->
-    <% if current_end_user.active_level = 0 %>
-      <%= current_end_user.basal_metabolism_man.to_i*1.5.floor %>kcal
-    <% elsif current_end_user.active_level = 1 %>
-      <%= current_end_user.basal_metabolism_man.to_i*1.75.floor %>kcal
+    <% if current_end_user.active_level == "low" %>
+      <%= (current_end_user.basal_metabolism_man(current_end_user) * 1.5).floor(1).to_f %>kcal
+    <% elsif current_end_user.active_level == "middle" %>
+      <%= (current_end_user.basal_metabolism_man(current_end_user) * 1.75).floor(1).to_f %>kcal
     <% else %>
-      <%= current_end_user.basal_metabolism_man.to_i*2.floor %>kcal
+      <%= (current_end_user.basal_metabolism_man(current_end_user) * 2).floor(1).to_f %>kcal
     <% end %>
+
   <% else %>
+
   <!--女性の場合-->
-    <% if current_end_user.active_level = 0 %>
-      <%= current_end_user.basal_metabolism_woman.to_i*1.5.floor %>kcal
-    <% elsif current_end_user.active_level = 1 %>
-      <%= current_end_user.basal_metabolism_woman.to_i*1.75.floor %>kcal
+    <!--低い時-->
+    <% if current_end_user.active_level == "low" %>
+      <%= (current_end_user.basal_metabolism_woman(current_end_user) * 1.5).floor(1).to_f %>kcal
+    <!--普通の時-->
+    <% elsif current_end_user.active_level == "middle" %>
+      <%= (current_end_user.basal_metabolism_woman(current_end_user) * 1.75).floor(1).to_f %>kcal
+    <!--高い時-->
     <% else %>
-      <%= current_end_user.basal_metabolism_woman.to_i*2.floor %>kcal
+      <%= (current_end_user.basal_metabolism_woman(current_end_user) * 2).floor(1).to_f %>kcal
     <% end %>
+
   <% end %>
+
 <% end %>

@@ -30,10 +30,10 @@ class EndUser < ApplicationRecord
   validates :height, presence: true
   validates :email, presence: true, uniqueness: true
 
-  
+
   has_one_attached :profile_image
-  
-  
+
+
   # プロフィール画像
   def get_profile_image(width, height)
     unless profile_image.attached?
@@ -42,7 +42,7 @@ class EndUser < ApplicationRecord
     end
       profile_image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
   def diary_name(end_user)
     if end_user.nickname.empty?
       "匿名希望さん"
@@ -80,13 +80,13 @@ class EndUser < ApplicationRecord
   end
 
   # 基礎代謝の計算_男性
-  def basal_metabolism_man
-    ( 0.0481 * start_weight + 0.0234 * height - 0.0138 * age - 0.4235 ) * 1000 / 4.186
+  def basal_metabolism_man(end_user)
+    ( 0.0481 * end_user.start_weight + 0.0234 * end_user.height - 0.0138 * end_user.age - 0.4235 ) * 1000 / 4.186
   end
 
   # 基礎代謝の計算_女性
-  def basal_metabolism_woman
-    ( 0.0481 * start_weight + 0.0234 * height - 0.0138 * age - 0.9708 ) * 1000 / 4.186
+  def basal_metabolism_woman(end_user)
+    ( 0.0481 * end_user.start_weight + 0.0234 * end_user.height - 0.0138 * end_user.age - 0.9708 ) * 1000 / 4.186
   end
 
 
