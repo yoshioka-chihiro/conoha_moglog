@@ -25,16 +25,20 @@ header {
   opacity: 0.8;
 }
 
+li {
+  list-style: none;
+}
+
 .navbar-collapse {
   text-align: center;
   line-height: 300%;
 }
 
-li a {
+.header a {
   color:black;
 }
 
-li a:hover {
+.header a:hover {
   color:gray;
 }
 
@@ -42,9 +46,33 @@ li a:hover {
   background-color: #FFFFCC;
   border-radius: 30px ;
   margin: 20px auto;
-  padding: 30px;
+  padding: 20px;
   width:700px;
   height: 300px;
+}
+
+.contents {
+  width:700px;
+  text-align:center;
+  margin-top: 10px;
+  margin-right: 30px;
+}
+
+.sidebar {
+  width: 400px;
+  height: 300px;
+  box-sizing: border-box;
+  margin-top: 70px;
+  position: sticky;
+  top: 125px;
+}
+
+.diary-body {
+  height: 120px;
+}
+
+.show-diary-body {
+  height: 150px;
 }
 
 .selection-group {
@@ -55,6 +83,11 @@ li a:hover {
 .top-responsive {
   display: none;
 }
+
+.sidebar-responsive {
+  display: none;
+}
+
 
 .responsive-br {
   display: none;
@@ -230,6 +263,34 @@ li a:hover {
     width: 100%;
     margin: 10px auto;
   }
+
+  .contents {
+    width: 90%;
+    text-align:center;
+    margin-top: 10px;
+    margin-right: 30px;
+  }
+
+  .sidebar-responsive {
+    display: block;
+    margin-top: 20px;
+    width: 90%;
+    box-sizing: border-box;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .diary-body {
+    height: 80px;
+  }
+
+  .selection-group2 {
+    display: flex;
+    justify-content: center;
+  }
+
   /*Diary*/
 
   .end_user-responsive {

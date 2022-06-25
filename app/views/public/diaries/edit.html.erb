@@ -4,13 +4,18 @@
       <%= render "public/shared/error_messages", resource: @diary %>
       <%= form_with model: @diary, local:true do |f| %>
         <div class="form-group">
-          <%= f.label :タイトル %>
+          <%= f.label :title, 'タイトル' %>
           <%= f.text_field :title, class: "form-control" %>
         </div>
         
         <div class="form-group">
-          <%= f.label :本文 %>
+          <%= f.label :body, '本文' %>
           <%= f.text_area :body, class: "form-control", size: "40x10" %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :tag_name, 'タグ' %>
+          <%= f.text_field :tag_name, value: @tag_list, placeholder: "タグを半角スペースで区切ってください(例 お菓子 筋トレ )", class: 'form-control book_tag_name' %>
         </div>
         
         <div>

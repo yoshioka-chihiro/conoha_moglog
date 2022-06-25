@@ -5,8 +5,19 @@ class Public::DiariesController < ApplicationController
 
   def index
     @diary = Diary.new
-    @diaries = Diary.published.order(created_at: :desc).page(params[:page]).per(8)
+    if params[:tag_id].present?
+      # paramsで:tag_idを受け取った場合
+      # （クリックしたときにパラメータでtag_idを受け取ったときに発動する。タグで絞込む機能）
+      @tag = Tag.find(params[:tag_id])
+      diaries = @tag.diaries.order(created_at: :desc)
+    else
+      # 普通にページを表示させた場合
+       diaries = Diary.published.order(created_at: :desc).page(params[:page]).per(8)
+    end
+    @tag_lists = Tag.all
+    @diaries = Kaminari.paginate_array(diaries).page(params[:page]).per(10)
   end
+
 
   def show
     @diary_user = @diary.end_user
@@ -19,7 +30,7 @@ class Public::DiariesController < ApplicationController
 
   def personal_index
     @diary_user = EndUser.find(params[:id])
-    
+
     if @diary_user == current_end_user
       if params[:option] == "A" || params[:option] == nil
       # 公開日記
@@ -32,12 +43,14 @@ class Public::DiariesController < ApplicationController
       @diaries = Diary.published.where(end_user_id: @diary_user.id).order(created_at: :desc).page(params[:page]).per(8)
     end
   end
-  
+
 
   def create
     @diary = Diary.new(diary_params)
+    tag_list = params[:diary][:tag_name].split(nil)
     @diary.end_user_id = current_end_user.id
     if @diary.save
+      @diary.save_diaries(tag_list)
       redirect_to diary_path(@diary), notice: "日記を投稿しました！"
     else
       @diaries = Diary.published.order(created_at: :desc).page(params[:page]).per(8)
@@ -46,10 +59,14 @@ class Public::DiariesController < ApplicationController
   end
 
   def edit
+    @tag_list = @diary.tags.pluck(:tag_name).split(nil)
   end
 
   def update
+    @tag_list = @diary.tags.pluck(:tag_name).split(nil)
+    tag_list = params[:diary][:tag_name].split(nil)
     if @diary.update(diary_params)
+      @diary.save_diaries(tag_list)
       flash[:notice] = "日記を更新しました。"
       redirect_to diary_path(@diary)
     else

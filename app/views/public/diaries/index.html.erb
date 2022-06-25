@@ -18,6 +18,11 @@
           <%= f.text_area :body, class: "form-control" %>
         </div>
 
+        <div class="form-group">
+          <%= f.label :tag_name, 'タグ' %>
+          <%= f.text_field :tag_name, placeholder: "タグを半角スペースで区切ってください(例 お菓子 筋トレ )", class: 'form-control book_tag_name' %>
+        </div>
+
         <div>
          <%= f.label :is_published_flag, "公開", value: true %>
          <%= f.radio_button :is_published_flag, 'true' %>
@@ -29,9 +34,31 @@
       <% end %>
       </div>
     </div>
+    
+    <div class="selection-group ">
+      
+      <div class="sidebar-responsive">
+        <ul>
+          <% @tag_lists.each do |list| %>
+            <li><%= link_to "##{list.tag_name}", diaries_path(tag_id: list.id), class: 'tag_list' %></li>
+          <% end %>
+        </ul>
+      </div>
 
+      <div class="contents">
+        <h3 class="mini-title text-center">みんなのDiary</h3>
+        <%= render 'public/diaries/index', diaries: @diaries %>
+      </div>
+      
+      <div class="sidebar">
+        <ul>
+          <% @tag_lists.each do |list| %>
+            <li><%= link_to "##{list.tag_name}", diaries_path(tag_id: list.id), class: 'tag_list' %></li>
+          <% end %>
+        </ul>
+      </div>
+      
+    </div>
 
-    <h3 class="mini-title text-center">みんなのDiary</h3>
-    <%= render 'public/diaries/index', diaries: @diaries %>
 
 </div>
