@@ -1,4 +1,4 @@
 class Tagmap < ApplicationRecord
-  belongs_to :diary
+  belongs_to :item
   belongs_to :tag
 end

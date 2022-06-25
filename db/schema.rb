@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_25_065957) do
+ActiveRecord::Schema.define(version: 2022_06_25_192056) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -151,11 +151,11 @@ ActiveRecord::Schema.define(version: 2022_06_25_065957) do
   end
 
   create_table "tagmaps", force: :cascade do |t|
-    t.integer "diary_id", null: false
+    t.integer "item_id", null: false
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["diary_id"], name: "index_tagmaps_on_diary_id"
+    t.index ["item_id"], name: "index_tagmaps_on_item_id"
     t.index ["tag_id"], name: "index_tagmaps_on_tag_id"
   end
 
@@ -178,6 +178,6 @@ ActiveRecord::Schema.define(version: 2022_06_25_065957) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "reports", "diary_comments"
   add_foreign_key "reports", "end_users"
-  add_foreign_key "tagmaps", "diaries"
+  add_foreign_key "tagmaps", "items"
   add_foreign_key "tagmaps", "tags"
 end
