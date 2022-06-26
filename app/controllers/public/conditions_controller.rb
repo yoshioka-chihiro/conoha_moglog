@@ -1,5 +1,7 @@
 class Public::ConditionsController < ApplicationController
   before_action :authenticate_end_user!
+  before_action :correct_end_user, only: [:show, :edit, :update, :destroy]
+
 
   def index
     @condition = Condition.new
@@ -20,7 +22,6 @@ class Public::ConditionsController < ApplicationController
   end
 
   def show
-    @condition = Condition.find(params[:id])
     # 体調が記録された時間の24時間前
     one_day_ago =  @condition.start_time - 1.day
     # 体調が記録された時間の48時間前
@@ -43,11 +44,9 @@ class Public::ConditionsController < ApplicationController
   end
 
   def edit
-    @condition = Condition.find(params[:id])
   end
 
   def update
-    @condition = Condition.find(params[:id])
     if @condition.update(condition_params)
       @conditions = Condition.all
       flash[:notice] = "更新しました。"
@@ -60,7 +59,6 @@ class Public::ConditionsController < ApplicationController
 
 
   def destroy
-    @condition = Condition.find(params[:id])
     if @condition.destroy
       flash[:notice] = "体調を削除しました"
       @conditions = Condition.all
@@ -74,6 +72,13 @@ class Public::ConditionsController < ApplicationController
 
   def condition_params
     params.require(:condition).permit(:movement, :feel, :start_time)
+  end
+
+  def correct_end_user
+    @condition = Condition.find(params[:id])
+    @end_user = @condition.end_user
+    # ログイン中のユーザーではないまたは退会済みユーザーの場合はアクセスできない
+    redirect_to(root_path) unless @end_user == current_end_user || (current_end_user.is_deleted == true)
   end
 
 

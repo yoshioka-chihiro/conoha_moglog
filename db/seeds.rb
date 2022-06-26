@@ -9,6 +9,7 @@ Admin.create!(email: "a@g", password: "HogeHoge")
 
 EndUser.create!(
   [
+    {email: "test@test.com", name: "健康 花子", nickname: "花ちゃん", age: 26, height: 158, start_weight: 54, active_level: 0, objective_weight: 47, gender: 1, password: "123456"},
     {email: "yuki@test.com", name: "佐々木 あや子", nickname: "あーちゃん", age: 26, height: 158, start_weight: 54, active_level: 0, objective_weight: 47, gender: 1, password: "123456"},
     {email: "yuka@test.com", name: "須藤 結賀", nickname: "ユカ", age: 27, height: 158, start_weight: 55, active_level: 0, objective_weight: 45, gender: 1, password: "123456", profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename:"sample-user1.jpg")},
     {email: "misa@test.com", name: "馬場 未佐霞", nickname: "ミサミサ", age: 35, height: 162, start_weight: 65, active_level: 0, objective_weight: 55, gender: 1, password: "123456", profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")},
@@ -60,11 +61,40 @@ end
   )
 end
 
+Tag.create!(
+  [
+    {tag_name: "ダイエッターと繋がりたい"},
+    {tag_name: "宅トレ"},
+    {tag_name: "ジム通い"},
+    {tag_name: "腸活"},
+    {tag_name: "痩せ飯"},
+    {tag_name: "オートミール"},
+    {tag_name: "オートミールレシピ"},
+    {tag_name: "20代"},
+    {tag_name: "10代"},
+    {tag_name: "30代"},
+    {tag_name: "40代"},
+    {tag_name: "50代"},
+    {tag_name: "生活改善"},
+    {tag_name: "春に始めたこと"},
+    {tag_name: "ダイエット初心者"}
+    ]
+  )
+  
+  
+10.times do |n|
+  TagDiary.create!(
+  tag_id: Random.rand(1..20),
+  diary_id: Random.rand(1..15)
+  )
+end
+
+
 10.times do |n|
   DiaryComment.create!(
-  end_user_id: Random.rand(1..20),
-  diary_id: Random.rand(1..20),
-  comment: "コメントテスト#{n + 1}"
+    end_user_id: Random.rand(1..20),
+    diary_id: Random.rand(1..20),
+    comment: "コメントテスト#{n + 1}"
   )
 end
 

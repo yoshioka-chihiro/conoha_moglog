@@ -1,50 +1,52 @@
-<div class="container">
-
-  <div class="selection-group">
-    <%= link_to diary_path(@diary) do %>
-      <%= image_tag @diary.end_user.get_profile_image(50,50), class: "rounded-circle"  %>
-    <% end %>
-    <%= @diary.diary_name(@diary_user) %>&emsp;
-    <%= @diary_user.age %>歳&emsp;
-    <%= @diary_user.height %>cm&emsp;
-    <% if @recent_weight.nil? %>
-      <%= @diary_user.start_weight %>kg
-    <% else %>
-      <%= @recent_weight.value %>kg
-    <% end %>
-  </div>
-
-  <div class="box">
-   <div class="selection-group">
-      <div>
-        <%= @diary.created_at.strftime("%Y年%m月%d日(%a)") %>
-        <strong><%= @diary.title %></strong>
-        <% if @diary_user == current_end_user %>
-          <%= link_to edit_diary_path(@diary.id) do %>
-            <i class="fa fa-pen"></i>
-          <% end %>
-        <% end %>
-      </div>
-      <div class="ml-2" id ="favorite_btn_<%= @diary.id %>">
-        <%= render 'public/favorites/btn', diary: @diary %>
-      </div>
-    </div>
-    <div class="mr-5 ml-5 text-center show-diary-body"><%= @diary.body %></div>
-    <div class="text-center">
-      <% @diary.tags.each do |tag| %>
-        <%= link_to "##{tag.tag_name}", diaries_path(tag), class: 'smaller tag_list text-center' %>
+<% if @diary_user.is_deleted == true %>
+  <p>このユーザーは退会済みです。</p>
+<% else %>
+  <div class="container">
+  
+    <div class="selection-group">
+      <%= link_to diary_path(@diary) do %>
+        <%= image_tag @diary.end_user.get_profile_image(50,50), class: "rounded-circle"  %>
+      <% end %>
+      <%= @diary.diary_name(@diary_user) %>&emsp;
+      <%= @diary_user.age %>歳&emsp;
+      <%= @diary_user.height %>cm&emsp;
+      <% if @recent_weight.nil? %>
+        <%= @diary_user.start_weight %>kg
+      <% else %>
+        <%= @recent_weight.value %>kg
       <% end %>
     </div>
+  
+    <div class="box">
+     <div class="selection-group">
+        <div>
+          <%= @diary.created_at.strftime("%Y年%m月%d日(%a)") %>
+          <strong><%= @diary.title %></strong>
+          <% if @diary_user == current_end_user %>
+            <%= link_to edit_diary_path(@diary.id) do %>
+              <i class="fa fa-pen"></i>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="ml-2" id ="favorite_btn_<%= @diary.id %>">
+          <%= render 'public/favorites/btn', diary: @diary %>
+        </div>
+      </div>
+      <div class="mr-5 ml-5 text-center show-diary-body"><%= @diary.body %></div>
+      <div class="text-center">
+        <% @diary.tags.each do |tag| %>
+          <%= link_to "##{tag.tag_name}", diaries_path(tag_id: tag.id), class: 'smaller tag_list text-center' %>
+        <% end %>
+      </div>
+    </div>
+  
+    <div id="comment_index">
+      <%= render 'public/diary_comments/comment_index', diary: @diary, diary_comments: @diary_comments %>
+    </div>
+  
+    <div class="text-center">
+      <%= render 'public/diary_comments/form', diary: @diary, diary_comment: @diary_comment %>
+    </div>
+    
   </div>
-
-  <div id="comment_index">
-    <%= render 'public/diary_comments/comment_index', diary: @diary, diary_comments: @diary_comments %>
-  </div>
-
-  <div class="text-center">
-    <%= render 'public/diary_comments/form', diary: @diary, diary_comment: @diary_comment %>
-  </div>
-
-
-
-</div>
+<% end %>

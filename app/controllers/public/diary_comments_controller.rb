@@ -1,5 +1,6 @@
 class Public::DiaryCommentsController < ApplicationController
   before_action :authenticate_end_user!
+  
 
   def create
     # コメントをする対象の投稿のインスタンスを作成

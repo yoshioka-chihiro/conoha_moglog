@@ -1,8 +1,10 @@
 class Public::EndUsersController < ApplicationController
   before_action :authenticate_end_user!
+  before_action :end_user_correct, only: [:edit, :update, :withdraw, :quit]
 
   def index
-    @end_users = EndUser.all
+    # 有効ユーザーのみ表示
+    @end_users = EndUser.where(is_deleted: false)
     @q = EndUser.ransack(params[:q])
   end
 
@@ -56,14 +58,17 @@ class Public::EndUsersController < ApplicationController
     @favorite_diaries = Diary.find(favorites)
   end
 
-
-
-
 private
 
   def end_user_params
     params.require(:end_user)
     .permit(:email, :name, :nickname, :gender, :start_weight, :objective_weight, :age, :height, :profile_image, :active_level)
+  end
+  
+  def end_user_correct
+    @end_user= EndUser.find(params[:id])
+     # 他ユーザーのページはアクセスできない
+    redirect_to(root_path) unless @end_user == current_end_user
   end
 
 end

@@ -1,6 +1,6 @@
 class Public::DiariesController < ApplicationController
   before_action :authenticate_end_user!
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_diary, only: [:show, :edit, :update, :destroy]
 
 
   def index
@@ -15,6 +15,7 @@ class Public::DiariesController < ApplicationController
        diaries = Diary.published.order(created_at: :desc).page(params[:page]).per(8)
     end
     @tag_lists = Tag.all
+    
     @diaries = Kaminari.paginate_array(diaries).page(params[:page]).per(10)
   end
 
@@ -91,8 +92,10 @@ class Public::DiariesController < ApplicationController
     params.require(:diary).permit(:title, :body, :is_published_flag)
   end
 
-  def set_post
+  def set_diary
     @diary = Diary.find(params[:id])
   end
+  
+  
 
 end

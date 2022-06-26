@@ -1,31 +1,37 @@
-<% diaries.each do |diary| %>
-  <div class="box">
-    <div class="selection-group">
-      <%= render 'public/diaries/diary_profile', end_user: diary.end_user %>
-    </div>
-
-    <div class="selection-group"><%= diary.created_at.strftime("%Y年%m月%d日(%a) %H:%m") %></div>
-
-    <div class="selection-group selection-group2">
-      <div class="title"><%= diary.title %></div>
-      <div class="ml-2" id ="favorite_btn_<%= diary.id %>">
-        <%= render 'public/favorites/btn', diary: diary %>
+<% unless diaries.blank? %>
+  <% diaries.each do |diary| %>
+    <% unless diary.end_user.is_deleted == true %>
+      <div class="box">
+        <div class="selection-group">
+          <%= render 'public/diaries/diary_profile', end_user: diary.end_user %>
+        </div>
+    
+        <div class="selection-group"><%= diary.created_at.strftime("%Y年%m月%d日(%a) %H:%m") %></div>
+    
+        <div class="selection-group selection-group2">
+          <div class="title"><%= diary.title %></div>
+          <div class="ml-2" id ="favorite_btn_<%= diary.id %>">
+            <%= render 'public/favorites/btn', diary: diary %>
+          </div>
+          <div class="ml-2">
+            <%= render 'public/diary_comments/comment_count', diary_comment: diary.diary_comments, diary: diary %>
+          </div>
+        </div>
+    
+        <div class="ml-5 mr-5 text-center diary-body"><%= diary.body %></div>
+    
+        <div class="text-center">
+          <% diary.tags.each do |tag| %>
+            <%= link_to "##{tag.tag_name}", diaries_path(tag_id: tag.id), class: 'smaller tag_list text-center' %>
+          <% end %>
+        </div>
+    
       </div>
-      <div class="ml-2">
-        <%= render 'public/diary_comments/comment_count', diary_comment: diary.diary_comments, diary: diary %>
-      </div>
-    </div>
-
-    <div class="ml-5 mr-5 text-center diary-body"><%= diary.body %></div>
-
-    <div class="text-center">
-      <% diary.tags.each do |tag| %>
-        <%= link_to "##{tag.tag_name}", diaries_path(tag_id: tag.id), class: 'smaller tag_list text-center' %>
-      <% end %>
-    </div>
-
-  </div>
+      
+    <% end %>
+  
+  <% end %>
+  
+  <div class="row justify-content-center"><%= paginate diaries %></div>
 
 <% end %>
-
-<div class="row justify-content-center"><%= paginate diaries %></div>
