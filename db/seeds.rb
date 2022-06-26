@@ -84,7 +84,7 @@ Tag.create!(
   
 10.times do |n|
   TagDiary.create!(
-  tag_id: Random.rand(1..20),
+  tag_id: Random.rand(1..15),
   diary_id: Random.rand(1..15)
   )
 end
