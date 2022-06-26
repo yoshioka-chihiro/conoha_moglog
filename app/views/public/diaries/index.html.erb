@@ -39,6 +39,7 @@
       
       <div class="sidebar-responsive">
         <ul>
+          <li><strong>人気のタグ</strong></li>
           <% @tag_lists.each do |list| %>
             <li><%= link_to "##{list.tag_name}", diaries_path(tag_id: list.id), class: 'tag_list' %></li>
           <% end %>
@@ -52,6 +53,7 @@
       
       <div class="sidebar">
         <ul>
+          <li><strong>人気のタグ</strong></li>
           <% @tag_lists.each do |list| %>
             <li><%= link_to "##{list.tag_name}", diaries_path(tag_id: list.id), class: 'tag_list' %></li>
           <% end %>

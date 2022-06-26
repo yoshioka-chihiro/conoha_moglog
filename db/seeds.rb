@@ -141,7 +141,7 @@ end
 30.times do |n|
   MealDetail.create!(
     meal_id: 1 + n,
-    food_id: Random.rand(1..1000),
+    food_id: Random.rand(1..500),
     quantity: Random.rand(1..10)
   )
 end

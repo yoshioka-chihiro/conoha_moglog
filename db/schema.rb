@@ -159,11 +159,6 @@ ActiveRecord::Schema.define(version: 2022_06_26_051639) do
     t.index ["tag_id"], name: "index_tag_diaries_on_tag_id"
   end
 
-  create_table "tagmaps", force: :cascade do |t|
-    t.string "diary_id", null: false
-    t.string "tag_id", null: false
-  end
-
   create_table "tags", force: :cascade do |t|
     t.string "tag_name"
     t.datetime "created_at", precision: 6, null: false

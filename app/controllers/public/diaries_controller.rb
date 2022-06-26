@@ -14,7 +14,7 @@ class Public::DiariesController < ApplicationController
       # 普通にページを表示させた場合
        diaries = Diary.published.order(created_at: :desc).page(params[:page]).per(8)
     end
-    @tag_lists = Tag.all
+    @tag_lists = Tag.find(TagDiary.group(:tag_id).order('count(tag_id) desc').limit(20).pluck(:tag_id))
     
     @diaries = Kaminari.paginate_array(diaries).page(params[:page]).per(10)
   end
