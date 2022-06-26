@@ -3,8 +3,8 @@ class Diary < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :diary_comments, dependent: :destroy
 
-  has_many :tagmaps, dependent: :destroy
-  has_many :tags, through: :tagmaps
+  has_many :tag_diaries, dependent: :destroy
+  has_many :tags, through: :tag_diaries
 
   scope :published, -> {where(is_published_flag: true)}
   scope :unpublished, -> {where(is_published_flag: false)}
@@ -20,7 +20,7 @@ class Diary < ApplicationRecord
   def self.looks(word)
   where(["title like? OR body like?", "%#{word}%", "%#{word}%"])
   end
-  
+
   # 日記の名前
   def diary_name(end_user)
     if end_user.nickname.empty?
@@ -47,8 +47,8 @@ class Diary < ApplicationRecord
      self.tags << diary_tag
    end
  end
- 
 
- 
+
+
 
 end

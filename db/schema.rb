@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_26_042152) do
+ActiveRecord::Schema.define(version: 2022_06_26_051639) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -150,6 +150,20 @@ ActiveRecord::Schema.define(version: 2022_06_26_042152) do
     t.index ["end_user_id"], name: "index_reports_on_end_user_id"
   end
 
+  create_table "tag_diaries", force: :cascade do |t|
+    t.integer "diary_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["diary_id"], name: "index_tag_diaries_on_diary_id"
+    t.index ["tag_id"], name: "index_tag_diaries_on_tag_id"
+  end
+
+  create_table "tagmaps", force: :cascade do |t|
+    t.string "diary_id", null: false
+    t.string "tag_id", null: false
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "tag_name"
     t.datetime "created_at", precision: 6, null: false
@@ -169,4 +183,6 @@ ActiveRecord::Schema.define(version: 2022_06_26_042152) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "reports", "diary_comments"
   add_foreign_key "reports", "end_users"
+  add_foreign_key "tag_diaries", "diaries"
+  add_foreign_key "tag_diaries", "tags"
 end
