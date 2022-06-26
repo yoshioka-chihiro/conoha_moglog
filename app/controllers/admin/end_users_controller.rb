@@ -1,16 +1,14 @@
 class Admin::EndUsersController < ApplicationController
+  before_action :set_end_user, only: [:show, :edit, :update]
 
   def show
-    @end_user = EndUser.find(params[:id])
   end
 
 
   def edit
-    @end_user = EndUser.find(params[:id])
   end
 
   def update
-    @end_user = EndUser.find(params[:id])
     if @end_user.update(end_user_params)
       flash[:notice] = "編集に成功しました。"
       redirect_to admin_end_user_path(@end_user)
@@ -24,6 +22,10 @@ class Admin::EndUsersController < ApplicationController
 
   def end_user_params
     params.require(:end_user).permit(:email, :name, :nickname, :gender, :start_weight, :objective_weight, :age, :height, :is_deleted)
+  end
+  
+  def set_end_user
+    @end_user = EndUser.find(params[:id])
   end
 
 end

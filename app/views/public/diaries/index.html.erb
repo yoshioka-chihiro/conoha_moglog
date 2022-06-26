@@ -6,7 +6,7 @@
 
   <div class="selection-group">
     <%= render "public/shared/error_messages", resource: @diary %>
-    <div class="diary-responsive mr-5"><%= image_tag asset_path('diary2.png'), size: "200x200" %></div>
+    <div class="diary-responsive mr-5"><%= image_tag asset_path('diary.png'), size: "200x200" %></div>
     <div class="w-100">
       <%= form_with model: @diary, local:true do |f| %>
         <div class="form-group">

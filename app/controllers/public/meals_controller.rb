@@ -1,7 +1,7 @@
 class Public::MealsController < ApplicationController
   before_action :authenticate_end_user!
   before_action :correct_end_user, only: [:show, :edit, :update, :destroy]
-  before_action :index_set, only: [:index, :destroy]
+  before_action :index_set, only: [:index, :create, :destroy]
 
   def index
   end
@@ -63,7 +63,7 @@ class Public::MealsController < ApplicationController
       meal_details_attributes:[:id, :meal_id, :food_id, :quantity, :_destroy])
       .merge(end_user_id: current_end_user.id)
   end
-  
+
   def correct_end_user
     @meal = Meal.find(params[:id])
     @end_user = @meal.end_user
@@ -71,7 +71,7 @@ class Public::MealsController < ApplicationController
     redirect_to(root_path) unless @end_user == current_end_user || (current_end_user.is_deleted == true)
   end
 
-  
+
   def index_set
     # 今日の００：００〜２３：５９
     start_date = Time.current.beginning_of_day

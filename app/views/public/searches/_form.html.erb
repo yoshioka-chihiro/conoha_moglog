@@ -1,7 +1,7 @@
 <% if end_user_signed_in? %>
   <div class="search_form">
     <%= form_with url: search_path, local: true, method: :get do |f| %>
-      <%= f.text_field :search, placeholder: "日記を検索" %>
+      <%= f.text_field :search, placeholder: "キーワードまたは#をつけてタグで検索", style: "width: 300px;" %>
       <%= f.submit "検索", class: "btn btn-primary" %>
     <% end %>
   </div>

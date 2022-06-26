@@ -26,7 +26,6 @@ Rails.application.routes.draw do
     get 'personal_index/:id' => 'diaries#personal_index'
     patch 'end_users/withdraw' => 'end_users#withdraw'
     get 'end_users/quit' => 'end_users#quit'
-    # delete 'end_users/image_destroy'
 
     resources :diaries, only:[:index, :show, :edit, :create, :update, :destroy] do
       resource :favorites, only: [:create, :destroy]
