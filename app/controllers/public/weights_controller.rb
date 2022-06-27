@@ -1,7 +1,7 @@
 class Public::WeightsController < ApplicationController
   before_action :authenticate_end_user!
   before_action :correct_end_user, only: [:edit, :update, :destroy]
-  
+
 
   def index
     @weights = Weight.where(end_user_id: current_end_user.id).order(record_day: :desc).page(params[:page]).per(8)
@@ -55,14 +55,14 @@ class Public::WeightsController < ApplicationController
     .permit(:value, :record_day)
     .merge(end_user_id: current_end_user.id)
   end
-  
+
   def correct_end_user
     @weight = Weight.find(params[:id])
     @end_user = @weight.end_user
     # ログイン中のユーザーではないまたは退会済みユーザーの場合はアクセスできない
     redirect_to(root_path) unless @end_user == current_end_user || (current_end_user.is_deleted == true)
   end
-  
+
   def set_weight
     @weight = Weight.find(params[:id])
   end
