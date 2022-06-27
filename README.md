@@ -27,8 +27,9 @@
 - 排泄があった時
 
 ## 設計書
-- 作成中です。
-
+- テーブル定義書（https://docs.google.com/spreadsheets/d/1VzuVFjUoHIXIdR3RYzLWwTPkVv2mGmVJ/edit?usp=sharing&ouid=100127356983162540675&rtpof=true&sd=true）
+- ER図（https://drive.google.com/file/d/1FhQo9IgauYB7K0txOBG-mDZpTJO7Q8lg/view?usp=sharing）
+- アプリケーション詳細設計（https://docs.google.com/spreadsheets/d/1Fh70YAzSppPh9HQy-s2N52GWRru_OULg/edit?usp=sharing&ouid=100127356983162540675&rtpof=true&sd=true）
 
 ## 開発環境
 - OS：Linux(CentOS)
@@ -38,4 +39,4 @@
 - IDE：Cloud9
 
 ## 使用素材
-- 使用検討中です。
+- ダ鳥獣戯画 – 鳥獣戯画ベクター素材化サイト（https://chojugiga.com/）

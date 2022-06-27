@@ -31,6 +31,7 @@ class Diary < ApplicationRecord
   end
 
 
+# タグ保存
  def save_tags(tags)
    current_tags = self.tags.pluck(:tag_name) unless self.tags.nil?
    old_tags = current_tags - tags

@@ -33,6 +33,7 @@ Rails.application.routes.draw do
         resource :reports, only: [:create, :destroy]
       end
     end
+    get "search" => "searches#search"
 
     resources :end_users, only:[:show, :edit, :update, :index] do
       get 'favorites' => 'end_users#favorites'
@@ -58,14 +59,13 @@ Rails.application.routes.draw do
 
     patch 'end_users/:id/withdraw' => 'end_users#withdraw'
     get 'end_users/unsubscribe' => 'end_users#unsubscribe'
-    get "search" => "searches#search"
 
 
   end
 
   namespace :admin do
     get '/' => 'homes#top'
-    resources :diary_comments, only:[:index, :show, :edit, :destroy]
+    resources :diary_comments, only:[:index, :destroy]
     resources :foods, only:[:index, :show, :new, :edit, :create, :update, :destroy] do
       collection do
         get 'search'
