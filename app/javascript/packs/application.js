@@ -22,9 +22,8 @@ require('packs/header')
 
 
 
-
-
-
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+

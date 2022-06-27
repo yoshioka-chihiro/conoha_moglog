@@ -1,9 +1,29 @@
 class Public::MealsController < ApplicationController
   before_action :authenticate_end_user!
-  before_action :correct_end_user, only: [:show, :edit, :update, :destroy]
-  before_action :index_set, only: [:index, :create, :destroy]
+  before_action :correct_end_user, only: [:show, :edit, :update]
+  # before_action :index_set, only: [:index, :create, :destroy]
 
   def index
+    # 今日の００：００〜２３：５９
+    start_date = Time.current.beginning_of_day
+    end_date = Time.current.end_of_day
+    # ログイン中ユーザーのMealを取得
+    @user_meals = Meal.where(end_user_id: current_end_user.id)
+    # その中から今日の記録を取得
+    @today_meals_list = @user_meals.where(record_time: start_date..end_date)
+    # 食事検索用
+    @q = Meal.ransack(params[:q])
+    # 食事登録用
+    @meal = Meal.new
+    # mealに紐付くmeal_detailsをbuildしておく（追加ボタン用）
+    @meal_detail = @meal.meal_details.build
+    # カロリー合計表示用
+    @today_calorie_sum = 0
+    @today_meals_list.each do |meal|
+      meal.meal_details.each do |meal_detail|
+        @today_calorie_sum += meal_detail.calorie_subtotal
+      end
+    end
   end
 
   def search
@@ -20,6 +40,13 @@ class Public::MealsController < ApplicationController
       redirect_to meal_path(@meal), notice: "食事を投稿しました！"
     else
       @q = Meal.ransack(params[:q])
+        # 今日の００：００〜２３：５９
+      start_date = Time.current.beginning_of_day
+      end_date = Time.current.end_of_day
+      # ログイン中ユーザーのMealを取得
+      @user_meals = Meal.where(end_user_id: current_end_user.id)
+      # その中から今日の記録を取得
+      @today_meals_list = @user_meals.where(record_time: start_date..end_date)
       render :index, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
     end
   end
@@ -47,10 +74,12 @@ class Public::MealsController < ApplicationController
   end
 
   def destroy
+    @meal = Meal.find(params[:id])
     if @meal.destroy
       flash[:notice] = "食事を削除しました"
       redirect_to meals_path
     else
+      flash[:notice] = "食事を削除しました"
       render :index
     end
   end
@@ -73,26 +102,7 @@ class Public::MealsController < ApplicationController
 
 
   def index_set
-    # 今日の００：００〜２３：５９
-    start_date = Time.current.beginning_of_day
-    end_date = Time.current.end_of_day
-    # ログイン中ユーザーのMealを取得
-    @user_meals = Meal.where(end_user_id: current_end_user.id)
-    # その中から今日の記録を取得
-    @today_meals_list = @user_meals.where(record_time: start_date..end_date)
-    # 食事検索用
-    @q = Meal.ransack(params[:q])
-    # 食事登録用
-    @meal = Meal.new
-    # mealに紐付くmeal_detailsをbuildしておく（追加ボタン用）
-    @meal_detail = @meal.meal_details.build
-    # カロリー合計表示用
-    @today_calorie_sum = 0
-    @today_meals_list.each do |meal|
-      meal.meal_details.each do |meal_detail|
-        @today_calorie_sum += meal_detail.calorie_subtotal
-      end
-    end
+
   end
 
 end

@@ -42,6 +42,11 @@ li {
   color:gray;
 }
 
+.chosen1 {
+  width: 100%;
+  max-width: 200px;
+}
+
 .box {
   background-color: #FFFFCC;
   border-radius: 30px ;
