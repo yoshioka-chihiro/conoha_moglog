@@ -4,7 +4,7 @@
   <div class="container">
   
     <div class="selection-group">
-      <%= link_to diary_path(@diary) do %>
+      <%= link_to end_user_path(@diary_user) do %>
         <%= image_tag @diary.end_user.get_profile_image(50,50), class: "rounded-circle"  %>
       <% end %>
       <%= @diary.diary_name(@diary_user) %>&emsp;
