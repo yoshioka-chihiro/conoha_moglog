@@ -25,11 +25,10 @@
             <%= link_to "##{tag.tag_name}", diaries_path(tag_id: tag.id), class: 'smaller tag_list text-center' %>
           <% end %>
         </div>
-    
+
       </div>
       
     <% end %>
-  
   <% end %>
   
   <div class="row justify-content-center"><%= paginate diaries %></div>

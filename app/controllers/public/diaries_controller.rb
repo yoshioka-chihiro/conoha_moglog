@@ -15,7 +15,7 @@ class Public::DiariesController < ApplicationController
        diaries = Diary.published.order(created_at: :desc).page(params[:page]).per(8)
     end
     # 表示用
-    @diaries = Kaminari.paginate_array(diaries).page(params[:page]).per(10)
+    @diaries = Kaminari.paginate_array(diaries).page(params[:page]).per(8)
     # タグ投稿数が多い順に２０個表示
     @tag_lists = Tag.find(TagDiary.group(:tag_id).order('count(tag_id) desc').limit(20).pluck(:tag_id))
   end
