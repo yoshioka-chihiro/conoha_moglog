@@ -11,7 +11,7 @@
     <div class="weight-icon-gray text-center weight-responsive">
       <% unless @objective_weight.nil? || @weights.empty? %>
         <strong><p class="weight-text">目標まであと</p></strong>
-        <%= -(@weights.last.value - @objective_weight) %>kg
+        <%= -(@weights.first.value - @objective_weight) %>kg
       <% end %>
     </div>
 </div>

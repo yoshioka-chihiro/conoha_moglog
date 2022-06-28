@@ -1,9 +1,16 @@
 <% if diary_comments.empty? %>
   <p>コメントはまだありません</p>
 <% else %>
-  <table class="table">
-    <tbody>
+  <table class="table w-90">
+        <thead>
+        <tr>
+          <th class="col-md-2">Name</th>
+          <th class="col-md-8">Comment</th>
+          <th class="col-md-2"></th>
+        </tr>
+        </thead>
         <% diary_comments.each do |diary_comment| %>
+        <tbody>
         <tr>
           <td>
             <% if diary_comment.end_user.nickname.empty? %>
@@ -25,7 +32,8 @@
             <% end %>
           </td>
         </tr>
-        <% end %>
+        </tbody>
+      <% end %>
     </tbody>
   </table>
 <% end %>
