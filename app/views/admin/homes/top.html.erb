@@ -1,36 +1,36 @@
 <div class="container">
-  
+
   <div class="justify-content-end row mt-5">
     <%= search_form_for @q, url: search_end_users_path, class: "search-form" do |f| %>
       <%= f.text_field :name_cont, placeholder: "ユーザーを検索" %>
       <%= f.submit '検索' %>
     <% end %>
   </div>
-  
+
   <h1>会員一覧</h1>
-  <table class="table table-hover">
+  <table class="table">
     <tr>
       <th>氏名</th>
       <th>ステータス</th>
     </tr>
       <% @end_users.each do |end_user| %>
-        <%= link_to admin_end_user_path(end_user) do %>
-          <tr>
-            <td>
+        <tr>
+          <td>
+            <%= link_to admin_end_user_path(end_user) do %>
               <%= end_user.name %>
-            </td>
-            <td>
-              <% if end_user.is_deleted == true %>
-                退会済み
-              <% else %>
-                有効
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% if end_user.is_deleted == true %>
+              退会済み
+            <% else %>
+              有効
+            <% end %>
+          </td>
+        </tr>
       <% end %>
   </table>
-  
+
     <% unless @end_users.empty? %>
         <div class="row justify-content-center"><%= paginate @end_users %></div>
     <% end %>
