@@ -16,7 +16,11 @@
             <td><%= image_tag end_user.get_profile_image(100,100), class: "rounded-circle"  %></td>
             <td>
               <%= link_to end_user_path(end_user) do %>
-                <%= end_user.nickname %>
+                <% if end_user.nickname.empty? %>
+                  <p>匿名希望さん</p>
+                <% else %>
+                  <%= end_user.nickname %>
+                <% end %>
               <% end %>
             </td>
             <% if current_end_user != end_user %>

@@ -1,6 +1,6 @@
 class Public::EndUsersController < ApplicationController
   before_action :authenticate_end_user!
-  before_action :end_user_correct, only: [:edit, :update, :withdraw, :quit]
+  before_action :end_user_correct, only: [:edit, :update]
 
   def index
     # 有効ユーザーのみ表示
