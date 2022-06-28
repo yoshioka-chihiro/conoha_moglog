@@ -12,7 +12,7 @@ class Public::DiariesController < ApplicationController
       diaries = @tag.diaries.order(created_at: :desc)
     else
       # 普通にページを表示させた場合
-       diaries = Diary.published.order(created_at: :desc).page(params[:page]).per(8)
+       diaries = Diary.published.order(created_at: :desc)
     end
     # 表示用
     @diaries = Kaminari.paginate_array(diaries).page(params[:page]).per(8)
