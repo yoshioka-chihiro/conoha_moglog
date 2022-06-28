@@ -42,9 +42,9 @@ class Public::EndUsersController < ApplicationController
     #現在ログインしているユーザーを@end_userに格納
     @end_user = EndUser.find(current_end_user.id)
      if @end_user.update(is_deleted: true)
-       flash[:notice] = " 退会しました"
       #sessionIDのresetを行う
       reset_session
+      flash[:notice] = " 退会しました"
       redirect_to root_path
      else
       flash[:notice] = " 退会に失敗しました"
