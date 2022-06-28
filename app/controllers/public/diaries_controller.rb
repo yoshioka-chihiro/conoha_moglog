@@ -75,7 +75,7 @@ class Public::DiariesController < ApplicationController
     @tag_list = @diary.tags.pluck(:tag_name).split(nil)
     tag_list = params[:diary][:tag_name].split(nil)
     if @diary.update(diary_params)
-      @diary.save_diaries(tag_list)
+      @diary.save_tags(tag_list)
       flash[:notice] = "日記を更新しました。"
       redirect_to diary_path(@diary)
     else
