@@ -3,11 +3,13 @@ class Public::RelationshipsController < ApplicationController
   def create
     current_end_user.follow(params[:end_user_id])
     @end_user = EndUser.find(params[:end_user_id])
+    render 'index'
   end
   # フォロー外すとき
   def destroy
     current_end_user.unfollow(params[:end_user_id])
     @end_user = EndUser.find(params[:end_user_id])
+    render 'index'
   end
   # フォロー一覧
   def followings

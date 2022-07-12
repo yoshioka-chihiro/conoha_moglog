@@ -1,9 +1,9 @@
 <% if current_end_user.following?(end_user) %>
-  <%= link_to end_user_relationships_path(end_user.id), method: :delete, remote: true, class: "btn btn-danger ml-5" do  %>
-    <i class="fas fa-user-minus"></i>フォロー外す
+  <%= link_to end_user_relationships_path(end_user.id), method: :delete, remote: true, class: "btn btn-danger" do  %>
+    <i class="fas fa-star"></i>フォローをやめる
   <% end %>
 <% else %>
-  <%= link_to end_user_relationships_path(end_user.id), method: :post, remote: true, class: "btn btn-primary ml-5" do %>
-    <i class="fas fa-user-plus"></i>フォローする
+  <%= link_to end_user_relationships_path(end_user.id), method: :post, remote: true, class: "btn btn-primary" do %>
+    <i class="far fa-star"></i>フォローする
   <% end %>
 <% end %>

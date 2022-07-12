@@ -5,17 +5,24 @@
     <div class="text-center">
       <%= image_tag end_user.get_profile_image(200,200), class: "rounded-circle" %>
       <p class="title"><%= end_user.nickname %></p>
-      <p>
-        フォロー数：
-        <%= link_to end_user_followings_path(end_user.id) do %>
-          <%= end_user.followings.count %>
-        <% end %>
-        フォロワー数：
-        <%= link_to end_user_followers_path(end_user.id) do %>
-          <%= end_user.followers.count %>
-        <% end %>
-      </p>
+      <div id="follow_btn_<%= end_user.id %>">
+        <%= render 'public/relationships/btn', end_user: end_user %>
       </div>
+      <div class="selection-group mt-3">
+        <div class="selection-group">
+          フォロー数：
+          <p id="follow_count_<%= end_user.id %>" class="mr-3">
+            <%= render 'public/relationships/follow_count', end_user: end_user %>
+          </p>
+        </div>
+        <div class="selection-group">
+          フォロワー数：
+          <p id="follower_count_<%= end_user.id %>">
+            <%= render 'public/relationships/follower_count', end_user: end_user %>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="mt-5 text-center">
     <%= link_to "/personal_index/#{end_user.id}", class: 'end_user-responsive btn mr-5 ml-5 btn-outline-dark btn-lg' do %>

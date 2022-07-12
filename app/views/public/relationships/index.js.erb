@@ -1,0 +1,8 @@
+<!--フォローボタン-->
+$('#follow_btn_<%= @end_user.id %>').html("<%= j(render 'public/relationships/btn', end_user: @end_user) %>");
+
+<!--フォロー数カウント-->
+$('#follow_count_<%= @end_user.id %>').html("<%= j(render 'public/relationships/follow_count', end_user: @end_user) %>");
+
+<!--フォロワー数カウント-->
+$('#follower_count_<%= @end_user.id %>').html("<%= j(render 'public/relationships/follower_count', end_user: @end_user) %>");
