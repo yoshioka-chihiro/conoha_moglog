@@ -1,12 +1,13 @@
 <div class="container">
   <div class="selection-group">
-    <div class="condition-icon-gray pt-5 mr-5 text-center health-responsive">
+    <div class="condition-icon-gray pt-3 mr-5 text-center health-responsive">
       <%= render 'public/meals/relation_meal', search_meals: @search_meals %>
     </div>
     <div class="pt-5 condition-icon text-center health-responsive">
       <% unless @lastest_condition.nil? %>
-        <p>前回のお通じから<br>
+        <p style="font-size:20px;">前回のお通じから<br>
         <strong><%= time_ago_in_words(@lastest_condition.created_at) %></strong>が経っています</p>
+        <i class="fas fa-clock size"></i>
       <% end %>
     </div>
 
@@ -19,7 +20,7 @@
     <h3 class="text-center mt-5">日付</h3>
     <div class="text-center">
       <%= f.label :日付 %>
-      <%= f.date_field :start_time, value: Time.now.strftime("%Y-%m-%d") %>
+      <%= f.datetime_field :start_time, value: Time.current.strftime('%Y-%m-%dT00:00:00') %>
     </div>
 
     <h3 class="text-center mt-5">どんなお通じでしたか？</h3>

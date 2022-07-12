@@ -2,7 +2,6 @@ class Public::ConditionsController < ApplicationController
   before_action :authenticate_end_user!
   before_action :correct_end_user, only: [:show, :edit, :update, :destroy]
 
-
   def index
     @condition = Condition.new
     # ログイン中のユーザーのデータを取得

@@ -4,14 +4,21 @@
 <% if search_meals.empty? %>
   <p class="text-center">食事が見当たりません</p>
 <% else %>
-  <div>
+<div class="selection-group">
+  <ul class="text-left">
     <% search_meals.each do |meal| %>
-      <% meal.meal_details.each do |meal_detail| %>
+      <li>
         <%= link_to meal_path(meal.id) do  %>
           <i class="fas fa-chevron-circle-right"></i>
         <% end %>
-        <%= meal_detail.food.name %>
-      <% end %>
+        <%= meal.meal_type_i18n %>
+        (
+        <% meal.meal_details.each do |meal_detail| %>
+          <%= meal_detail.food.name %>
+        <% end %>
+        )
+      </li>
     <% end %>
+  </ul>
   </div>
 <% end %>

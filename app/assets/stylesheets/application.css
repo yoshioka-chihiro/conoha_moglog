@@ -42,20 +42,22 @@ li {
   color:gray;
 }
 
+/*Mealセレクトボックス*/
 .chosen1 {
   width: 100%;
   max-width: 200px;
 }
 
+/*Diary表示*/
 .box {
   background-color: #FFFFCC;
   border-radius: 30px ;
   margin: 20px auto;
-  padding: 20px;
   width:700px;
   height: 300px;
 }
 
+/*Diaryコンテンツ（新着日記）部分*/
 .contents {
   width:700px;
   text-align:center;
@@ -63,6 +65,7 @@ li {
   margin-right: 30px;
 }
 
+/*Diaryサイドバー（タグ）部分*/
 .sidebar {
   width: 400px;
   height: 300px;
@@ -72,6 +75,7 @@ li {
   top: 125px;
 }
 
+
 .diary-body {
   height: 120px;
 }
@@ -80,6 +84,7 @@ li {
   height: 150px;
 }
 
+/*Flexbox適用のためのCSS*/
 .selection-group {
   display: flex;
   justify-content: center;
@@ -92,7 +97,6 @@ li {
 .sidebar-responsive {
   display: none;
 }
-
 
 .responsive-br {
   display: none;
@@ -131,14 +135,19 @@ li {
 .condition-icon {
   border-radius: 70px;
   width:250px;
-  height:150px;
+  height:200px;
   background-color: pink;
+}
+
+/*condition時計アイコン*/
+.size {
+  font-size: 2.5rem;
 }
 
 .condition-icon-gray {
   border-radius: 70px;
   width:250px;
-  height:150px;
+  height:200px;
   background-color: lightgray;
 }
 
@@ -180,7 +189,9 @@ li {
     width: 83.333333%;
 }
 
+/*レスポンシブ化*/
 @media screen and (max-width: 481px){
+  /*全体*/
   main {
     width: 100%;
     height: 100%;
@@ -191,7 +202,7 @@ li {
   display: block;
   justify-content: center;
   }
-
+  /*全体*/
 
   /*トップページ*/
   .selection-group-top {
@@ -225,7 +236,6 @@ li {
   .meal_responsive-btn {
     margin: 10px 0;
   }
-
   /*Meal*/
 
   /*Weight*/
@@ -295,7 +305,6 @@ li {
     display: flex;
     justify-content: center;
   }
-
   /*Diary*/
 
   .end_user-responsive {
