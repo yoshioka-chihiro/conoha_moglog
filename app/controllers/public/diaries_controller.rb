@@ -2,7 +2,6 @@ class Public::DiariesController < ApplicationController
   before_action :authenticate_end_user!
   before_action :set_diary, only: [:show, :edit, :update, :destroy]
 
-
   def index
     @diary = Diary.new
     if params[:tag_id].present?
@@ -19,7 +18,6 @@ class Public::DiariesController < ApplicationController
     # タグ投稿数が多い順に２０個表示
     @tag_lists = Tag.find(TagDiary.group(:tag_id).order('count(tag_id) desc').limit(20).pluck(:tag_id))
   end
-
 
   def show
     @diary_user = @diary.end_user

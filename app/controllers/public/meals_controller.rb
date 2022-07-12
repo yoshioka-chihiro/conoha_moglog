@@ -1,11 +1,11 @@
 class Public::MealsController < ApplicationController
   before_action :authenticate_end_user!
   before_action :correct_end_user, only: [:show, :edit, :update]
-  # before_action :index_set, only: [:index, :create, :destroy]
 
   def index
-    # 今日の００：００〜２３：５９
+    # 今日の００：００
     start_date = Time.current.beginning_of_day
+    # 今日の２３：５９
     end_date = Time.current.end_of_day
     # ログイン中ユーザーのMealを取得
     @user_meals = Meal.where(end_user_id: current_end_user.id)
@@ -40,8 +40,9 @@ class Public::MealsController < ApplicationController
       redirect_to meal_path(@meal), notice: "食事を投稿しました！"
     else
       @q = Meal.ransack(params[:q])
-        # 今日の００：００〜２３：５９
+      # 今日の００：００
       start_date = Time.current.beginning_of_day
+      # 今日の２３：５９
       end_date = Time.current.end_of_day
       # ログイン中ユーザーのMealを取得
       @user_meals = Meal.where(end_user_id: current_end_user.id)
@@ -98,11 +99,6 @@ class Public::MealsController < ApplicationController
     @end_user = @meal.end_user
     # ログイン中のユーザーではないまたは退会済みユーザーの場合はアクセスできない
     redirect_to(root_path) unless @end_user == current_end_user || (current_end_user.is_deleted == true)
-  end
-
-
-  def index_set
-
   end
 
 end
