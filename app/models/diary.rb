@@ -18,7 +18,7 @@ class Diary < ApplicationRecord
 
   # 日記検索
   def self.looks(word)
-  where(["title like? OR body like?", "%#{word}%", "%#{word}%"])
+    where(["title like? OR body like?", "%#{word}%", "%#{word}%"])
   end
 
   # タグ保存
@@ -38,8 +38,5 @@ class Diary < ApplicationRecord
      self.tags << diary_tag
    end
   end
-
-
-
 
 end
