@@ -10,7 +10,7 @@
       </div>
   
     <% else %>
-      <h3 class="mini-title text-center"><%= @diary_user.nickname %>さんの Diary</h3>
+      <h3 class="mini-title text-center"><%= @diary_user.diary_name(@diary_user) %>さんの Diary</h3>
     <% end %>
   
     <div class="justify-content-center row mt-5">
