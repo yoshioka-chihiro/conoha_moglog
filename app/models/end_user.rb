@@ -43,9 +43,10 @@ class EndUser < ApplicationRecord
       profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
+  # 日記の名前
   def diary_name(end_user)
     if end_user.nickname.empty?
-      "匿名希望さん"
+      "匿名希望"
     else
       end_user.nickname
     end

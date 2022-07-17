@@ -21,18 +21,8 @@ class Diary < ApplicationRecord
   where(["title like? OR body like?", "%#{word}%", "%#{word}%"])
   end
 
-  # 日記の名前
-  def diary_name(end_user)
-    if end_user.nickname.empty?
-      "匿名希望"
-    else
-      end_user.nickname
-    end
-  end
-
-
-# タグ保存
- def save_tags(tags)
+  # タグ保存
+  def save_tags(tags)
    current_tags = self.tags.pluck(:tag_name) unless self.tags.nil?
    old_tags = current_tags - tags
    new_tags = tags - current_tags
@@ -47,7 +37,7 @@ class Diary < ApplicationRecord
      diary_tag = Tag.find_or_create_by(tag_name:new_name)
      self.tags << diary_tag
    end
- end
+  end
 
 
 
