@@ -12,7 +12,7 @@ class Public::ConditionsController < ApplicationController
     now = Time.now
     # 24時間前
     one_day_ago = now - 1.day
-    # 48日前
+    # 48時間前
     two_days_ago = now - 2.day
     # ログイン中のユーザーのデータを取得
     @user_meals = Meal.where(end_user_id: current_end_user.id)
