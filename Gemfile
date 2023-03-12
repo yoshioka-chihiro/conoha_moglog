@@ -63,6 +63,7 @@ end
 
 group :production, :staging do
   gem 'mysql2'
+  gem 'unicorn'
 end
 
 
