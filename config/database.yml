@@ -23,12 +23,15 @@ test:
 
 
 production:
-  <<: *default
+#  <<: *default
   database: moglog_production
   adapter: mysql2
-  encoding: utf8mb4
-  charset: utf8mb4
-  collation: utf8mb4_general_ci
-  host: <%= ENV['DB_HOST'] %>
+#  encoding: utf8mb4
+  encording:utf8
+  pool: 5
+#  charset: utf8mb4
+#  collation: utf8mb4_general_ci
+#  host: <%= ENV['DB_HOST'] %>
   username: root
   password: Hiroki1109!
+ socket: /var/lib/mysql/mysql.sock
