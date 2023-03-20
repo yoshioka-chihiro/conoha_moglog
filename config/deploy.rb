@@ -42,6 +42,9 @@
 # capistranoのバージョン固定
 lock "~> 3.17.2"
 
+#set :assets_roles, [:web]
+
+
 # デプロイするアプリケーション名
 set :application, 'Moglog'
 
