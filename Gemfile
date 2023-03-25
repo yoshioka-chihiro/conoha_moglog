@@ -50,6 +50,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano-safe-deploy-to'
+  gem 'capistrano3-unicorn'
 end
 
 group :test do

@@ -23,7 +23,7 @@
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml", 'config/master.key'
 
-# Default value for linked_dirs is []
+# Default value for li:nked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "tmp/webpacker", "public/system", "vendor", "storage"
 
 # Default value for default_env is {}
@@ -43,6 +43,8 @@
 lock "~> 3.17.2"
 
 #set :assets_roles, [:web]
+
+set :unicorn_pid, "#{shared_path}/tmp/pids/unicorn.pid"
 
 
 # デプロイするアプリケーション名
@@ -70,15 +72,22 @@ set :keep_releases, 5
 # rubyのバージョン
 # rbenvで設定したサーバー側のrubyのバージョン
 set :rbenv_ruby, '3.1.2'
+set :rbenv_type, :user
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+set :rbenv_roles, :all
+
 
 # 出力するログのレベル。
 set :log_level, :debug
 
 # デプロイのタスク
+
 namespace :deploy do
 
   # unicornの再起動
   desc 'Restart application'
+
   task :restart do
     invoke 'unicorn:restart'
   end
@@ -108,3 +117,11 @@ namespace :deploy do
     end
   end
 end
+
+set :default_env, {
+  rbenv_root: "/home/user/.rbenv",
+  path: "/home/user/.rbenv/bin:$PATH",
+  region: ENV["S3_REGION"],
+  aws_access_key_id: ENV["S3_ACCESS_KEY"],
+  aws_secret_access_key: ENV["S3_SECRET_KEY"]
+}
