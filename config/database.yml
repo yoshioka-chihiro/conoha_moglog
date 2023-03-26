@@ -27,6 +27,7 @@ production:
   encoding: utf8
   pool: 5
   database: moglog_production
+#  host: localhost
   username: root
-  password: Hiroki1109!
+  password: P@ssw0rd!!
   socket: /var/lib/mysql/mysql.sock
