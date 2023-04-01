@@ -51,6 +51,9 @@ group :development do
   gem 'capistrano-rbenv'
   gem 'capistrano-safe-deploy-to'
   gem 'capistrano3-unicorn'
+  gem 'net-imap'
+  gem 'net-pop'
+  gem 'net-smtp'
 end
 
 group :test do
