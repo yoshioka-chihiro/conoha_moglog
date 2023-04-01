@@ -93,6 +93,6 @@ gem 'kaminari','~> 1.2.1'
 
 gem 'dotenv-rails'
 
-gem 'net-smtp
+gem 'net-smtp'
 gem 'net-imap'
 gem 'net-pop'
