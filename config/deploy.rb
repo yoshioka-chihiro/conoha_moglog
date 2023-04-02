@@ -73,7 +73,7 @@ set :keep_releases, 5
 # rbenvで設定したサーバー側のrubyのバージョン
 set :rbenv_ruby, '3.1.2'
 set :rbenv_type, :system
-#set :rbnav_path, '/usr/local/rbenv'
+set :rbnav_path, '/home/newuser/.rbenv/versions/3.1.2/bin/ruby'
 
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
