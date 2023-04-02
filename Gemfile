@@ -51,6 +51,8 @@ group :development do
   gem 'capistrano-rbenv'
   gem 'capistrano-safe-deploy-to'
   gem 'capistrano3-unicorn'
+  gem 'ed25519'
+  gem 'bcrypt_pbkdf'
 end
 
 group :test do

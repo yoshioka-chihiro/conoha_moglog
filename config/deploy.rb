@@ -48,7 +48,7 @@ set :unicorn_pid, "#{shared_path}/tmp/pids/unicorn.pid"
 
 
 # デプロイするアプリケーション名
-set :application, 'Moglog'
+set :application, "Moglog"
 
 # cloneするgitのレポジトリ
 # 1-3で設定したリモートリポジトリのurl
@@ -58,7 +58,7 @@ set :repo_url, 'git@github.com:yoshioka-chihiro/conoha_moglog.git'
 set :branch, 'main'
 
 # deploy先のディレクトリ。
-set :deploy_to, '/var/www/Moglog'
+set :deploy_to, "/var/www/Moglog"
 
 # シンボリックリンクをはるファイル
 set :linked_files, fetch(:linked_files, []).push('config/secrets.yml')
@@ -72,7 +72,9 @@ set :keep_releases, 5
 # rubyのバージョン
 # rbenvで設定したサーバー側のrubyのバージョン
 set :rbenv_ruby, '3.1.2'
-set :rbenv_type, :user
+set :rbenv_type, :system
+set :rbnav_path, '/usr/local/rbenv'
+
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all
